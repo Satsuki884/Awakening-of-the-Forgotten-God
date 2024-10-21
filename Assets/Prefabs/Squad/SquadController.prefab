@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32826d06a12a24207b1009a79edb7e61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _squadCount: 3
   _brainType: 0
-  _characterPrefab: {fileID: 4927669211999389811, guid: 0b6f743e46a484787b04c762df2c2b51, type: 3}
-  _characters: []
+  _characterPrefabs: []
+  _pointsPlayer: []
+  _pointsAI: []
