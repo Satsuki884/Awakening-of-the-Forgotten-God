@@ -1,12 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace AFG.Stats
 {
+    [System.Serializable]
+    public class CharacterStatsData
+    {
+        public float health;
+        public float speed;
+    }
+
     public class CharacterStats : MonoBehaviour
     {
-       [SerializeField] private float _health;
+        [SerializeField] private float _health;
 
         public float Health
         {
@@ -16,7 +24,7 @@ namespace AFG.Stats
             }
             set
             {
-                if(value < 0)
+                if (value < 0)
                 {
                     _health = 0;
                 }
@@ -35,9 +43,16 @@ namespace AFG.Stats
             set => _speed = value;
         }
 
-        public void Initialize()
+        public void Initialize(string jsonData)
         {
-           
+            // Десериализация данных из JSON
+            CharacterStatsData statsData = JsonUtility.FromJson<CharacterStatsData>(jsonData);
+            
+            // Присвоение значений из JSON
+            Health = statsData.health;
+            Speed = statsData.speed;
+
+            Debug.Log("Character initialized from JSON: Health=" + Health + ", Speed=" + Speed);
         }
     }
 }

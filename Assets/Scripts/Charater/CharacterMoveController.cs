@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,5 +14,10 @@ public class CharacterMoveController : MonoBehaviour
     public void MoveRight()
     {
         Debug.Log("Move right");
+    }
+
+    public void MoveTo(Vector3 transformPosition, Action OnMoveFinished)
+    {
+        OnMoveFinished?.Invoke();
     }
 }
