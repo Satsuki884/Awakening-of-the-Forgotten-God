@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4343189006852141662}
   - component: {fileID: 9128870392996443510}
   - component: {fileID: 7184269393050253208}
+  - component: {fileID: -6794284341826315026}
+  - component: {fileID: -1788916355792293242}
   m_Layer: 0
   m_Name: Odin
   m_TagString: Untagged
@@ -83,3 +85,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-6794284341826315026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6619029429925650971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28882c317a51a4b4388da6125577e065, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 100
+  _speed: 3
+--- !u!114 &-1788916355792293242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6619029429925650971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13bf56803045b42ee955f2c029e2b8c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

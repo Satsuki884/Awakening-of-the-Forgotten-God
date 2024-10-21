@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class CharacterDamageController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void TakeDamage(int i)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Debug.Log("Take damage " + i);
     }
 }
