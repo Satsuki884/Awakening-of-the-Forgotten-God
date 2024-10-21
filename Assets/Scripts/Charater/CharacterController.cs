@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using AFG.Stats;
 using UnityEngine;
 
 namespace AFG.Character
@@ -7,14 +8,14 @@ namespace AFG.Character
     public class CharacterController : MonoBehaviour
     {
         //TODO refactoring change after buf-debuf
-        [SerializeField] protected int _speed;
-        public int Speed => _speed;
-        
         [SerializeField] protected CharacterAnimationController _animationController;
         [SerializeField] protected CharacterMoveController _moveController;
         [SerializeField] protected CharacterDamageController _damageController;
 
         protected CharacterBrain _brain;
+        protected CharacterStats _characterStats;
+        
+        public float Speed => _characterStats.Speed;
         
         public virtual void Initialization(CharacterBrain brain)
         {
@@ -22,6 +23,8 @@ namespace AFG.Character
            
             _brain = brain;
             _brain.Initialization(this);
+
+            _characterStats = GetComponentInChildren<CharacterStats>();
         }
 
         public virtual void SelectCharacter()

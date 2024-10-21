@@ -33,6 +33,7 @@ namespace AFG.Combat
                 _charactersQueue.Add(character);
             }
             
+            _charactersQueue[0].SelectCharacter();
         }
     }
 }
