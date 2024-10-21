@@ -39,8 +39,9 @@ public class AnimationStateController : MonoBehaviour
         {
             animator.SetBool("range", false);
         }*/
-        animator.SetBool("melee", Input.GetKey("w"));
-        animator.SetBool("area", Input.GetKey("q"));
-        animator.SetBool("range", Input.GetKey("e"));
+        
+        animator.SetBool("melee", Input.GetKeyDown(KeyCode.W));
+        animator.SetBool("area", Input.GetKeyDown(KeyCode.Q));
+        animator.SetBool("range", Input.GetKeyDown(KeyCode.E));
     }
 }
