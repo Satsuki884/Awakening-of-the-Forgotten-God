@@ -7,12 +7,15 @@ namespace AFG.Character
 {
     public class CharacterMeleSkill : CharacterSkill
     {
-        public override void UseSkill(CharacterController user, 
+        private float Atk;
+        public override void UseSkill(CharacterController user,
             List<CharacterController> targets)
         {
             base.UseSkill(user, targets);
-            
-            for(int i=0; i < targets.Count; i++)
+
+            Atk = user.Atk;
+
+            for (int i=0; i < targets.Count; i++)
             {
                 int j = i;
                 targets[j].IsAbleToSelect = true;
@@ -39,7 +42,7 @@ namespace AFG.Character
                 _user.AnimationController.PlayMeleAttackAnimation(() =>
                 {
                     //enemy hit
-                    characterController.DamageController.TakeDamage(10);
+                    characterController.DamageController.TakeDamage(Atk, characterController);
                     
                     //return to start point
                     _user.MoveController.MoveTo(startPoint, () =>

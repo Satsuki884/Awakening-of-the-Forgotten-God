@@ -18,6 +18,36 @@ public class CharacterAnimationController : MonoBehaviour
         OnHit?.Invoke();
     }
 
+    public void PlayRangeAttackAnimation(Action OnRange)
+    {
+        Debug.Log("Play range animation");
+        OnRange?.Invoke();
+    }
+
+    public void PlayHealAnimation(Action OnHeal)
+    {
+        Debug.Log("Play heal animation");
+        OnHeal?.Invoke();
+    }
+
+    public void PlayBufAnimation(Action OnBuf)
+    {
+        Debug.Log("Play buf animation");
+        OnBuf?.Invoke();
+    }
+
+    public void PlayDebufAnimation(Action OnDebuf)
+    {
+        Debug.Log("Play debuf animation");
+        OnDebuf?.Invoke();
+    }
+
+    public void PlayAreaAnimation(Action OnArea)
+    {
+        Debug.Log("Play area animation");
+        OnArea?.Invoke();
+    }
+
     public void PlayIdleAnimation()
     {
         Debug.Log("Play idle animation");
