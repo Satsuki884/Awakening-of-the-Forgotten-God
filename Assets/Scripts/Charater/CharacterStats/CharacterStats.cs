@@ -10,6 +10,8 @@ namespace AFG.Stats
     {
         public float health;
         public float speed;
+        public float def;
+        public float atk;
     }
 
     public class CharacterStats : MonoBehaviour
@@ -43,6 +45,22 @@ namespace AFG.Stats
             set => _speed = value;
         }
 
+        [SerializeField] private float _def;
+
+        public float Def
+        {
+            get => _def;
+            set => _def = value;
+        }
+
+        [SerializeField] private float _atk;
+
+        public float Atk
+        {
+            get => _atk;
+            set => _atk = value;
+        }
+
         public void Initialize(string jsonData)
         {
             // Десериализация данных из JSON
@@ -51,8 +69,10 @@ namespace AFG.Stats
             // Присвоение значений из JSON
             Health = statsData.health;
             Speed = statsData.speed;
+            Atk = statsData.atk;
+            Def = statsData.def;
 
-            Debug.Log("Character initialized from JSON: Health=" + Health + ", Speed=" + Speed);
+            Debug.Log("Character initialized from JSON: Health=" + Health + ", Speed=" + Speed + ", Def=" + Def + ", Atk=" + Atk);
         }
     }
 }

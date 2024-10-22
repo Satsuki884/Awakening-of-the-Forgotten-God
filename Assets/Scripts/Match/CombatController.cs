@@ -4,6 +4,7 @@ using AFG.Character;
 using AFG.Squad;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 using CharacterController = AFG.Character.CharacterController;
 
@@ -21,7 +22,6 @@ namespace AFG.Combat
         [SerializeField] private Button _healButton;
         [SerializeField] private Button _bufButton;
         [SerializeField] private Button _debuffButton;
-        [SerializeField] private Button _ultaButton;
         
         //TODO change after buf-debuf
         private List<CharacterController> _charactersQueue;
@@ -46,7 +46,12 @@ namespace AFG.Combat
             {
                 _charactersQueue.Add(character);
             }
-            SelectCharacter(_charactersQueue[0]);
+           SelectCharacter(sortedCharacters[0]);
+
+            /*foreach (var character in _playerSquad.Characters)
+            {
+                SelectCharacter(character);
+            }*/
         }
 
         private void SelectCharacter(CharacterController character)
@@ -71,15 +76,63 @@ namespace AFG.Combat
                     _attackMeleButton.onClick.AddListener(() =>
                     {
                         skill.UseSkill(_selectedCharacter, _aiSquad.Characters);
+                        DeactivateAllButton();
                     });
+                    
+                }
+                if (skill is CharacterRangeSkill)
+                {
+                    _attackRangeButton.gameObject.SetActive(true);
+                    _attackRangeButton.onClick.AddListener(() =>
+                    {
+                        skill.UseSkill(_selectedCharacter, _aiSquad.Characters);
+                        DeactivateAllButton();
+                    });
+                    
+                }
+                if (skill is CharacterBufSkill)
+                {
+                    _bufButton.gameObject.SetActive(true);
+                    _bufButton.onClick.AddListener(() =>
+                    {
+                        skill.UseSkill(_selectedCharacter, _playerSquad.Characters);
+                        DeactivateAllButton();
+                    });
+
+                }
+                if (skill is CharacterDebufSkill)
+                {
+                    _debuffButton.gameObject.SetActive(true);
+                    _debuffButton.onClick.AddListener(() =>
+                    {
+                        skill.UseSkill(_selectedCharacter, _aiSquad.Characters);
+                        DeactivateAllButton();
+                    });
+
+                }
+                if (skill is CharacterHealSkill)
+                {
+                    _healButton.gameObject.SetActive(true);
+                    _healButton.onClick.AddListener(() =>
+                    {
+                        skill.UseSkill(_selectedCharacter, _playerSquad.Characters);
+                        DeactivateAllButton();
+                    });
+
                 }
             }
         }
-        
+
+
         //TODO deactivate all buttons
         private void DeactivateAllButton()
         {
-            
+            _attackMeleButton.gameObject.SetActive(false);
+            _attackRangeButton.gameObject.SetActive(false);
+            _attackAreaButton.gameObject.SetActive(false);
+            _healButton.gameObject.SetActive(false);
+            _bufButton.gameObject.SetActive(false);
+            _debuffButton.gameObject.SetActive(false);
         }
     }
 }

@@ -99,6 +99,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 50
   _speed: 2
+  _def: 25
+  _atk: 4
 --- !u!114 &-6567065270026539711
 MonoBehaviour:
   m_ObjectHideFlags: 0
