@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7975109266195920824}
   - component: {fileID: 9125243727095626265}
   - component: {fileID: -6533826742580233173}
-  - component: {fileID: -276559523515033593}
+  - component: {fileID: -5158763405801835418}
   m_Layer: 0
   m_Name: Tor
   m_TagString: Untagged
@@ -101,7 +101,7 @@ MonoBehaviour:
   _speed: 2
   _def: 25
   _atk: 4
---- !u!114 &-276559523515033593
+--- !u!114 &-5158763405801835418
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,6 +110,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 505549411352300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07b82cc5ffb2b44f3a8bdd0252ce257a, type: 3}
+  m_Script: {fileID: 11500000, guid: 68e779e6fa62c44b3be5b2dc92cd91e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

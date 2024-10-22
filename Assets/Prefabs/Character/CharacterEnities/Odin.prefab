@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9128870392996443510}
   - component: {fileID: 7184269393050253208}
   - component: {fileID: -6794284341826315026}
-  - component: {fileID: -7981501307579598506}
+  - component: {fileID: -8182532785167177203}
   m_Layer: 0
   m_Name: Odin
   m_TagString: Untagged
@@ -101,7 +101,7 @@ MonoBehaviour:
   _speed: 3
   _def: 10
   _atk: 5
---- !u!114 &-7981501307579598506
+--- !u!114 &-8182532785167177203
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,6 +110,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6619029429925650971}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07b82cc5ffb2b44f3a8bdd0252ce257a, type: 3}
+  m_Script: {fileID: 11500000, guid: 68e779e6fa62c44b3be5b2dc92cd91e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

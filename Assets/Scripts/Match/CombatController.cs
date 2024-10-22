@@ -120,6 +120,16 @@ namespace AFG.Combat
                     });
 
                 }
+                if (skill is CharacterAreaDamageSkill)
+                {
+                    _attackAreaButton.gameObject.SetActive(true);
+                    _attackAreaButton.onClick.AddListener(() =>
+                    {
+                        skill.UseSkill(_selectedCharacter, _aiSquad.Characters);
+                        DeactivateAllButton();
+                    });
+
+                }
             }
         }
 

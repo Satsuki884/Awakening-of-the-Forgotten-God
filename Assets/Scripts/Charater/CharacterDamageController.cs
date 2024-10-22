@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 
 namespace AFG.Character
@@ -34,6 +35,7 @@ namespace AFG.Character
             Debug.Log("Target Health after damage: " + target.Health);
         }
 
+        
 
     }
 
