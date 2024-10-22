@@ -1984,6 +1984,10 @@ PrefabInstance:
       propertyPath: _characterPrefabs.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1257455408958391666, guid: 540b92bf5fa3a4c7fa8979438014e293, type: 3}
+      propertyPath: _characterPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 1711744879267834823, guid: 8d56e01d9cfbf4170a8c933fe71fd453, type: 3}
     - target: {fileID: 7510881702350321048, guid: 540b92bf5fa3a4c7fa8979438014e293, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

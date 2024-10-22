@@ -18,7 +18,6 @@ namespace AFG.Squad
 
         public bool IsActive { get; set; }
 
-        [SerializeField] private GameObject targetObject;
 
         public virtual void Initialization()
         {

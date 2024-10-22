@@ -32,11 +32,11 @@ namespace AFG.Character
                 _isAbleToSelect = value;
                 if (_isAbleToSelect)
                 {
-                    transform.position+=Vector3.up * 10;
+                    transform.position+=Vector3.up * 5;
                 }
                 else
                 {
-                    transform.position-=Vector3.up * 10;
+                    transform.position-=Vector3.up * 5;
                 }
             }
         }
