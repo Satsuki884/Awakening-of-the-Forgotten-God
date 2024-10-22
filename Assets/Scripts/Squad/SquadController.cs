@@ -18,33 +18,35 @@ namespace AFG.Squad
 
         public bool IsActive { get; set; }
 
+        [SerializeField] private GameObject targetObject;
+
         public virtual void Initialization()
         {
             CharacterController characterController;
 
             CharacterBrain characterBrain;
 
-            //Vector3 position;
-
-
             if (_brainType == CharacterBrainType.AI)
             {
                 characterBrain = new CharacterAIBrain();
-                //position = _points[].position;
             }
             else
             {
                 characterBrain = new CharacterPlayerBrain();
-                //position = _points[].position;
             }
 
-            for(int i=0;i<_characterPrefabs.Length;i++)
+            float step = 6f;
+            Vector3 positionOffset;
+            int totalCharacters = _characterPrefabs.Length;
+            float halfWidth = (totalCharacters - 1) * step / 2;
+
+            for (int i=0;i<_characterPrefabs.Length;i++)
             {
-                //position = _points[i % _points.Count].position;
-                //characterController = Instantiate(_characterPrefabs[i], _points[i % _points.Count].position, Quaternion.identity);
                 characterController = Instantiate(_characterPrefabs[i], transform);
-                characterController.transform.parent = transform;
-                
+
+                positionOffset = new Vector3(i * step - halfWidth, 1, 0);
+                characterController.transform.localPosition = positionOffset;
+
                 //inject brain
                 characterController.Initialization(characterBrain);
                 
