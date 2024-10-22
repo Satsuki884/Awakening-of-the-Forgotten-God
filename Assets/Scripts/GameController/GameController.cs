@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using AFG.Character;
+using AFG.MVP;
 using UnityEngine;
 
 namespace AFG
@@ -24,13 +25,20 @@ namespace AFG
         //TODO add save and Load
         //public SaveManager SaveManager {get;set;}
         
-        public CharacterBrain Brain { get; set; }
-        
-        public void DoSomething()
+        private CombatModel _combatModel;
+
+        public CombatModel CombatModel
         {
-            
+            get
+            {
+                if (_combatModel == null)
+                {
+                    _combatModel = new CombatModel();
+                }
+
+                return _combatModel;
+            }
         }
-        public int TestProperty { get; set; }
     }
 }
 

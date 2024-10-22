@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using AFG.Character;
@@ -9,9 +10,9 @@ namespace AFG.Character
     {
         private float Atk;
         public override void UseSkill(CharacterController user,
-            List<CharacterController> targets)
+            List<CharacterController> targets, Action OnSkillUsed)
         {
-            base.UseSkill(user, targets);
+            base.UseSkill(user, targets, OnSkillUsed);
 
             Atk = user.Atk;
 
@@ -49,6 +50,7 @@ namespace AFG.Character
                     {
                         //play idle animation on start point
                         _user.AnimationController.PlayIdleAnimation();
+                        onSkillUsed?.Invoke();
                     });
                 });
             });

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,12 +12,10 @@ namespace AFG.Character
 {
     public class CharacterAreaDamageSkill : CharacterSkill
     {
-
-        
         public override void UseSkill(CharacterController user,
-            List<CharacterController> targets)
+            List<CharacterController> targets, Action OnSkillUsed)
         {
-            base.UseSkill(user, targets);
+            base.UseSkill(user, targets, OnSkillUsed);
 
             //play run animation
             user.AnimationController.PlayRunAnimation();
@@ -42,6 +41,7 @@ namespace AFG.Character
                         targets[i].DamageController.TakeDamage(user.Atk, targets[i]);
                         //play idle animation on start point
                         user.AnimationController.PlayIdleAnimation();
+                        onSkillUsed?.Invoke();
                     });
                 }
                 

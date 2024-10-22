@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,9 +8,9 @@ namespace AFG.Character
     public class CharacterBufSkill : CharacterSkill
     {
         public override void UseSkill(CharacterController user,
-            List<CharacterController> targets)
+            List<CharacterController> targets, Action OnSkillUsed)
         {
-            base.UseSkill(user, targets);
+            base.UseSkill(user, targets, OnSkillUsed);
 
 
             for (int i = 0; i < targets.Count; i++)

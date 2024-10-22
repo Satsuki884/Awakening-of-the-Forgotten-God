@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AFG.Character;
@@ -15,24 +16,20 @@ namespace AFG.Combat
         [SerializeField] private SquadController _playerSquad;
         [SerializeField] private SquadController _aiSquad;
 
-        [Header("Buttons")] 
-        [SerializeField] private Button _attackMeleButton;
-        [SerializeField] private Button _attackRangeButton;
-        [SerializeField] private Button _attackAreaButton;
-        [SerializeField] private Button _healButton;
-        [SerializeField] private Button _bufButton;
-        [SerializeField] private Button _debuffButton;
-        
         //TODO change after buf-debuf
         private List<CharacterController> _charactersQueue;
 
         private CharacterController _selectedCharacter;
+        private int _currentCharacterIndex = 0;
         
         private void Start()
         {
             _playerSquad.Initialization();
             _aiSquad.Initialization();
 
+            GameController.Instance.CombatModel.PlayerSquad = _playerSquad;
+            GameController.Instance.CombatModel.AiSquad = _aiSquad;
+            
             _charactersQueue = new List<CharacterController>();
 
             // Combine characters from both squads
@@ -46,103 +43,36 @@ namespace AFG.Combat
             {
                 _charactersQueue.Add(character);
             }
-           SelectCharacter(sortedCharacters[0]);
-
-            /*foreach (var character in _playerSquad.Characters)
-            {
-                SelectCharacter(character);
-            }*/
+            
+            SelectCharacter(sortedCharacters[_currentCharacterIndex]);
         }
 
+        private void OnEnable()
+        {
+            GameController.Instance.CombatModel.OnMoveFinished += SelectNextCharacter;
+        }
+
+        private void OnDisable()
+        {
+            GameController.Instance.CombatModel.OnMoveFinished -= SelectNextCharacter;
+        }
+        
         private void SelectCharacter(CharacterController character)
         {
-            DeactivateAllButton();
-            
             _selectedCharacter = character;
             _selectedCharacter.SelectCharacter();
-
-            ActivateButtons();
+            
+            GameController.Instance.CombatModel.SelectedCharacter = _selectedCharacter;
         }
-
-        private void ActivateButtons()
+        
+        private void SelectNextCharacter()
         {
-            for (int i = 0; i < _selectedCharacter.Skills.Length; i++)
+            _currentCharacterIndex++;
+            if (_currentCharacterIndex >= _charactersQueue.Count)
             {
-                var skill = _selectedCharacter.Skills[i];
-                //TODO add other skills buttons
-                if (skill is CharacterMeleSkill)
-                {
-                    _attackMeleButton.gameObject.SetActive(true);
-                    _attackMeleButton.onClick.AddListener(() =>
-                    {
-                        skill.UseSkill(_selectedCharacter, _aiSquad.Characters);
-                        DeactivateAllButton();
-                    });
-                    
-                }
-                if (skill is CharacterRangeSkill)
-                {
-                    _attackRangeButton.gameObject.SetActive(true);
-                    _attackRangeButton.onClick.AddListener(() =>
-                    {
-                        skill.UseSkill(_selectedCharacter, _aiSquad.Characters);
-                        DeactivateAllButton();
-                    });
-                    
-                }
-                if (skill is CharacterBufSkill)
-                {
-                    _bufButton.gameObject.SetActive(true);
-                    _bufButton.onClick.AddListener(() =>
-                    {
-                        skill.UseSkill(_selectedCharacter, _playerSquad.Characters);
-                        DeactivateAllButton();
-                    });
-
-                }
-                if (skill is CharacterDebufSkill)
-                {
-                    _debuffButton.gameObject.SetActive(true);
-                    _debuffButton.onClick.AddListener(() =>
-                    {
-                        skill.UseSkill(_selectedCharacter, _aiSquad.Characters);
-                        DeactivateAllButton();
-                    });
-
-                }
-                if (skill is CharacterHealSkill)
-                {
-                    _healButton.gameObject.SetActive(true);
-                    _healButton.onClick.AddListener(() =>
-                    {
-                        skill.UseSkill(_selectedCharacter, _playerSquad.Characters);
-                        DeactivateAllButton();
-                    });
-
-                }
-                if (skill is CharacterAreaDamageSkill)
-                {
-                    _attackAreaButton.gameObject.SetActive(true);
-                    _attackAreaButton.onClick.AddListener(() =>
-                    {
-                        skill.UseSkill(_selectedCharacter, _aiSquad.Characters);
-                        DeactivateAllButton();
-                    });
-
-                }
+                _currentCharacterIndex = 0;
             }
-        }
-
-
-        //TODO deactivate all buttons
-        private void DeactivateAllButton()
-        {
-            _attackMeleButton.gameObject.SetActive(false);
-            _attackRangeButton.gameObject.SetActive(false);
-            _attackAreaButton.gameObject.SetActive(false);
-            _healButton.gameObject.SetActive(false);
-            _bufButton.gameObject.SetActive(false);
-            _debuffButton.gameObject.SetActive(false);
+            SelectCharacter(_charactersQueue[_currentCharacterIndex]);
         }
     }
 }
