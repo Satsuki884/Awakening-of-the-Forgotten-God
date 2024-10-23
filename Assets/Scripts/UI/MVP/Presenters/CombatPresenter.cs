@@ -1,6 +1,8 @@
 using System;
 using AFG.Character;
 using AFG.Squad;
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using CharacterController = AFG.Character.CharacterController;
@@ -15,6 +17,7 @@ namespace AFG.MVP
         [SerializeField] private Button _healButton;
         [SerializeField] private Button _bufButton;
         [SerializeField] private Button _debuffButton;
+        [SerializeField] private TextMeshProUGUI _currentCharacter;
 
         public void OnEnable()
         {
@@ -29,6 +32,9 @@ namespace AFG.MVP
         private void OnCharacterSelected(CharacterController _selectedCharacter)
         {
             DeactivateAllButton();
+            string fullName = _selectedCharacter.name.ToString();
+            string firstWord = fullName.Split(' ')[0];
+            _currentCharacter.text = firstWord;
             var _playerSquad = GameController.Instance.CombatModel.PlayerSquad;
             var _aiSquad = GameController.Instance.CombatModel.AiSquad;
             Action onFinishMove = ()=> GameController.Instance.CombatModel.FinishMove();
@@ -42,6 +48,8 @@ namespace AFG.MVP
             Squad.SquadController _playerSquad, 
             Action onFinishMove)
         {
+
+            HighlightCharacter(_selectedCharacter, true);
             for (int i = 0; i < _selectedCharacter.Skills.Length; i++)
             {
 
@@ -61,6 +69,7 @@ namespace AFG.MVP
                             onFinishMove);
 
                         DeactivateAllButton();
+                        HighlightCharacter(_selectedCharacter, false);
                     });
 
                 }
@@ -78,6 +87,7 @@ namespace AFG.MVP
                             onFinishMove);
 
                         DeactivateAllButton();
+                        HighlightCharacter(_selectedCharacter, false);
                     });
 
                 }
@@ -93,6 +103,7 @@ namespace AFG.MVP
                             onFinishMove);
 
                         DeactivateAllButton();
+                        HighlightCharacter(_selectedCharacter, false);
                     });
 
                 }
@@ -110,6 +121,7 @@ namespace AFG.MVP
                             onFinishMove);
 
                         DeactivateAllButton();
+                        HighlightCharacter(_selectedCharacter, false);
                     });
 
                 }
@@ -125,6 +137,7 @@ namespace AFG.MVP
                             onFinishMove);
 
                         DeactivateAllButton();
+                        HighlightCharacter(_selectedCharacter, false);
                     });
 
                 }
@@ -140,12 +153,40 @@ namespace AFG.MVP
                             onFinishMove);
 
                         DeactivateAllButton();
+                        HighlightCharacter(_selectedCharacter, false);
                     });
 
                 }
             }
         }
-        
+
+        private void HighlightCharacter(CharacterController character, bool enableHighlight)
+        {
+            Debug.Log("я буду светиться?");
+            Renderer characterRenderer = character.GetComponentInChildren<Renderer>();
+            Debug.Log(characterRenderer);
+            if (characterRenderer != null)
+            {
+                if (enableHighlight)
+                {
+                    // Изменяем цвет на белый с небольшим эффектом пульсации
+                    characterRenderer.material.DOColor(Color.green, 0.5f)
+                        .OnComplete(() =>
+                        {
+                            // Возвращаем цвет обратно на исходный через короткий промежуток времени для пульсации
+                            characterRenderer.material.DOColor(new Color(1f, 1f, 1f, 0.5f), 0.5f)
+                                .SetLoops(-1, LoopType.Yoyo); // Бесконечное повторение пульсации
+                        });
+                }
+                else
+                {
+                    // Убираем подсветку, возвращаем стандартный цвет
+                    characterRenderer.material.DOKill(); // Останавливаем пульсацию
+                    characterRenderer.material.DOColor(Color.white, 0.5f); // Возвращаем цвет обратно
+                }
+            }
+        }
+
         private void DeactivateAllButton()
         {
             _attackMeleButton.gameObject.SetActive(false);

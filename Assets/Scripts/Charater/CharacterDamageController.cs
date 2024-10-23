@@ -26,13 +26,13 @@ namespace AFG.Character
                 target.Health -= i;
             }else if (target.Health < i && target.Health > 0)
             {
-                Debug.LogError("Health "+ target.name+ " = 0");
+                //Debug.LogError("Health "+ target.name+ " = 0");
                 target.Health = 0;
                 Destroy(target, 2f);
             }
 
-            Debug.Log(target.name + " Def after damage: " + target.Def);
-            Debug.Log(target.name + " Health after damage: " + target.Health);
+            //Debug.Log(target.name + " Def after damage: " + target.Def);
+            //Debug.Log(target.name + " Health after damage: " + target.Health);
         }
 
         
