@@ -12,13 +12,10 @@ namespace AFG.Character
 {
     public class CharacterRangeSkill : CharacterSkill
     {
-        private float Atk;
         public override void UseSkill(CharacterController user,
             List<CharacterController> targets, Action OnSkillUsed)
         {
             base.UseSkill(user, targets, OnSkillUsed);
-
-            Atk = user.Atk;
 
             for (int i = 0; i < targets.Count; i++)
             {
@@ -39,7 +36,7 @@ namespace AFG.Character
             _user.AnimationController.PlayRangeAttackAnimation(() =>
             {
                 //enemy hit
-                characterController.DamageController.TakeDamage(Atk, characterController);
+                characterController.DamageController.TakeDamage(_user.Atk, characterController);
                 //play idle animation on start point
                 _user.AnimationController.PlayIdleAnimation();
                 onSkillUsed?.Invoke();

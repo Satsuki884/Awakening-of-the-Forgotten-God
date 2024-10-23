@@ -8,13 +8,12 @@ namespace AFG.Character
 {
     public class CharacterMeleSkill : CharacterSkill
     {
-        private float Atk;
         public override void UseSkill(CharacterController user,
             List<CharacterController> targets, Action OnSkillUsed)
         {
             base.UseSkill(user, targets, OnSkillUsed);
 
-            Atk = user.Atk;
+            Debug.LogWarning(user.name);
 
             for (int i=0; i < targets.Count; i++)
             {
@@ -50,7 +49,7 @@ namespace AFG.Character
                 _user.AnimationController.PlayMeleAttackAnimation(() =>
                 {
                     //enemy hit
-                    characterController.DamageController.TakeDamage(Atk, characterController);
+                    characterController.DamageController.TakeDamage(_user.Atk, characterController);
                     
                     //return to start point
                     _user.MoveController.MoveBack(_user, startPoint, initialRotation, () =>

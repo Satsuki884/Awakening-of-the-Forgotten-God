@@ -162,9 +162,9 @@ namespace AFG.MVP
 
         private void HighlightCharacter(CharacterController character, bool enableHighlight)
         {
-            Debug.Log("я буду светиться?");
+           // Debug.Log("я буду светиться?");
             Renderer characterRenderer = character.GetComponentInChildren<Renderer>();
-            Debug.Log(characterRenderer);
+            //Debug.Log(characterRenderer);
             if (characterRenderer != null)
             {
                 if (enableHighlight)

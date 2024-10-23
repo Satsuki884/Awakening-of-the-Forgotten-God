@@ -13,15 +13,11 @@ namespace AFG.Character
     public class CharacterAreaDamageSkill : CharacterSkill
     {
 
-        private float _atk;
-        //private List<CharacterController> _areaTargets;
         public override void UseSkill(CharacterController user,
             List<CharacterController> targets, Action OnSkillUsed)
         {
             base.UseSkill(user, targets, OnSkillUsed);
 
-            _atk = user.Atk;
-            //_areaTargets = targets;
 
             for (int i = 0; i < targets.Count; i++)
             {
@@ -62,7 +58,7 @@ namespace AFG.Character
                     {
                            
                         //enemy hit
-                        _targets[i].DamageController.TakeDamage(_atk, _targets[i]);
+                        _targets[i].DamageController.TakeDamage(_user.Atk, _targets[i]);
                             //return to start point
                             _user.MoveController.MoveBack(_user, startPoint, initialRotation, () =>
                             {

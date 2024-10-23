@@ -20,6 +20,7 @@ public class CharacterMoveController : MonoBehaviour
 
     public void MoveTo(CharacterController user, Vector3 transformPosition, Action OnMoveFinished)
     {
+        Debug.LogWarning(user.name);
         Vector3 direction = (transformPosition - user.transform.position).normalized;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
 

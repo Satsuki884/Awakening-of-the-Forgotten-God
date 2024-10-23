@@ -16,7 +16,7 @@ namespace AFG.Character
             List<CharacterController> targets,
             Action OnSkillUsed = null)
         {
-            Debug.Log("Skill used by " + user.name);
+            //Debug.Log("Skill used by " + user.name);
             _user = user;
             _targets = targets;
             onSkillUsed = OnSkillUsed;
