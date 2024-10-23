@@ -22,22 +22,19 @@ namespace AFG
             }
         }
 
-        //TODO add save and Load
-        //public SaveManager SaveManager {get;set;}
-        
-        private CombatModel _combatModel;
+        public SaveManager SaveManager { get;set;}
+        public CombatModel CombatModel { get; set; }
+        public PlayerCharactersHolderModel PlayerCharactersHolderModel { get; set; }
+        public CharactersHolderModel CharactersHolderModel { get; set; }
 
-        public CombatModel CombatModel
+        public void Initialize()
         {
-            get
-            {
-                if (_combatModel == null)
-                {
-                    _combatModel = new CombatModel();
-                }
+            SaveManager = new SaveManager();
+            CombatModel = new CombatModel();
 
-                return _combatModel;
-            }
+            //TODO load from SaveManager
+            PlayerCharactersHolderModel = new PlayerCharactersHolderModel(string.Empty);
+            CharactersHolderModel = new CharactersHolderModel(string.Empty);
         }
     }
 }
