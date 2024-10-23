@@ -24,6 +24,9 @@ namespace AFG.Character
         public CharacterDeBufController DeBufController => _deBufController;
 
         private bool _isAbleToSelect;
+
+        [SerializeField] private GameObject _selectionIndicatorPrefab;
+        private GameObject _selectionIndicator;
         public bool IsAbleToSelect
         {
             get => _isAbleToSelect;
@@ -32,11 +35,35 @@ namespace AFG.Character
                 _isAbleToSelect = value;
                 if (_isAbleToSelect)
                 {
-                    transform.position+=Vector3.up * 2;
+                    ShowSelectionIndicator();
+                }
+                else
+                {
+                    HideSelectionIndicator();
                 }
             }
         }
+
         
+        private void Start()
+        {
+            _selectionIndicator = Instantiate(_selectionIndicatorPrefab, transform);
+            _selectionIndicator.transform.localScale = new Vector3(5, 5, 1);
+            _selectionIndicator.transform.rotation = Quaternion.Euler(90, 0, 0);
+            _selectionIndicator.SetActive(false);
+        }
+
+        private void ShowSelectionIndicator()
+        {
+            _selectionIndicator.SetActive(true);
+            _selectionIndicator.transform.position = transform.position + Vector3.up * 0.1f;
+        }
+
+        private void HideSelectionIndicator()
+        {
+            _selectionIndicator.SetActive(false);
+        }
+
         protected CharacterBrain _brain;
         protected CharacterStats _characterStats;
         

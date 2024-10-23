@@ -45,6 +45,10 @@ namespace AFG.Squad
 
                 positionOffset = new Vector3(i * step - halfWidth, 1, 0);
                 characterController.transform.localPosition = positionOffset;
+                if (_brainType == CharacterBrainType.AI)
+                {
+                    characterController.transform.eulerAngles = new Vector3(0, 180, 0); // Поворот на 180 градусов
+                }
 
                 //inject brain
                 characterController.Initialization(characterBrain);

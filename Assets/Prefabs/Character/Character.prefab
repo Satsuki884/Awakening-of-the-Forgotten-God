@@ -54,6 +54,7 @@ MonoBehaviour:
   _damageController: {fileID: 596756449076775240}
   _healController: {fileID: 5667478600148470615}
   _deBufController: {fileID: 2752516492794495008}
+  _selectionIndicatorPrefab: {fileID: 6394513305067255813, guid: fd2b27f6a2e7f2e48b05055acae2394b, type: 3}
 --- !u!114 &8380994519039996886
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: _deBufController
       value: 
       objectReference: {fileID: 350780323717589488}
+    - target: {fileID: 4927669211999389811, guid: 0b6f743e46a484787b04c762df2c2b51, type: 3}
+      propertyPath: _selectionIndicatorPrefab
+      value: 
+      objectReference: {fileID: 6394513305067255813, guid: fd2b27f6a2e7f2e48b05055acae2394b, type: 3}
     - target: {fileID: 5307354103079997627, guid: 0b6f743e46a484787b04c762df2c2b51, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

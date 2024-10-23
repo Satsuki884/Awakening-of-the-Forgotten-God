@@ -59,6 +59,7 @@ namespace AFG.Combat
         
         private void SelectCharacter(CharacterController character)
         {
+
             _selectedCharacter = character;
             _selectedCharacter.SelectCharacter();
             

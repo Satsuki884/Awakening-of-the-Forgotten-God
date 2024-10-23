@@ -12,47 +12,67 @@ namespace AFG.Character
 {
     public class CharacterAreaDamageSkill : CharacterSkill
     {
+
+        private float _atk;
+        //private List<CharacterController> _areaTargets;
         public override void UseSkill(CharacterController user,
             List<CharacterController> targets, Action OnSkillUsed)
         {
             base.UseSkill(user, targets, OnSkillUsed);
 
-            //play run animation
-            user.AnimationController.PlayRunAnimation();
-
-            Vector3 startPoint = user.transform.position;
-
-            Vector3 averagePosition = Vector3.zero;
+            _atk = user.Atk;
+            //_areaTargets = targets;
 
             for (int i = 0; i < targets.Count; i++)
             {
-                averagePosition += targets[i].transform.position;
+                int j = i;
+                targets[j].IsAbleToSelect = true;
+
+                targets[j].OnSelected += OnCharacterSelected;
             }
-            averagePosition /= targets.Count;
+
+            Debug.Log("Area skill used");
+        }
+
+        public override void OnCharacterSelected(CharacterController characterController)
+        {
+            base.OnCharacterSelected(characterController);
+
+            //play run animation
+            _user.AnimationController.PlayRunAnimation();
+
+            Vector3 startPoint = _user.transform.position;
 
             //run to enemy
-            user.MoveController.MoveTo(averagePosition, () =>
+            _user.MoveController.MoveTo(characterController.transform.position, () =>
             {
-                for (int i = 0; i < targets.Count; i++)
+                //start hit enemy
+                _user.AnimationController.PlayAreaAnimation(() =>
                 {
-                    user.AnimationController.PlayAreaAnimation(() =>
+                    Debug.LogWarning("Start area dmdge");
+                    //enemy hit
+                    for (int i = 0; i < _targets.Count; i++)
                     {
+                           
                         //enemy hit
-                        targets[i].DamageController.TakeDamage(user.Atk, targets[i]);
-                        //play idle animation on start point
-                        user.AnimationController.PlayIdleAnimation();
-                        onSkillUsed?.Invoke();
-                    });
-                }
-                
+                        _targets[i].DamageController.TakeDamage(_atk, _targets[i]);
+                            //return to start point
+                            _user.MoveController.MoveTo(startPoint, () =>
+                            {
+                                //play idle animation on start point
+                                _user.AnimationController.PlayIdleAnimation();
+                                onSkillUsed?.Invoke();
+                            });
+                    }
+                    Debug.LogWarning("Range skill used on all enemy");
+                });
             });
-
-
-            Debug.Log("Range skill used on all enemy");
+            
             DeactivateSelectionAbility(_targets);
         }
 
-        
+
+       
     }
 }
 

@@ -1,5 +1,6 @@
 using System;
 using AFG.Character;
+using AFG.Squad;
 using UnityEngine;
 using UnityEngine.UI;
 using CharacterController = AFG.Character.CharacterController;
@@ -27,94 +28,117 @@ namespace AFG.MVP
         
         private void OnCharacterSelected(CharacterController _selectedCharacter)
         {
+            DeactivateAllButton();
             var _playerSquad = GameController.Instance.CombatModel.PlayerSquad;
             var _aiSquad = GameController.Instance.CombatModel.AiSquad;
             Action onFinishMove = ()=> GameController.Instance.CombatModel.FinishMove();
-            
+
+            ActivateButtons(_selectedCharacter, _aiSquad, _playerSquad, onFinishMove);
+        }
+
+
+        private void ActivateButtons(CharacterController _selectedCharacter, 
+            Squad.SquadController _aiSquad, 
+            Squad.SquadController _playerSquad, 
+            Action onFinishMove)
+        {
             for (int i = 0; i < _selectedCharacter.Skills.Length; i++)
             {
+
                 var skill = _selectedCharacter.Skills[i];
+                //Debug.LogWarning("skill: " + skill);
+                //DeactivateAllButton();
 
                 if (skill is CharacterMeleSkill)
                 {
+                    //Debug.Log("skill: " + skill);
                     _attackMeleButton.gameObject.SetActive(true);
                     _attackMeleButton.onClick.AddListener(() =>
                     {
                         skill.UseSkill(
-                            _selectedCharacter, 
+                            _selectedCharacter,
                             _aiSquad.Characters,
                             onFinishMove);
-                        
+
                         DeactivateAllButton();
                     });
-                    
+
                 }
                 if (skill is CharacterRangeSkill)
                 {
+                    //Debug.Log("skill: " + skill);
                     _attackRangeButton.gameObject.SetActive(true);
+                    //Debug.LogWarning("i worked too");
                     _attackRangeButton.onClick.AddListener(() =>
                     {
+
                         skill.UseSkill(
-                            _selectedCharacter, 
+                            _selectedCharacter,
                             _aiSquad.Characters,
                             onFinishMove);
-                        
+
                         DeactivateAllButton();
                     });
-                    
+
                 }
                 if (skill is CharacterBufSkill)
                 {
+                    //Debug.Log("skill: " + skill);
                     _bufButton.gameObject.SetActive(true);
                     _bufButton.onClick.AddListener(() =>
                     {
                         skill.UseSkill(
-                            _selectedCharacter, 
+                            _selectedCharacter,
                             _playerSquad.Characters,
                             onFinishMove);
-                        
+
                         DeactivateAllButton();
                     });
 
                 }
                 if (skill is CharacterDebufSkill)
                 {
+                    //Debug.Log("skill: " + skill);
                     _debuffButton.gameObject.SetActive(true);
+                    //Debug.LogWarning("i worked");
                     _debuffButton.onClick.AddListener(() =>
                     {
+
                         skill.UseSkill(
-                            _selectedCharacter, 
+                            _selectedCharacter,
                             _aiSquad.Characters,
                             onFinishMove);
-                        
+
                         DeactivateAllButton();
                     });
 
                 }
                 if (skill is CharacterHealSkill)
                 {
+                    //Debug.Log("skill: " + skill);
                     _healButton.gameObject.SetActive(true);
                     _healButton.onClick.AddListener(() =>
                     {
                         skill.UseSkill(
-                            _selectedCharacter, 
+                            _selectedCharacter,
                             _playerSquad.Characters,
                             onFinishMove);
-                        
+
                         DeactivateAllButton();
                     });
 
                 }
                 if (skill is CharacterAreaDamageSkill)
                 {
+                    //Debug.Log("skill: " + skill);
                     _attackAreaButton.gameObject.SetActive(true);
                     _attackAreaButton.onClick.AddListener(() =>
                     {
                         skill.UseSkill(
-                            _selectedCharacter, 
+                            _selectedCharacter,
                             _aiSquad.Characters,
                             onFinishMove);
-                        
+
                         DeactivateAllButton();
                     });
 
