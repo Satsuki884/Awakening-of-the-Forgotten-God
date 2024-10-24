@@ -16,6 +16,7 @@ namespace AFG
                 if (_instance == null)
                 {
                     _instance = FindObjectOfType<GameController>();
+                    _instance.Initialize();
                     DontDestroyOnLoad(_instance);
                 }
                 return _instance;
