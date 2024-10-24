@@ -35,37 +35,41 @@ namespace AFG.MVP
             string fullName = _selectedCharacter.name.ToString();
             string firstWord = fullName.Split(' ')[0];
             _currentCharacter.text = firstWord;
-            var _playerSquad = GameController.Instance.CombatModel.PlayerSquad;
-            var _aiSquad = GameController.Instance.CombatModel.AiSquad;
             Action onFinishMove = ()=> GameController.Instance.CombatModel.FinishMove();
 
-            ActivateButtons(_selectedCharacter, _aiSquad, _playerSquad, onFinishMove);
+            ActivateButtons(_selectedCharacter, onFinishMove);
         }
 
+        SquadController tempAISquad;
+        SquadController tempPlayerSquad;
 
-        private void ActivateButtons(CharacterController _selectedCharacter, 
-            Squad.SquadController _aiSquad, 
-            Squad.SquadController _playerSquad, 
-            Action onFinishMove)
+        private void ActivateButtons(CharacterController _selectedCharacter, Action onFinishMove)
         {
+            
+            SquadController parent = _selectedCharacter.GetComponentInParent<SquadController>();
+            if(parent.name == "SquadPlayerController"){
+                tempAISquad = GameController.Instance.CombatModel.AiSquad;
+                tempPlayerSquad = GameController.Instance.CombatModel.PlayerSquad;
+            }else if (parent.name == "SquadAIController")
+            {
+                tempAISquad = GameController.Instance.CombatModel.PlayerSquad;
+                tempPlayerSquad = GameController.Instance.CombatModel.AiSquad;
+            }
 
             HighlightCharacter(_selectedCharacter, true);
             for (int i = 0; i < _selectedCharacter.Skills.Length; i++)
             {
 
                 var skill = _selectedCharacter.Skills[i];
-                //Debug.LogWarning("skill: " + skill);
-                //DeactivateAllButton();
 
                 if (skill is CharacterMeleSkill)
                 {
-                    //Debug.Log("skill: " + skill);
                     _attackMeleButton.gameObject.SetActive(true);
                     _attackMeleButton.onClick.AddListener(() =>
                     {
                         skill.UseSkill(
                             _selectedCharacter,
-                            _aiSquad.Characters,
+                            tempAISquad.Characters,
                             onFinishMove);
 
                         DeactivateAllButton();
@@ -75,15 +79,13 @@ namespace AFG.MVP
                 }
                 if (skill is CharacterRangeSkill)
                 {
-                    //Debug.Log("skill: " + skill);
                     _attackRangeButton.gameObject.SetActive(true);
-                    //Debug.LogWarning("i worked too");
                     _attackRangeButton.onClick.AddListener(() =>
                     {
 
                         skill.UseSkill(
                             _selectedCharacter,
-                            _aiSquad.Characters,
+                            tempAISquad.Characters,
                             onFinishMove);
 
                         DeactivateAllButton();
@@ -93,13 +95,12 @@ namespace AFG.MVP
                 }
                 if (skill is CharacterBufSkill)
                 {
-                    //Debug.Log("skill: " + skill);
                     _bufButton.gameObject.SetActive(true);
                     _bufButton.onClick.AddListener(() =>
                     {
                         skill.UseSkill(
                             _selectedCharacter,
-                            _playerSquad.Characters,
+                            tempPlayerSquad.Characters,
                             onFinishMove);
 
                         DeactivateAllButton();
@@ -109,15 +110,13 @@ namespace AFG.MVP
                 }
                 if (skill is CharacterDebufSkill)
                 {
-                    //Debug.Log("skill: " + skill);
                     _debuffButton.gameObject.SetActive(true);
-                    //Debug.LogWarning("i worked");
                     _debuffButton.onClick.AddListener(() =>
                     {
 
                         skill.UseSkill(
                             _selectedCharacter,
-                            _aiSquad.Characters,
+                            tempAISquad.Characters,
                             onFinishMove);
 
                         DeactivateAllButton();
@@ -127,13 +126,12 @@ namespace AFG.MVP
                 }
                 if (skill is CharacterHealSkill)
                 {
-                    //Debug.Log("skill: " + skill);
                     _healButton.gameObject.SetActive(true);
                     _healButton.onClick.AddListener(() =>
                     {
                         skill.UseSkill(
                             _selectedCharacter,
-                            _playerSquad.Characters,
+                            tempPlayerSquad.Characters,
                             onFinishMove);
 
                         DeactivateAllButton();
@@ -143,13 +141,12 @@ namespace AFG.MVP
                 }
                 if (skill is CharacterAreaDamageSkill)
                 {
-                    //Debug.Log("skill: " + skill);
                     _attackAreaButton.gameObject.SetActive(true);
                     _attackAreaButton.onClick.AddListener(() =>
                     {
                         skill.UseSkill(
                             _selectedCharacter,
-                            _aiSquad.Characters,
+                            tempAISquad.Characters,
                             onFinishMove);
 
                         DeactivateAllButton();
@@ -162,27 +159,22 @@ namespace AFG.MVP
 
         private void HighlightCharacter(CharacterController character, bool enableHighlight)
         {
-           // Debug.Log("я буду светиться?");
             Renderer characterRenderer = character.GetComponentInChildren<Renderer>();
-            //Debug.Log(characterRenderer);
             if (characterRenderer != null)
             {
                 if (enableHighlight)
                 {
-                    // Изменяем цвет на белый с небольшим эффектом пульсации
                     characterRenderer.material.DOColor(Color.green, 0.5f)
                         .OnComplete(() =>
                         {
-                            // Возвращаем цвет обратно на исходный через короткий промежуток времени для пульсации
                             characterRenderer.material.DOColor(new Color(1f, 1f, 1f, 0.5f), 0.5f)
-                                .SetLoops(-1, LoopType.Yoyo); // Бесконечное повторение пульсации
+                                .SetLoops(-1, LoopType.Yoyo);
                         });
                 }
                 else
                 {
-                    // Убираем подсветку, возвращаем стандартный цвет
-                    characterRenderer.material.DOKill(); // Останавливаем пульсацию
-                    characterRenderer.material.DOColor(Color.white, 0.5f); // Возвращаем цвет обратно
+                    characterRenderer.material.DOKill();
+                    characterRenderer.material.DOColor(Color.white, 0.5f);
                 }
             }
         }
