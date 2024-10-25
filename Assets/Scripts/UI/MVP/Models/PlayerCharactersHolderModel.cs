@@ -7,11 +7,14 @@ namespace AFG.MVP
 {
     public class PlayerCharactersHolderModel : CharactersHolderModel
     {
-        public PlayerCharactersHolderModel() : base()
+        public override void Start()
         {
+            base.Start();
+            
             Characters = GameController.
                 Instance.
-                SaveManager.LoadPlayerCharacterNames().characterDataWrappers.
+                SaveManager.LoadPlayerCharacterNames().
+                characterDataWrappers.
                 ToList();
         }
     }

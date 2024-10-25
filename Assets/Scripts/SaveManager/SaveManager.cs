@@ -37,6 +37,7 @@ namespace AFG
             File.WriteAllText(path, json);
         }
 
+        //TODO refactoring
         public CharactersDataWrapper LoadAllCharacterNames()
         {
             //read file
@@ -44,6 +45,22 @@ namespace AFG
             {
                 string json = File.ReadAllText(_filePathToAllCharacters);
                 CharactersDataWrapper dataWrapper = JsonUtility.FromJson<CharactersDataWrapper>(json);
+                
+                for(int i=0;i<characterDataWrapperHolder.CharacterDataWrappers.Length;i++)
+                {
+                   for(int j=0;j<dataWrapper.characterDataWrappers.Count;j++)
+                   {
+                       if(characterDataWrapperHolder.CharacterDataWrappers[i].CharacterName.
+                           Equals(dataWrapper.characterDataWrappers[j].CharacterName))
+                       {
+                           dataWrapper.characterDataWrappers[j].
+                               SetCharacterPrefab(characterDataWrapperHolder.CharacterDataWrappers[i].CharacterPrefab);
+                           
+                            break;
+                       }
+                   }
+                }
+                
                 return dataWrapper;
             }
             //there are no file

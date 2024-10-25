@@ -6,7 +6,7 @@ namespace AFG.MVP
 {
     public class PlayerCharacterItemsHolderPresenter : MonoBehaviour
     {
-        [SerializeField] private GridLayoutGroup _holder;
+        [SerializeField] private GameObject _holder;
         [SerializeField] private CharacterItem _characterItem;
         
         private PlayerCharactersHolderModel _model;
@@ -20,11 +20,15 @@ namespace AFG.MVP
         private void OnEnable()
         {
             _model.OnCharactersUpdated += RefreshView;
+            _model.OnStartCharacterSelection += Activate;
+            _model.OnStopCharacterSelection += Deactivate;
         }
 
         private void OnDisable()
         {
             _model.OnCharactersUpdated -= RefreshView;
+            _model.OnStartCharacterSelection -= Activate;
+            _model.OnStopCharacterSelection -= Deactivate;
         }
 
         private void RefreshView()
@@ -40,8 +44,21 @@ namespace AFG.MVP
             {
                 var characterItem = Instantiate(_characterItem, _holder.transform);
                 //TODO refactoring move name to json
-                characterItem.Initialize(character.CharacterName);
+                characterItem.Initialize(character.CharacterName, (characterName) =>
+                {
+                    _model.StopCharacterSelection(characterName);
+                });
             }
+        }
+
+        private void Activate()
+        {
+            _holder.SetActive(true);
+        }
+
+        private void Deactivate()
+        {
+            _holder.SetActive(false);
         }
     }
 }

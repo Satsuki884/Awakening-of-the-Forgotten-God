@@ -31,16 +31,25 @@ namespace AFG
         }
         
         public CombatModel CombatModel { get; set; }
-        public PlayerCharactersHolderModel PlayerCharactersHolderModel { get; set; }
-        public CharactersHolderModel CharactersHolderModel { get; set; }
+
+        [Header("Models")]
+        [SerializeField] private PlayerCharactersHolderModel _playerCharactersHolderModel;
+        public PlayerCharactersHolderModel PlayerCharactersHolderModel
+        {
+            get => _playerCharactersHolderModel;
+            set => _playerCharactersHolderModel = value;
+        }
+        
+        [SerializeField] private CharactersHolderModel _charactersHolderModel;
+        public CharactersHolderModel CharactersHolderModel
+        {
+            get => _charactersHolderModel;
+            set => _charactersHolderModel = value;
+        }
 
         public void Initialize()
         {
             CombatModel = new CombatModel();
-
-            //TODO load from SaveManager
-            PlayerCharactersHolderModel = new PlayerCharactersHolderModel();
-            CharactersHolderModel = new CharactersHolderModel();
         }
     }
 }

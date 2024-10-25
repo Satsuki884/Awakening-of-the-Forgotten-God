@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2feec8e5d7ab14427a3ce7408dccfffc, type: 3}
   m_Name: CharacterDataWrapperHolder
   m_EditorClassIdentifier: 
-  _characterWrapperEntities:
+  characterDataWrappers:
   - _characterName: Idzanami
-    _characterPrefab: {fileID: 8042672439109388108, guid: 97f152cc23a0b4e449ae1cf255f19837, type: 3}
+    _characterPrefab: {fileID: 1733676684280189680, guid: 97f152cc23a0b4e449ae1cf255f19837, type: 3}
   - _characterName: Amaunet
-    _characterPrefab: {fileID: 1810703140369530274, guid: 1daa222f654669f4198f7839e1ac0658, type: 3}
+    _characterPrefab: {fileID: 7976691685474019358, guid: 1daa222f654669f4198f7839e1ac0658, type: 3}

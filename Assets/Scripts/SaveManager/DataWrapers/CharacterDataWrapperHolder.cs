@@ -21,5 +21,10 @@ namespace AFG
         
         [SerializeField] private CharacterController _characterPrefab;
         public CharacterController CharacterPrefab=> _characterPrefab;
+        
+        public void SetCharacterPrefab(CharacterController characterPrefab)
+        {
+            _characterPrefab = characterPrefab;
+        }
     }
 }
