@@ -1,39 +1,74 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace AFG
 {
-    public class SaveManager
+    //TODO cashe character data saves
+    //this is Facade
+    public class SaveManager : MonoBehaviour
     {
-        private string _filePath;
-
-        public SaveManager()
+        [SerializeField] private CharacterDataWrapperHolder characterDataWrapperHolder;
+        public CharacterDataWrapperHolder CharacterDataWrapperHolder => characterDataWrapperHolder;
+        
+        private string _filePathToAllCharacters;
+        private string _filePathToPlayerCharacters;
+        
+        public void Awake()
         {
-            _filePath = Path.Combine(Application.persistentDataPath, "saveData.json");
+            _filePathToAllCharacters = Path.Combine(Application.persistentDataPath, "AllCharacters.json");
+            _filePathToPlayerCharacters = Path.Combine(Application.persistentDataPath, "PlayerCharacters.json");
         }
 
-        public void SaveCharacterNames(List<string> characterNames)
+        public void SaveAllCharacterNames(List<CharacterDataWrapper> characters, string path)
         {
-            string json = JsonUtility.ToJson(new CharacterNamesWrapper { CharacterNames = characterNames });
-            File.WriteAllText(_filePath, json);
-        }
-
-        public List<string> LoadCharacterNames()
-        {
-            if (File.Exists(_filePath))
+            if (!File.Exists(path))
             {
-                string json = File.ReadAllText(_filePath);
-                CharacterNamesWrapper wrapper = JsonUtility.FromJson<CharacterNamesWrapper>(json);
-                return wrapper.CharacterNames;
+                File.Create(path).Dispose();
             }
-            return new List<string>();
+
+            string json = JsonUtility.ToJson(new CharactersDataWrapper
+            {
+                characterDataWrappers = characters
+            });
+            
+            File.WriteAllText(path, json);
         }
 
-        [System.Serializable]
-        private class CharacterNamesWrapper
+        public CharactersDataWrapper LoadAllCharacterNames()
         {
-            public List<string> CharacterNames;
+            //read file
+            if (File.Exists(_filePathToAllCharacters))
+            {
+                string json = File.ReadAllText(_filePathToAllCharacters);
+                CharactersDataWrapper dataWrapper = JsonUtility.FromJson<CharactersDataWrapper>(json);
+                return dataWrapper;
+            }
+            //there are no file
+            else
+            {
+                CharactersDataWrapper dataWrapper = new CharactersDataWrapper
+                {
+                    characterDataWrappers = characterDataWrapperHolder.
+                        CharacterDataWrappers.ToList()
+                };
+                
+                //safe to file
+                SaveAllCharacterNames(dataWrapper.characterDataWrappers, _filePathToAllCharacters);
+                
+                string json = JsonUtility.ToJson(dataWrapper);
+                Debug.Log(json);
+                
+                return dataWrapper;
+            }
+        }
+        
+        //TODO add realisation for player name saves
+        public CharactersDataWrapper LoadPlayerCharacterNames()
+        {
+            return LoadAllCharacterNames();
         }
     }
 }

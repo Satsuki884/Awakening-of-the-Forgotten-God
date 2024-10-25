@@ -1,31 +1,26 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using CharacterController = AFG.Character.CharacterController;
 
 namespace AFG.MVP
 {
     public class CharactersHolderModel
     {
-        public event Action<CharacterController> OnCharacterAdded;
-        public event Action<CharacterController> OnCharacterRemoved;
-        public List<CharacterController> Characters { get; private set; } =
-            new List<CharacterController>();
+        public event Action OnCharactersUpdated;
+        public List<CharacterDataWrapper> Characters { get; set; } =
+            new List<CharacterDataWrapper>();
         
-        public CharactersHolderModel(string chatactersJson)
+        public CharactersHolderModel()
         {
-            Characters = new List<CharacterController>();
-        }
-        
-        public virtual void AddCharacter(CharacterController character)
-        {
-            Characters.Add(character);
-            OnCharacterAdded?.Invoke(character);
-        }
-        
-        public virtual void RemoveCharacter(CharacterController character)
-        {
-            Characters.Remove(character);
-            OnCharacterRemoved?.Invoke(character);
+            Characters = GameController.
+                Instance.
+                SaveManager.
+                CharacterDataWrapperHolder.
+                CharacterDataWrappers.
+                ToList();
+            
+            OnCharactersUpdated?.Invoke();
         }
     }
 }

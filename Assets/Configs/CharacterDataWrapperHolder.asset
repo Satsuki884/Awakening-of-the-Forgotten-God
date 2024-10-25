@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2feec8e5d7ab14427a3ce7408dccfffc, type: 3}
+  m_Name: CharacterDataWrapperHolder
+  m_EditorClassIdentifier: 
+  _characterWrapperEntities:
+  - _characterName: Idzanami
+    _characterPrefab: {fileID: 8042672439109388108, guid: 97f152cc23a0b4e449ae1cf255f19837, type: 3}
+  - _characterName: Amaunet
+    _characterPrefab: {fileID: 1810703140369530274, guid: 1daa222f654669f4198f7839e1ac0658, type: 3}

@@ -11,7 +11,7 @@ namespace AFG.MVP
         
         private PlayerCharactersHolderModel _model;
 
-        public void Start()
+        public void Awake()
         {
             _model = GameController.Instance.PlayerCharactersHolderModel;
             RefreshView();
@@ -19,26 +19,14 @@ namespace AFG.MVP
 
         private void OnEnable()
         {
-            _model.OnCharacterAdded += OnCharacterAdded;
-            _model.OnCharacterRemoved += OnCharacterRemoved;
+            _model.OnCharactersUpdated += RefreshView;
         }
 
         private void OnDisable()
         {
-            _model.OnCharacterAdded -= OnCharacterAdded;
-            _model.OnCharacterRemoved -= OnCharacterRemoved;
+            _model.OnCharactersUpdated -= RefreshView;
         }
 
-        private void OnCharacterAdded(CharacterController character)
-        {
-            RefreshView();
-        }
-
-        private void OnCharacterRemoved(CharacterController character)
-        {
-            RefreshView();
-        }
-        
         private void RefreshView()
         {
             //clear old items
@@ -52,7 +40,7 @@ namespace AFG.MVP
             {
                 var characterItem = Instantiate(_characterItem, _holder.transform);
                 //TODO refactoring move name to json
-                characterItem.Initialize(character.name);
+                characterItem.Initialize(character.CharacterName);
             }
         }
     }
