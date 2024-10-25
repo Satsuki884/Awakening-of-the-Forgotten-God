@@ -27,7 +27,7 @@ namespace AFG.Character
                 targets[j].OnSelected += OnCharacterSelected;
             }
 
-            Debug.Log("Area skill used");
+            //Debug.Log("Area skill used");
         }
 
         public override void OnCharacterSelected(CharacterController characterController)
@@ -36,7 +36,7 @@ namespace AFG.Character
             DeactivateSelectionAbility(_targets);
 
             //play run animation
-            _user.AnimationController.PlayRunAnimation();
+            _user.AnimationController.PlayRunAnimation(_user);
 
             Vector3 startPoint = _user.transform.position;
             Quaternion initialRotation = _user.transform.rotation;
@@ -50,9 +50,9 @@ namespace AFG.Character
             _user.MoveController.MoveTo(_user, adjustedPosition, () =>
             {
                 //start hit enemy
-                _user.AnimationController.PlayAreaAnimation(() =>
+                _user.AnimationController.PlayAreaAnimation(_user ,() =>
                 {
-                    Debug.LogWarning("Start area dmdge");
+                    //Debug.LogWarning("Start area dmdge");
                     //enemy hit
                     for (int i = 0; i < _targets.Count; i++)
                     {
@@ -60,13 +60,15 @@ namespace AFG.Character
                         //enemy hit
                         _targets[i].DamageController.TakeDamage(_user.Atk, _targets[i]);
                             //return to start point
-                            _user.MoveController.MoveBack(_user, startPoint, initialRotation, () =>
-                            {
-                                //play idle animation on start point
-                                _user.AnimationController.PlayIdleAnimation();
-                                onSkillUsed?.Invoke();
-                            });
+                           
                     }
+                    _user.AnimationController.PlayRunAnimation(_user);
+                    _user.MoveController.MoveBack(_user, startPoint, initialRotation, () =>
+                    {
+                        //play idle animation on start point
+                        _user.AnimationController.PlayIdleAnimation(_user);
+                        onSkillUsed?.Invoke();
+                    });
                     //Debug.LogWarning("Range skill used on all enemy");
                 });
             });

@@ -13,7 +13,7 @@ namespace AFG.Character
         {
             base.UseSkill(user, targets, OnSkillUsed);
 
-            Debug.LogWarning(user.name);
+            //Debug.LogWarning(user.name);
 
             for (int i=0; i < targets.Count; i++)
             {
@@ -23,7 +23,7 @@ namespace AFG.Character
                 targets[j].OnSelected += OnCharacterSelected;
             }
             
-            Debug.Log("Mele skill used");
+            //Debug.Log("Mele skill used");
         }
         
         public override void OnCharacterSelected(CharacterController characterController)
@@ -32,7 +32,7 @@ namespace AFG.Character
             DeactivateSelectionAbility(_targets);
 
             //play run animation
-            _user.AnimationController.PlayRunAnimation();
+            _user.AnimationController.PlayRunAnimation(_user);
             
             Vector3 startPoint = _user.transform.position;
             Quaternion initialRotation = _user.transform.rotation;
@@ -46,16 +46,17 @@ namespace AFG.Character
             _user.MoveController.MoveTo(_user, adjustedPosition, () =>
             {
                 //start hit enemy
-                _user.AnimationController.PlayMeleAttackAnimation(() =>
+                _user.AnimationController.PlayMeleeAttackAnimation(_user ,() =>
                 {
                     //enemy hit
                     characterController.DamageController.TakeDamage(_user.Atk, characterController);
-                    
+                    _user.AnimationController.PlayRunAnimation(_user);
+
                     //return to start point
                     _user.MoveController.MoveBack(_user, startPoint, initialRotation, () =>
                     {
                         //play idle animation on start point
-                        _user.AnimationController.PlayIdleAnimation();
+                        _user.AnimationController.PlayIdleAnimation(_user);
                         onSkillUsed?.Invoke();
                     });
                 });

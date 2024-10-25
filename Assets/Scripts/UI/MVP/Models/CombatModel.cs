@@ -22,7 +22,9 @@ namespace AFG.MVP
                 if (_selectedCharacter == null || 
                     !_selectedCharacter.Equals(value))
                 {
+                    
                     _selectedCharacter = value;
+                    Debug.LogError(_selectedCharacter.name + "\tя хожу");
                     OnCharacterSelected?.Invoke(_selectedCharacter);
                 }
             }

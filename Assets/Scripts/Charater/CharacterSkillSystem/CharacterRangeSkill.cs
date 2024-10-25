@@ -25,7 +25,7 @@ namespace AFG.Character
                 targets[j].OnSelected += OnCharacterSelected;
             }
 
-            Debug.Log("Range skill used");
+            //Debug.Log("Range skill used");
         }
 
         public override void OnCharacterSelected(CharacterController characterController)
@@ -33,12 +33,12 @@ namespace AFG.Character
             base.OnCharacterSelected(characterController);
 
             //start hit enemy
-            _user.AnimationController.PlayRangeAttackAnimation(() =>
+            _user.AnimationController.PlayRangeAttackAnimation(_user, () =>
             {
                 //enemy hit
                 characterController.DamageController.TakeDamage(_user.Atk, characterController);
                 //play idle animation on start point
-                _user.AnimationController.PlayIdleAnimation();
+                _user.AnimationController.PlayIdleAnimation(_user);
                 onSkillUsed?.Invoke();
             });
 

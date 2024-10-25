@@ -32,6 +32,7 @@ namespace AFG.MVP
         private void OnCharacterSelected(CharacterController _selectedCharacter)
         {
             DeactivateAllButton();
+            HighlightCharacter(_selectedCharacter, true);
             string fullName = _selectedCharacter.name.ToString();
             string firstWord = fullName.Split(' ')[0];
             _currentCharacter.text = firstWord;
@@ -56,9 +57,10 @@ namespace AFG.MVP
                 tempPlayerSquad = GameController.Instance.CombatModel.AiSquad;
             }
 
-            HighlightCharacter(_selectedCharacter, true);
+            
             for (int i = 0; i < _selectedCharacter.Skills.Length; i++)
             {
+                
 
                 var skill = _selectedCharacter.Skills[i];
 
@@ -74,6 +76,7 @@ namespace AFG.MVP
 
                         DeactivateAllButton();
                         HighlightCharacter(_selectedCharacter, false);
+                        Debug.LogWarning(_selectedCharacter.name + "\tя закончил ходить");
                     });
 
                 }
@@ -90,6 +93,7 @@ namespace AFG.MVP
 
                         DeactivateAllButton();
                         HighlightCharacter(_selectedCharacter, false);
+                        Debug.LogWarning(_selectedCharacter.name + "\tя закончил ходить");
                     });
 
                 }
@@ -105,6 +109,7 @@ namespace AFG.MVP
 
                         DeactivateAllButton();
                         HighlightCharacter(_selectedCharacter, false);
+                        Debug.LogWarning(_selectedCharacter.name + "\tя закончил ходить");
                     });
 
                 }
@@ -121,6 +126,7 @@ namespace AFG.MVP
 
                         DeactivateAllButton();
                         HighlightCharacter(_selectedCharacter, false);
+                        Debug.LogWarning(_selectedCharacter.name + "\tя закончил ходить");
                     });
 
                 }
@@ -136,6 +142,7 @@ namespace AFG.MVP
 
                         DeactivateAllButton();
                         HighlightCharacter(_selectedCharacter, false);
+                        Debug.LogWarning(_selectedCharacter.name + "\tя закончил ходить");
                     });
 
                 }
@@ -151,6 +158,7 @@ namespace AFG.MVP
 
                         DeactivateAllButton();
                         HighlightCharacter(_selectedCharacter, false);
+                        Debug.LogWarning(_selectedCharacter.name + "\tя закончил ходить");
                     });
 
                 }
@@ -160,10 +168,12 @@ namespace AFG.MVP
         private void HighlightCharacter(CharacterController character, bool enableHighlight)
         {
             Renderer characterRenderer = character.GetComponentInChildren<Renderer>();
+            
             if (characterRenderer != null)
             {
                 if (enableHighlight)
                 {
+                    Debug.Log(character.name + " \tсвет");
                     characterRenderer.material.DOColor(Color.green, 0.5f)
                         .OnComplete(() =>
                         {
@@ -173,6 +183,7 @@ namespace AFG.MVP
                 }
                 else
                 {
+                    Debug.Log(character.name + " \tстоп");
                     characterRenderer.material.DOKill();
                     characterRenderer.material.DOColor(Color.white, 0.5f);
                 }

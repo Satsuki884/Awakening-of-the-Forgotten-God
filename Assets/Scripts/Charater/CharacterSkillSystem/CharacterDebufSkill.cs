@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 namespace AFG.Character
 {
@@ -20,7 +21,7 @@ namespace AFG.Character
                 targets[j].OnSelected += OnCharacterSelected;
             }
 
-            Debug.Log("Debuf skill used");
+            //Debug.Log("Debuf skill used");
         }
 
         public override void OnCharacterSelected(CharacterController characterController)
@@ -28,7 +29,7 @@ namespace AFG.Character
             base.OnCharacterSelected(characterController);
             DeactivateSelectionAbility(_targets);
             //play run animation
-            _user.AnimationController.PlayRunAnimation();
+            _user.AnimationController.PlayRunAnimation(_user);
 
             Vector3 startPoint = _user.transform.position;
 
@@ -43,16 +44,17 @@ namespace AFG.Character
             _user.MoveController.MoveTo(_user, adjustedPosition, () =>
             {
                 //start debuf enemy
-                _user.AnimationController.PlayDebufAnimation(() =>
+                _user.AnimationController.PlayDebufAnimation(_user ,() =>
                 {
                     //enemy debuf
                     characterController.DeBufController.TakeDeBuf(characterController, 2, 2);
+                    _user.AnimationController.PlayRunAnimation(_user);
 
                     //return to start point
                     _user.MoveController.MoveBack(_user, startPoint, initialRotation, () =>
                     {
                         //play idle animation on start point
-                        _user.AnimationController.PlayIdleAnimation();
+                        _user.AnimationController.PlayIdleAnimation(_user);
                         onSkillUsed?.Invoke();
                     });
                 });

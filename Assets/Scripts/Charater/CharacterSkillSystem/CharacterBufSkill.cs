@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 namespace AFG.Character
 {
@@ -21,7 +22,7 @@ namespace AFG.Character
                 targets[j].OnSelected += OnCharacterSelected;
             }
 
-            Debug.Log("Buf skill used");
+            //Debug.Log("Buf skill used");
         }
 
         public override void OnCharacterSelected(CharacterController characterController)
@@ -30,7 +31,7 @@ namespace AFG.Character
             DeactivateSelectionAbility(_targets);
 
             //play run animation
-            _user.AnimationController.PlayRunAnimation();
+            _user.AnimationController.PlayRunAnimation(_user);
 
             Vector3 startPoint = _user.transform.position;
             Quaternion initialRotation = _user.transform.rotation;
@@ -44,16 +45,17 @@ namespace AFG.Character
             _user.MoveController.MoveTo(_user, adjustedPosition, () =>
             {
                 //start buf 
-                _user.AnimationController.PlayBufAnimation(() =>
+                _user.AnimationController.PlayBufAnimation(_user , () =>
                 {
                     //enemy hit
                     characterController.DeBufController.TakeBuf(characterController, 2, 5);
+                    _user.AnimationController.PlayRunAnimation(_user);
 
                     //return to start point
                     _user.MoveController.MoveBack(_user, startPoint, initialRotation, () =>
                     {
                         //play idle animation on start point
-                        _user.AnimationController.PlayIdleAnimation();
+                        _user.AnimationController.PlayIdleAnimation(_user);
                     });
                 });
             });
