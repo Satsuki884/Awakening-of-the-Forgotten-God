@@ -35,7 +35,6 @@ namespace AFG.Character
 
             Quaternion initialRotation = _user.transform.rotation;
 
-            
             Vector3 targetPosition = characterController.transform.position;
             Vector3 direction = (targetPosition - _user.transform.position).normalized;
             Vector3 adjustedPosition = targetPosition - direction * 3f;

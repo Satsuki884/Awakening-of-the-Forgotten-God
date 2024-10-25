@@ -32,7 +32,7 @@ namespace AFG.Character
         
         public virtual void OnCharacterSelected(CharacterController characterController)
         {
-            
+            characterController.OnSelected -= OnCharacterSelected;
         }
     }
 }

@@ -46,7 +46,6 @@ namespace AFG.Character
             Vector3 direction = (targetPosition - _user.transform.position).normalized;
             Vector3 adjustedPosition = targetPosition - direction * 3f;
 
-
             _user.MoveController.MoveTo(_user, adjustedPosition, () =>
             {
                 //start hit enemy
@@ -75,9 +74,6 @@ namespace AFG.Character
             
             DeactivateSelectionAbility(_targets);
         }
-
-
-       
     }
 }
 

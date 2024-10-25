@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using AFG.Character;
 using AFG.Squad;
 using DG.Tweening;
@@ -44,127 +45,102 @@ namespace AFG.MVP
         SquadController tempAISquad;
         SquadController tempPlayerSquad;
 
-        private void ActivateButtons(CharacterController _selectedCharacter, Action onFinishMove)
+        private void ActivateButtons(CharacterController selectedCharacter, Action onFinishMove)
         {
+            SquadController parent = selectedCharacter.GetComponentInParent<SquadController>();
             
-            SquadController parent = _selectedCharacter.GetComponentInParent<SquadController>();
-            if(parent.name == "SquadPlayerController"){
+            //TODO implement brain check
+            if(parent.name == "SquadPlayerController")
+            {
                 tempAISquad = GameController.Instance.CombatModel.AiSquad;
                 tempPlayerSquad = GameController.Instance.CombatModel.PlayerSquad;
-            }else if (parent.name == "SquadAIController")
+            }
+            else if (parent.name == "SquadAIController")
             {
                 tempAISquad = GameController.Instance.CombatModel.PlayerSquad;
                 tempPlayerSquad = GameController.Instance.CombatModel.AiSquad;
             }
 
             
-            for (int i = 0; i < _selectedCharacter.Skills.Length; i++)
+            for (int i = 0; i < selectedCharacter.Skills.Length; i++)
             {
-                
-
-                var skill = _selectedCharacter.Skills[i];
+                var skill = selectedCharacter.Skills[i];
 
                 if (skill is CharacterMeleSkill)
                 {
-                    _attackMeleButton.gameObject.SetActive(true);
-                    _attackMeleButton.onClick.AddListener(() =>
-                    {
-                        skill.UseSkill(
-                            _selectedCharacter,
-                            tempAISquad.Characters,
-                            onFinishMove);
-
-                        DeactivateAllButton();
-                        HighlightCharacter(_selectedCharacter, false);
-                        Debug.LogWarning(_selectedCharacter.name + "\tя закончил ходить");
-                    });
-
+                    AddActionToButton(_attackMeleButton, 
+                        selectedCharacter, 
+                        skill, 
+                        tempAISquad.Characters, 
+                        onFinishMove);
                 }
                 if (skill is CharacterRangeSkill)
                 {
-                    _attackRangeButton.gameObject.SetActive(true);
-                    _attackRangeButton.onClick.AddListener(() =>
-                    {
-
-                        skill.UseSkill(
-                            _selectedCharacter,
-                            tempAISquad.Characters,
-                            onFinishMove);
-
-                        DeactivateAllButton();
-                        HighlightCharacter(_selectedCharacter, false);
-                        Debug.LogWarning(_selectedCharacter.name + "\tя закончил ходить");
-                    });
-
+                    AddActionToButton(_attackMeleButton, 
+                        selectedCharacter, 
+                        skill, 
+                        tempAISquad.Characters, 
+                        onFinishMove);
                 }
                 if (skill is CharacterBufSkill)
                 {
-                    _bufButton.gameObject.SetActive(true);
-                    _bufButton.onClick.AddListener(() =>
-                    {
-                        skill.UseSkill(
-                            _selectedCharacter,
-                            tempPlayerSquad.Characters,
-                            onFinishMove);
-
-                        DeactivateAllButton();
-                        HighlightCharacter(_selectedCharacter, false);
-                        Debug.LogWarning(_selectedCharacter.name + "\tя закончил ходить");
-                    });
-
+                    AddActionToButton(_bufButton, 
+                        selectedCharacter, 
+                        skill, 
+                        tempPlayerSquad.Characters, 
+                        onFinishMove);
                 }
                 if (skill is CharacterDebufSkill)
                 {
-                    _debuffButton.gameObject.SetActive(true);
-                    _debuffButton.onClick.AddListener(() =>
-                    {
-
-                        skill.UseSkill(
-                            _selectedCharacter,
-                            tempAISquad.Characters,
-                            onFinishMove);
-
-                        DeactivateAllButton();
-                        HighlightCharacter(_selectedCharacter, false);
-                        Debug.LogWarning(_selectedCharacter.name + "\tя закончил ходить");
-                    });
-
+                    AddActionToButton(_debuffButton, 
+                        selectedCharacter, 
+                        skill, 
+                        tempAISquad.Characters, 
+                        onFinishMove);
                 }
                 if (skill is CharacterHealSkill)
                 {
-                    _healButton.gameObject.SetActive(true);
-                    _healButton.onClick.AddListener(() =>
-                    {
-                        skill.UseSkill(
-                            _selectedCharacter,
-                            tempPlayerSquad.Characters,
-                            onFinishMove);
-
-                        DeactivateAllButton();
-                        HighlightCharacter(_selectedCharacter, false);
-                        Debug.LogWarning(_selectedCharacter.name + "\tя закончил ходить");
-                    });
-
+                    AddActionToButton(_healButton, 
+                        selectedCharacter, 
+                        skill, 
+                        tempPlayerSquad.Characters, 
+                        onFinishMove);
                 }
                 if (skill is CharacterAreaDamageSkill)
                 {
-                    _attackAreaButton.gameObject.SetActive(true);
-                    _attackAreaButton.onClick.AddListener(() =>
-                    {
-                        skill.UseSkill(
-                            _selectedCharacter,
-                            tempAISquad.Characters,
-                            onFinishMove);
-
-                        DeactivateAllButton();
-                        HighlightCharacter(_selectedCharacter, false);
-                        Debug.LogWarning(_selectedCharacter.name + "\tя закончил ходить");
-                    });
-
+                    AddActionToButton(_attackAreaButton, 
+                        selectedCharacter, 
+                        skill, 
+                        tempAISquad.Characters, 
+                        onFinishMove);
                 }
             }
         }
 
+        //principle DRY (Don't Repeat Yourself)
+        private void AddActionToButton(Button button, 
+            CharacterController selectedCharacter, 
+            CharacterSkill skill,
+            List<CharacterController> characterTargets,
+            Action onFinishMove)
+        {
+            button.gameObject.SetActive(true);
+            
+            button.onClick.RemoveAllListeners();
+            
+            button.onClick.AddListener(() =>
+            {
+                skill.UseSkill(
+                    selectedCharacter,
+                    characterTargets,
+                    onFinishMove);
+
+                DeactivateAllButton();
+                HighlightCharacter(selectedCharacter, false);
+                Debug.LogWarning(selectedCharacter.name + "\tпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ");
+            });
+        }
+        
         private void HighlightCharacter(CharacterController character, bool enableHighlight)
         {
             Renderer characterRenderer = character.GetComponentInChildren<Renderer>();
@@ -173,7 +149,7 @@ namespace AFG.MVP
             {
                 if (enableHighlight)
                 {
-                    Debug.Log(character.name + " \tсвет");
+                    Debug.Log(character.name + " \tпїЅпїЅпїЅпїЅ");
                     characterRenderer.material.DOColor(Color.green, 0.5f)
                         .OnComplete(() =>
                         {
@@ -183,7 +159,7 @@ namespace AFG.MVP
                 }
                 else
                 {
-                    Debug.Log(character.name + " \tстоп");
+                    Debug.Log(character.name + " \tпїЅпїЅпїЅпїЅ");
                     characterRenderer.material.DOKill();
                     characterRenderer.material.DOColor(Color.white, 0.5f);
                 }

@@ -21,7 +21,7 @@ namespace AFG.Character
             {
                 int j = i;
                 targets[j].IsAbleToSelect = true;
-
+                
                 targets[j].OnSelected += OnCharacterSelected;
             }
 

@@ -56,6 +56,7 @@ namespace AFG.Character
                     {
                         //play idle animation on start point
                         _user.AnimationController.PlayIdleAnimation(_user);
+                        onSkillUsed?.Invoke();
                     });
                 });
             });
