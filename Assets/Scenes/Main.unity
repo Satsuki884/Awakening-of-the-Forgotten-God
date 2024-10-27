@@ -563,6 +563,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a51dfb4d2ea94a4ab9be33a44cdcbe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _saveManager: {fileID: 0}
+  _playerCharactersHolderModel: {fileID: 0}
+  _charactersHolderModel: {fileID: 0}
 --- !u!4 &1258653254
 Transform:
   m_ObjectHideFlags: 0
@@ -865,7 +868,7 @@ PrefabInstance:
     - target: {fileID: 1257455408958391666, guid: 540b92bf5fa3a4c7fa8979438014e293, type: 3}
       propertyPath: _characterPrefabs.Array.data[2]
       value: 
-      objectReference: {fileID: 4432938548943739164, guid: ae3f256315f4470488dd7e0474f0ffbb, type: 3}
+      objectReference: {fileID: 1569689243662928842, guid: a29e94a5da0e10e459cd6df61a736e73, type: 3}
     - target: {fileID: 7510881702350321048, guid: 540b92bf5fa3a4c7fa8979438014e293, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
