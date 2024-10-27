@@ -51,8 +51,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animationController: {fileID: 8380994519039996886}
   _moveController: {fileID: 262785950620959673}
-  _damageController: {fileID: 596756449076775240}
-  _healController: {fileID: 5667478600148470615}
+  _damageController: {fileID: 0}
+  _healController: {fileID: 0}
   _deBufController: {fileID: 2752516492794495008}
   _selectionIndicatorPrefab: {fileID: 6394513305067255813, guid: fd2b27f6a2e7f2e48b05055acae2394b, type: 3}
 --- !u!114 &8380994519039996886
@@ -88,7 +88,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3742657525708692943}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dc15d267347741c0a540b49e836f850, type: 3}
+  m_Script: {fileID: 11500000, guid: bc316805fb5709f43b3f8edd2be02b6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &5667478600148470615
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3742657525708692943}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07b5a54de18c2d9438722b4844255de6, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ebb6be9e0e03d74c81c68df2560c9c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &2752516492794495008
@@ -112,6 +112,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3742657525708692943}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e18b120aaffd18649aa334884ea790ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e6b397ae028c7b47aa6af4c5f1b7b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -7,11 +7,12 @@ using UnityEngine;
 public class SquadUnitButton : MonoBehaviour
 {
     [SerializeField] private Transform _unitHolder;
+    [SerializeField] private int number;
     private void OnMouseDown()
     {
         GameController.
             Instance.
             PlayerCharactersHolderModel.
-            StartCharacterSelection(_unitHolder);
+            StartCharacterSelection(_unitHolder, number);
     }
 }
