@@ -13,9 +13,5 @@ MonoBehaviour:
   m_Name: PlayerCharacterDataWrapperHolder
   m_EditorClassIdentifier: 
   characterDataWrappers:
-  - _characterName: Idzanami
-    _characterPrefab: {fileID: 1733676684280189680, guid: 97f152cc23a0b4e449ae1cf255f19837, type: 3}
-  - _characterName: Amaunet
-    _characterPrefab: {fileID: 7976691685474019358, guid: 1daa222f654669f4198f7839e1ac0658, type: 3}
   - _characterName: Teskatlipoka
     _characterPrefab: {fileID: 7536712614303847639, guid: 24c4affcce67d594cbcc7289c3dd0038, type: 3}
