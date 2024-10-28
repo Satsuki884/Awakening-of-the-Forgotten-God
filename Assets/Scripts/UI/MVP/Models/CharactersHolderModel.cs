@@ -18,7 +18,7 @@ namespace AFG.MVP
         //private Transform[] _characterHolders;
         private GameObject _oldCharacter;
 
-        private Transform _characterHolder;// = new Transform[3];  // Массив холдеров для каждой кнопки
+        private Transform _characterHolder;// = new Transform[3];  // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         private GameObject[] _selectedCharacters = new GameObject[3];
 
         public virtual void Start()
@@ -51,26 +51,11 @@ namespace AFG.MVP
                 Destroy(_selectedCharacters[_buttonIndex]);
             }
 
-            // Находим выбранного персонажа
             var character = Characters.Find(c => c.CharacterName.Equals(characterName));
 
-            // Проверяем, не был ли выбранный персонаж уже привязан к другой кнопке
-            /*for (int i = 0; i < _selectedCharacters.Length; i++)
-            {
-                if (i != _buttonIndex && _selectedCharacters[i] != null &&
-                    _selectedCharacters[i].name == character.CharacterPrefab.gameObject.name)
-                {
-                    Destroy(_selectedCharacters[i]);
-                    _selectedCharacters[i] = null;
-                }
-            }*/
-
-            // Создаем персонажа возле соответствующей кнопки
             _selectedCharacters[_buttonIndex] = Instantiate(character.CharacterPrefab.gameObject, _characterHolder);
 
             _selectedCharacters[_buttonIndex].transform.rotation = Quaternion.Euler(0, 180, 0);
-
-            
 
             for (int i = 0; i < _selectedCharacters.Length; i++)
             {
