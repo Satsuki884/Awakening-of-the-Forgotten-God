@@ -9,13 +9,13 @@ namespace AFG.MVP
     {
         public override void Start()
         {
-            base.Start();
-            
             Characters = GameController.
                 Instance.
                 SaveManager.LoadPlayerCharacterNames().
                 characterDataWrappers.
                 ToList();
+
+            UpdateCharacters();
         }
     }
 }

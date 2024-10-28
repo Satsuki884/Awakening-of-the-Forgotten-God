@@ -11,9 +11,10 @@ namespace AFG
     public class SaveManager : MonoBehaviour
     {
         [SerializeField] private CharacterDataWrapperHolder characterDataWrapperHolder;
-        //[SerializeField] private PlayerCharacterDataWrapperHolder playerCharacterDataWrapperHolder;
+        [SerializeField] private CharacterDataWrapperHolder playerCharacterDataWrapperHolder;
+        
         public CharacterDataWrapperHolder CharacterDataWrapperHolder => characterDataWrapperHolder;
-        //public PlayerCharacterDataWrapperHolder PlayerCharacterDataWrapperHolder => playerCharacterDataWrapperHolder;
+        public CharacterDataWrapperHolder PlayerCharacterDataWrapperHolder => playerCharacterDataWrapperHolder;
         
         private string _filePathToAllCharacters;
         private string _filePathToPlayerCharacters;
@@ -24,22 +25,9 @@ namespace AFG
             _filePathToPlayerCharacters = Path.Combine(Application.persistentDataPath, "PlayerCharacters.json");
         }
 
-        /*public void SavePlayerCharacterNames(List<PlayerCharacterDataWrapper> characters, string path)
-        {
-            if (!File.Exists(path))
-            {
-                File.Create(path).Dispose();
-            }
-
-            string json = JsonUtility.ToJson(new PlayerCharactersDataWrapper
-            {
-                playerCharacterDataWrappers = characters
-            });
-
-            File.WriteAllText(path, json);
-        }*/
-
-        public void SaveAllCharacterNames(List<CharacterDataWrapper> characters, string path)
+        //use 2 principles 
+        //DRY
+        public void SaveCharacterNames(List<CharacterDataWrapper> characters, string path)
         {
             if (!File.Exists(path))
             {
@@ -55,29 +43,32 @@ namespace AFG
         }
 
         //TODO refactoring
-        public CharactersDataWrapper LoadAllCharacterNames()
+        public CharactersDataWrapper LoadCharacterNames(
+            CharacterDataWrapperHolder dataWrapperHolder, 
+            string path)
         {
-            //TODO add check for validation
-            //read file
-            if (File.Exists(_filePathToAllCharacters))
-            {
-                string json = File.ReadAllText(_filePathToAllCharacters);
-                CharactersDataWrapper dataWrapper = JsonUtility.FromJson<CharactersDataWrapper>(json);
+            CharactersDataWrapper dataWrapper = null;
 
-                int characterWrapperLenght = characterDataWrapperHolder.CharacterDataWrappers.Length;
+            //read file
+            if (File.Exists(path))
+            {
+                string json = File.ReadAllText(path);
+                dataWrapper = JsonUtility.FromJson<CharactersDataWrapper>(json);
+
+                int characterWrapperLenght = dataWrapperHolder.CharacterDataWrappers.Length;
                 int dataWraperLenght = dataWrapper.characterDataWrappers.Count;
 
                 if (characterWrapperLenght == dataWraperLenght)
                 {
-                    for(int i=0;i<characterDataWrapperHolder.CharacterDataWrappers.Length;i++)
+                    for(int i=0;i<dataWrapperHolder.CharacterDataWrappers.Length;i++)
                     {
                         for(int j=0;j<dataWrapper.characterDataWrappers.Count;j++)
                         {
-                            if(characterDataWrapperHolder.CharacterDataWrappers[i].CharacterName.
+                            if(dataWrapperHolder.CharacterDataWrappers[i].CharacterName.
                                Equals(dataWrapper.characterDataWrappers[j].CharacterName))
                             {
                                 dataWrapper.characterDataWrappers[j].
-                                    SetCharacterPrefab(characterDataWrapperHolder.CharacterDataWrappers[i].CharacterPrefab);
+                                    SetCharacterPrefab(dataWrapperHolder.CharacterDataWrappers[i].CharacterPrefab);
                            
                                 break;
                             }
@@ -88,15 +79,21 @@ namespace AFG
                 }
             }
             
-            //there are no file
+            return FillAllCharactersDefault(dataWrapperHolder, path);
+        }
+
+        private CharactersDataWrapper FillAllCharactersDefault(
+            CharacterDataWrapperHolder dataWrapperHolder, 
+            string path)
+        {
             CharactersDataWrapper dataWrapperNew = new CharactersDataWrapper
             {
-                characterDataWrappers = characterDataWrapperHolder.
+                characterDataWrappers = dataWrapperHolder.
                     CharacterDataWrappers.ToList()
             };
             
             //safe to file
-            SaveAllCharacterNames(dataWrapperNew.characterDataWrappers, _filePathToAllCharacters);
+            SaveCharacterNames(dataWrapperNew.characterDataWrappers, path);
             
             string jsonNew = JsonUtility.ToJson(dataWrapperNew);
             Debug.Log(jsonNew);
@@ -104,64 +101,15 @@ namespace AFG
             return dataWrapperNew;
         }
         
-        //TODO add realisation for player name saves
         public CharactersDataWrapper LoadPlayerCharacterNames()
         {
-            return LoadAllCharacterNames();
+            return LoadCharacterNames(playerCharacterDataWrapperHolder, _filePathToPlayerCharacters);
         }
 
-
-
-
-
-        /*public PlayerCharactersDataWrapper LoadAllPlayerCharacterNames()
+        //use for store
+        public CharactersDataWrapper LoadAllCharacterNames()
         {
-            //read file
-            if (File.Exists(_filePathToPlayerCharacters))
-            {
-                string json = File.ReadAllText(_filePathToPlayerCharacters);
-                PlayerCharactersDataWrapper dataWrapper = JsonUtility.FromJson<PlayerCharactersDataWrapper>(json);
-
-                for (int i = 0; i < playerCharacterDataWrapperHolder.PlayerCharacterDataWrappers.Length; i++)
-                {
-                    for (int j = 0; j < dataWrapper.playerCharacterDataWrappers.Count; j++)
-                    {
-                        if (playerCharacterDataWrapperHolder.PlayerCharacterDataWrappers[i].CharacterName.
-                            Equals(dataWrapper.playerCharacterDataWrappers[j].CharacterName))
-                        {
-                            dataWrapper.playerCharacterDataWrappers[j].
-                                SetCharacterPrefab(playerCharacterDataWrapperHolder.PlayerCharacterDataWrappers[i].CharacterPrefab);
-
-                            break;
-                        }
-                    }
-                }
-
-                return dataWrapper;
-            }
-            //there are no file
-            else
-            {
-                PlayerCharactersDataWrapper dataWrapper = new PlayerCharactersDataWrapper
-                {
-                    playerCharacterDataWrappers = playerCharacterDataWrapperHolder.
-                        PlayerCharacterDataWrappers.ToList()
-                };
-
-                //safe to file
-                SavePlayerCharacterNames(dataWrapper.playerCharacterDataWrappers, _filePathToPlayerCharacters);
-
-                string json = JsonUtility.ToJson(dataWrapper);
-                Debug.Log(json);
-
-                return dataWrapper;
-            }
+            return LoadCharacterNames(characterDataWrapperHolder, _filePathToAllCharacters);
         }
-
-        //TODO add realisation for player name saves
-        public PlayerCharactersDataWrapper LoadPlayerCharacterName()
-        {
-            return LoadAllPlayerCharacterNames();
-        }*/
     }
 }

@@ -30,8 +30,7 @@ namespace AFG.MVP
                 CharacterDataWrappers.
                 ToList();
 
-            //_selectedCharacters = new GameObject[3];
-            OnCharactersUpdated?.Invoke();
+            UpdateCharacters();
         }
 
         private int _buttonIndex;// = 0;
@@ -44,6 +43,11 @@ namespace AFG.MVP
             OnStartCharacterSelection?.Invoke();
         }
 
+        protected void UpdateCharacters()
+        {
+            OnCharactersUpdated?.Invoke();
+        }
+        
         public void StopCharacterSelection(string characterName)
         {
             if (_selectedCharacters[_buttonIndex] != null)
