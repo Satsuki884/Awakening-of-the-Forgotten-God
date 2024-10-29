@@ -10,11 +10,11 @@ namespace AFG
     //this is Facade
     public class SaveManager : MonoBehaviour
     {
-        [SerializeField] private CharacterDataWrapperHolder characterDataWrapperHolder;
-        [SerializeField] private CharacterDataWrapperHolder playerCharacterDataWrapperHolder;
+        [SerializeField] private CharacterDataHolder characterDataHolder;
+        [SerializeField] private CharacterDataHolder playerCharacterDataHolder;
         
-        public CharacterDataWrapperHolder CharacterDataWrapperHolder => characterDataWrapperHolder;
-        public CharacterDataWrapperHolder PlayerCharacterDataWrapperHolder => playerCharacterDataWrapperHolder;
+        public CharacterDataHolder CharacterDataHolder => characterDataHolder;
+        public CharacterDataHolder PlayerCharacterDataHolder => playerCharacterDataHolder;
         
         private string _filePathToAllCharacters;
         private string _filePathToPlayerCharacters;
@@ -48,7 +48,7 @@ namespace AFG
 
         //TODO refactoring
         public CharactersDataWrapper LoadCharacterNames(
-            CharacterDataWrapperHolder dataWrapperHolder, 
+            CharacterDataHolder dataHolder, 
             string path)
         {
             CharactersDataWrapper dataWrapper = null;
@@ -59,20 +59,20 @@ namespace AFG
                 string json = File.ReadAllText(path);
                 dataWrapper = JsonUtility.FromJson<CharactersDataWrapper>(json);
 
-                int characterWrapperLenght = dataWrapperHolder.CharacterDataWrappers.Length;
+                int characterWrapperLenght = dataHolder.CharacterData.Length;
                 int dataWraperLenght = dataWrapper.characterDataWrappers.Count;
 
                 if (characterWrapperLenght == dataWraperLenght)
                 {
-                    for(int i=0;i<dataWrapperHolder.CharacterDataWrappers.Length;i++)
+                    for(int i=0;i<dataHolder.CharacterData.Length;i++)
                     {
                         for(int j=0;j<dataWrapper.characterDataWrappers.Count;j++)
                         {
-                            if(dataWrapperHolder.CharacterDataWrappers[i].CharacterName.
+                            if(dataHolder.CharacterData[i].CharacterDataWrapper.CharacterName.
                                Equals(dataWrapper.characterDataWrappers[j].CharacterName))
                             {
                                 dataWrapper.characterDataWrappers[j].
-                                    SetCharacterPrefab(dataWrapperHolder.CharacterDataWrappers[i].CharacterPrefab);
+                                    SetCharacterPrefab(dataHolder.CharacterData[i].CharacterDataWrapper.CharacterPrefab);
                            
                                 break;
                             }
@@ -83,17 +83,17 @@ namespace AFG
                 }
             }
             
-            return FillAllCharactersDefault(dataWrapperHolder, path);
+            return FillAllCharactersDefault(dataHolder, path);
         }
 
         private CharactersDataWrapper FillAllCharactersDefault(
-            CharacterDataWrapperHolder dataWrapperHolder, 
+            CharacterDataHolder dataHolder, 
             string path)
         {
             CharactersDataWrapper dataWrapperNew = new CharactersDataWrapper
             {
-                characterDataWrappers = dataWrapperHolder.
-                    CharacterDataWrappers.ToList()
+                characterDataWrappers = dataHolder.
+                    CharacterData.Select(x=>x.CharacterDataWrapper).ToList()
             };
             
             //safe to file
@@ -107,13 +107,13 @@ namespace AFG
         
         public CharactersDataWrapper LoadPlayerCharacterNames()
         {
-            return LoadCharacterNames(playerCharacterDataWrapperHolder, _filePathToPlayerCharacters);
+            return LoadCharacterNames(playerCharacterDataHolder, _filePathToPlayerCharacters);
         }
 
         //use for store
         public CharactersDataWrapper LoadAllCharacterNames()
         {
-            return LoadCharacterNames(characterDataWrapperHolder, _filePathToAllCharacters);
+            return LoadCharacterNames(characterDataHolder, _filePathToAllCharacters);
         }
     }
 }

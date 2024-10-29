@@ -1,23 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 using CharacterController = AFG.Character.CharacterController;
 
 namespace AFG
 {
-    [CreateAssetMenu (fileName = "PlayerCharacterDataWrapperHolder", menuName = "Configs/new PlayerCharacterDataWrapperHolder")]
-    public class PlayerCharacterDataWrapperHolder : ScriptableObject
+    [CreateAssetMenu (fileName = "CharacterData", menuName = "Configs/new CharacterData")]
+    public class CharacterData : ScriptableObject
     {
-        [FormerlySerializedAs("_playerCharacterWrapperEntities")] [SerializeField] private PlayerCharacterDataWrapper[] playerCharacterDataWrappers;
-        public PlayerCharacterDataWrapper[] PlayerCharacterDataWrappers => playerCharacterDataWrappers;
+        [SerializeField] private CharacterDataWrapper _characterDataWrapper;
+        public CharacterDataWrapper CharacterDataWrapper => _characterDataWrapper;
     }
 
     [System.Serializable]
-    public class PlayerCharacterDataWrapper
+    public class CharacterDataWrapper
     {
         [SerializeField] private string _characterName;
         public string CharacterName => _characterName;
+
+        [SerializeField] private Sprite _icon;
+        public Sprite Icon => _icon;
+    
+        //TODO add stats
+        //TODO add price
         
         [SerializeField] private CharacterController _characterPrefab;
         public CharacterController CharacterPrefab=> _characterPrefab;
@@ -28,3 +33,4 @@ namespace AFG
         }
     }
 }
+

@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using CharacterController = AFG.Character.CharacterController;
@@ -49,6 +50,8 @@ namespace AFG.MVP
                     _model.StopCharacterSelection(characterName);
                 });
             }
+            
+            GameController.Instance.LevelModel.PlayerSquad = _model.Characters.ToArray();
         }
 
         private void Activate()

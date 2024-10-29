@@ -8,7 +8,6 @@ namespace AFG.Squad
     public class SquadController : MonoBehaviour
     {
         [SerializeField] private CharacterBrainType _brainType;
-        [SerializeField] protected CharacterController[] _characterPrefabs;
         
         protected List<CharacterController> _characters = new List<CharacterController>();
         public List<CharacterController> Characters => _characters;
@@ -19,7 +18,7 @@ namespace AFG.Squad
         public bool IsActive { get; set; }
 
 
-        public virtual void Initialization()
+        public virtual void Initialization(List<CharacterDataWrapper> characterDataWrappers)
         {
             CharacterController characterController;
 
@@ -36,22 +35,23 @@ namespace AFG.Squad
 
             float step = 6f;
             Vector3 positionOffset;
-            int totalCharacters = _characterPrefabs.Length;
+            int totalCharacters = characterDataWrappers.Count;
             float halfWidth = (totalCharacters - 1) * step / 2;
 
-            for (int i=0;i<_characterPrefabs.Length;i++)
+            for (int i=0;i<totalCharacters;i++)
             {
-                characterController = Instantiate(_characterPrefabs[i], transform);
+                var characterData = characterDataWrappers[i];
+                characterController = Instantiate(characterData.CharacterPrefab, transform);
 
                 positionOffset = new Vector3(i * step - halfWidth, 1, 0);
                 characterController.transform.localPosition = positionOffset;
                 if (_brainType == CharacterBrainType.AI)
                 {
-                    characterController.transform.eulerAngles = new Vector3(0, 180, 0); // Поворот на 180 градусов
+                    characterController.transform.eulerAngles = new Vector3(0, 180, 0); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ 180 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 }
 
                 //inject brain
-                characterController.Initialization(characterBrain);
+                characterController.Initialization(characterBrain, characterDataWrappers[i]);
                 
                 _characters.Add(characterController);
             }
