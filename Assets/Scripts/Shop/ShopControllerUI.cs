@@ -70,8 +70,6 @@ namespace AFG {
             _itemHeight = _shopItemsContainer.GetChild(0).GetComponent<RectTransform>().sizeDelta.y;
             Destroy(_shopItemsContainer.GetChild(0).gameObject);
             _shopItemsContainer.DetachChildren();
-            //Debug.Log("Character Count\t" + Characters.Count);
-            //Debug.Log("Player Character Count\t" + PlayerCharacters.Count);
 
             for (int i = 0; i < Characters.Count; i++)
             {
@@ -94,26 +92,16 @@ namespace AFG {
 
                     if (Characters[i].CharacterName == PlayerCharacters[j].CharacterName)
                     {
-                        itemUI.SetCharacterAsPurchased();
-                        itemUI.OnItemSelect(i, OnItemSelected);
-                    }
-                    else
-                    {
-                        itemUI.SetCharacterPrice(_characterStats.Speed);
-                        itemUI.OnItemPurchase(i, OnItemPurchased);
+                        itemUI.SetSoldOut();
                     }
                     _shopItemsContainer.GetComponent<RectTransform>().sizeDelta = 
-                        Vector3.up*((_itemHeight+_itemSpacing)+Characters.Count + _itemSpacing);
+                        Vector3.up*((_itemHeight+_itemSpacing)*Characters.Count + _itemSpacing);
                 }
             }
         }
 
-        void OnItemSelected(int index)
-        {
-            Debug.Log("select" + index);
-        }
 
-        void OnItemPurchased(int index, CharacterDataWrapper character)
+        void OnItemPurchased(int index, CharacterDataWrapper character, GameObject _itemSoldOut)
         {
             Debug.Log("purchase" + index);
             PlayerCharacters.Add(character);
@@ -121,6 +109,8 @@ namespace AFG {
                 Instance.
                 SaveManager.
                 SavePurchaseCharacters(PlayerCharacters);
+            _itemSoldOut.SetActive(true);
+            GenerateShopItemsUI();
         }
 
         void AddShopEvents()

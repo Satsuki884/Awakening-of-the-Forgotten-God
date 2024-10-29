@@ -2092,6 +2092,7 @@ MonoBehaviour:
   _shopMenu: {fileID: 1656910851}
   _shopItemsContainer: {fileID: 1233647578}
   _itemPrefab: {fileID: 8437011869845254526, guid: a68240b3b3a13d54db2ccbdf28e61018, type: 3}
+  playerCharacterDataWrapperHolder: {fileID: 0}
   shopUI: {fileID: 385687678}
   openShop: {fileID: 2124356598}
   closeShop: {fileID: 1164582332}
