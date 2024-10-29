@@ -1,4 +1,6 @@
 using AFG;
+using AFG.Character;
+using AFG.Stats;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,7 +17,7 @@ namespace AFG {
         [SerializeField] private float _itemSpacing = .5f;
 
 
-        [SerializeField] private GameObject _shopPanel;
+        //[SerializeField] private GameObject _shopPanel;
         [SerializeField] private Transform _shopMenu;
         [SerializeField] private Transform _shopItemsContainer;
         [SerializeField] private GameObject _itemPrefab;
@@ -25,6 +27,8 @@ namespace AFG {
             new List<CharacterDataWrapper>();
         [SerializeField] public List<CharacterDataWrapper> PlayerCharacters { get; set; } = 
             new List<CharacterDataWrapper>();
+
+        [SerializeField] private CharacterDataWrapperHolder playerCharacterDataWrapperHolder;
 
 
         //[Header("Shop Events")]
@@ -36,7 +40,7 @@ namespace AFG {
         void Start()
         {
             AddShopEvents();
-            GenerateShopItemsUI();
+            
             Characters = GameController.
                    Instance.
                    SaveManager.
@@ -44,33 +48,49 @@ namespace AFG {
                    CharacterDataWrappers.
                    ToList();
 
+            //Debug.Log(Characters[0].CharacterPrefab.Atk);
+
+            
+
             PlayerCharacters = GameController.
                 Instance.
                 SaveManager.LoadPlayerCharacterNames().
                 characterDataWrappers.
                 ToList();
+
+            Debug.Log(PlayerCharacters[0].CharacterName);
+
+            GenerateShopItemsUI();
         }
+
+        private CharacterStats _characterStats;
 
         private void GenerateShopItemsUI()
         {
             _itemHeight = _shopItemsContainer.GetChild(0).GetComponent<RectTransform>().sizeDelta.y;
             Destroy(_shopItemsContainer.GetChild(0).gameObject);
             _shopItemsContainer.DetachChildren();
+            //Debug.Log("Character Count\t" + Characters.Count);
+            //Debug.Log("Player Character Count\t" + PlayerCharacters.Count);
 
             for (int i = 0; i < Characters.Count; i++)
             {
                 for (int j = 0; j < PlayerCharacters.Count; j++)
                 {
+
+                    _characterStats = Characters[i].CharacterPrefab.GetComponentInChildren<CharacterStats>();
+                    Debug.Log(_characterStats);
+
                     CharacterShopItemUI itemUI = Instantiate(_itemPrefab, _shopItemsContainer).GetComponent<CharacterShopItemUI>();
 
                     itemUI.SetItemPosition(Vector3.down * i * (_itemHeight + _itemSpacing));
                     itemUI.gameObject.name = "Item " + i + " - " + Characters[i].CharacterName;
                     itemUI.SetCharacterName(Characters[i].CharacterName);
-                    itemUI.SetCharacterAtk(Characters[i].CharacterPrefab.Atk);
-                    itemUI.SetCharacterHp(Characters[i].CharacterPrefab.Health);
-                    itemUI.SetCharacterDef(Characters[i].CharacterPrefab.Def);
-                    itemUI.SetCharacterSpeed(Characters[i].CharacterPrefab.Speed);
-                    itemUI.SetCharacterPrice(Characters[i].CharacterPrefab.Speed);
+                    itemUI.SetCharacterAtk(_characterStats.Atk);
+                    itemUI.SetCharacterHp(_characterStats.Health);
+                    itemUI.SetCharacterDef(_characterStats.Def);
+                    itemUI.SetCharacterSpeed(_characterStats.Speed);
+                    itemUI.SetCharacterPrice(_characterStats.Speed);
 
                     if (Characters[i].CharacterName == PlayerCharacters[j].CharacterName)
                     {
@@ -79,9 +99,11 @@ namespace AFG {
                     }
                     else
                     {
-                        itemUI.SetCharacterPrice(Characters[i].CharacterPrefab.Speed);
+                        itemUI.SetCharacterPrice(_characterStats.Speed);
                         itemUI.OnItemPurchase(i, OnItemPurchased);
                     }
+                    _shopItemsContainer.GetComponent<RectTransform>().sizeDelta = 
+                        Vector3.up*((_itemHeight+_itemSpacing)+Characters.Count + _itemSpacing);
                 }
             }
         }
@@ -91,9 +113,14 @@ namespace AFG {
             Debug.Log("select" + index);
         }
 
-        void OnItemPurchased(int index)
+        void OnItemPurchased(int index, CharacterDataWrapper character)
         {
             Debug.Log("purchase" + index);
+            PlayerCharacters.Add(character);
+            GameController.
+                Instance.
+                SaveManager.
+                SavePurchaseCharacters(PlayerCharacters);
         }
 
         void AddShopEvents()

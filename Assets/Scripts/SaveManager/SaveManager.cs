@@ -27,6 +27,10 @@ namespace AFG
 
         //use 2 principles 
         //DRY
+        public void SavePurchaseCharacters(List<CharacterDataWrapper> characters)
+        {
+            SaveCharacterNames(characters, _filePathToPlayerCharacters);
+        }
         public void SaveCharacterNames(List<CharacterDataWrapper> characters, string path)
         {
             if (!File.Exists(path))
