@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using static UnityEditor.Progress;
 
@@ -29,7 +30,7 @@ namespace AFG {
         [SerializeField] public List<CharacterDataWrapper> PlayerCharacters { get; set; } = 
             new List<CharacterDataWrapper>();
 
-        [SerializeField] private CharacterDataWrapperHolder playerCharacterDataWrapperHolder;
+        [FormerlySerializedAs("playerCharacterDataWrapperHolder")] [SerializeField] private CharacterDataHolder playerCharacterDataHolder;
 
 
         //[Header("Shop Events")]
@@ -49,8 +50,9 @@ namespace AFG {
             Characters = GameController.
                    Instance.
                    SaveManager.
-                   CharacterDataWrapperHolder.
-                   CharacterDataWrappers.
+                   CharacterDataHolder.
+                   CharacterData.
+                   Select(x=>x.CharacterDataWrapper).
                    ToList();
            
 

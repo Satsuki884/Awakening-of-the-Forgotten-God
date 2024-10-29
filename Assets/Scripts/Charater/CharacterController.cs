@@ -70,35 +70,38 @@ namespace AFG.Character
         protected CharacterSkill[] _skills;
         public CharacterSkill[] Skills => _skills;
 
+        private CharacterDataWrapper _characterDataWrapper;
+        
         public float Def
         {
             get => _characterStats.Def;
-            set => _characterStats.Def = value; // Сеттер для защиты
+            set => _characterStats.Def = value; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         }
 
         public float Speed
         {
             get => _characterStats.Speed;
-            set => _characterStats.Speed = value; // Сеттер для скорости
+            set => _characterStats.Speed = value; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         }
 
         public float Atk
         {
             get => _characterStats.Atk;
-            set => _characterStats.Atk = value; // Сеттер для атаки
+            set => _characterStats.Atk = value; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         }
 
         public float Health
         {
             get => _characterStats.Health;
-            set => _characterStats.Health = value; // Сеттер для здоровья
+            set => _characterStats.Health = value; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         }
 
-        public virtual void Initialization(CharacterBrain brain)
+        public virtual void Initialization(CharacterBrain brain, CharacterDataWrapper characterDataWrapper)
         {
             Debug.Log("Initialized character "+gameObject.name);
            
             _brain = brain;
+            _characterDataWrapper = characterDataWrapper;
             _brain.Initialization(this);
 
             _characterStats = GetComponentInChildren<CharacterStats>();

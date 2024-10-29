@@ -26,8 +26,9 @@ namespace AFG.MVP
             Characters = GameController.
                 Instance.
                 SaveManager.
-                CharacterDataWrapperHolder.
-                CharacterDataWrappers.
+                CharacterDataHolder.
+                CharacterData.
+                Select(x=>x.CharacterDataWrapper).
                 ToList();
 
             UpdateCharacters();

@@ -24,8 +24,20 @@ namespace AFG.Combat
         
         private void Start()
         {
-            _playerSquad.Initialization();
-            _aiSquad.Initialization();
+            var playerSquadData = GameController.
+                Instance.
+                SaveManager.
+                PlayerCharacterDataHolder.
+                CharacterData.Select(x=>x.CharacterDataWrapper).
+                ToList();
+            
+            var aiSquadData = GameController.
+                Instance.
+                LevelModel.
+                GetAiSquad();
+            
+            _playerSquad.Initialization(playerSquadData);
+            _aiSquad.Initialization(aiSquadData.ToList());
 
             GameController.Instance.CombatModel.PlayerSquad = _playerSquad;
             GameController.Instance.CombatModel.AiSquad = _aiSquad;

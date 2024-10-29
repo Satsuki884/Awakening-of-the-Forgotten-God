@@ -29,6 +29,13 @@ namespace AFG
             get => _saveManager;
             set => _saveManager = value;
         }
+
+        [SerializeField] private LevelModel _levelModel;
+        public LevelModel LevelModel
+        {
+            get => _levelModel;
+            set => _levelModel = value;
+        }
         
         public CombatModel CombatModel { get; set; }
 
