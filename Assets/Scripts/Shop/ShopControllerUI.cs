@@ -15,6 +15,7 @@ namespace AFG {
     public class ShopControllerUI : MonoBehaviour
     {
         [SerializeField] private float _itemSpacing = .5f;
+        //private float _playersMoney = 10;
 
 
         //[SerializeField] private GameObject _shopPanel;
@@ -36,6 +37,10 @@ namespace AFG {
         [SerializeField] Button openShop;
         [SerializeField] Button closeShop;
 
+        /*[SerializeField] private GameObject _itemBuyNow;
+        [SerializeField] private Button _youSure;
+        [SerializeField] private Button _notBuy;*/
+
         // Start is called before the first frame update
         void Start()
         {
@@ -47,18 +52,13 @@ namespace AFG {
                    CharacterDataWrapperHolder.
                    CharacterDataWrappers.
                    ToList();
-
-            //Debug.Log(Characters[0].CharacterPrefab.Atk);
-
-            
+           
 
             PlayerCharacters = GameController.
                 Instance.
                 SaveManager.LoadPlayerCharacterNames().
                 characterDataWrappers.
                 ToList();
-
-            Debug.Log(PlayerCharacters[0].CharacterName);
 
             GenerateShopItemsUI();
         }
@@ -67,50 +67,91 @@ namespace AFG {
 
         private void GenerateShopItemsUI()
         {
+            
+
             _itemHeight = _shopItemsContainer.GetChild(0).GetComponent<RectTransform>().sizeDelta.y;
             Destroy(_shopItemsContainer.GetChild(0).gameObject);
             _shopItemsContainer.DetachChildren();
 
             for (int i = 0; i < Characters.Count; i++)
             {
+                _characterStats = Characters[i].CharacterPrefab.GetComponentInChildren<CharacterStats>();
+                //Debug.Log(_characterStats);
+
+                CharacterShopItemUI itemUI = Instantiate(_itemPrefab, _shopItemsContainer).GetComponent<CharacterShopItemUI>();
+
+                itemUI.SetItemPosition(Vector3.down * i * (_itemHeight + _itemSpacing));
+                itemUI.gameObject.name = "Item " + i + " - " + Characters[i].CharacterName;
+                itemUI.SetCharacterName(Characters[i].CharacterName);
+                itemUI.SetCharacterAtk(_characterStats.Atk);
+                itemUI.SetCharacterHp(_characterStats.Health);
+                itemUI.SetCharacterDef(_characterStats.Def);
+                itemUI.SetCharacterSpeed(_characterStats.Speed);
+                itemUI.SetCharacterPrice(_characterStats.Speed);
+
+                //TODO info about user`s money
+                /*if (100 > _playersMoney)
+                {
+                    itemUI.SetButtonUnEnable();
+                } */
+                
+
                 for (int j = 0; j < PlayerCharacters.Count; j++)
                 {
-
-                    _characterStats = Characters[i].CharacterPrefab.GetComponentInChildren<CharacterStats>();
-                    Debug.Log(_characterStats);
-
-                    CharacterShopItemUI itemUI = Instantiate(_itemPrefab, _shopItemsContainer).GetComponent<CharacterShopItemUI>();
-
-                    itemUI.SetItemPosition(Vector3.down * i * (_itemHeight + _itemSpacing));
-                    itemUI.gameObject.name = "Item " + i + " - " + Characters[i].CharacterName;
-                    itemUI.SetCharacterName(Characters[i].CharacterName);
-                    itemUI.SetCharacterAtk(_characterStats.Atk);
-                    itemUI.SetCharacterHp(_characterStats.Health);
-                    itemUI.SetCharacterDef(_characterStats.Def);
-                    itemUI.SetCharacterSpeed(_characterStats.Speed);
-                    itemUI.SetCharacterPrice(_characterStats.Speed);
-
                     if (Characters[i].CharacterName == PlayerCharacters[j].CharacterName)
                     {
                         itemUI.SetSoldOut();
                     }
-                    _shopItemsContainer.GetComponent<RectTransform>().sizeDelta = 
-                        Vector3.up*((_itemHeight+_itemSpacing)*Characters.Count + _itemSpacing);
                 }
+
+                itemUI.OnItemPurchase(itemUI, Characters[i], OnItemPurchased);
+                _shopItemsContainer.GetComponent<RectTransform>().sizeDelta =
+                    Vector3.up * ((_itemHeight + _itemSpacing) * (Characters.Count-1) + _itemSpacing);
             }
         }
 
-
-        void OnItemPurchased(int index, CharacterDataWrapper character, GameObject _itemSoldOut)
+        void OnItemPurchased(CharacterShopItemUI item,
+            CharacterDataWrapper character,
+            GameObject _itemBuyNow, GameObject _itemSoldOut)
         {
-            Debug.Log("purchase" + index);
+
+            BuyNow(_itemBuyNow, _itemSoldOut);
+
+            item.ItemPurchaseConfirm(item, character, OnItemPurchasedConfirmed);
+            item.DontBuy();
+
+        }
+
+        void OnItemPurchasedConfirmed(CharacterShopItemUI item, 
+            CharacterDataWrapper character, 
+            GameObject _itemBuyNow, GameObject _itemSoldOut)
+        {
             PlayerCharacters.Add(character);
             GameController.
                 Instance.
                 SaveManager.
                 SavePurchaseCharacters(PlayerCharacters);
+
+            _itemBuyNow.SetActive(false);
             _itemSoldOut.SetActive(true);
+
+            PlayerCharacters = GameController.
+                Instance.
+                SaveManager.LoadPlayerCharacterNames().
+                characterDataWrappers.
+                ToList();
             GenerateShopItemsUI();
+        }
+
+        void BuyNow(GameObject _itemBuyNow, GameObject _itemSoldOut)
+        {
+            Debug.Log("sdjkfljsd");
+            _itemBuyNow.SetActive(true);
+        }
+
+        void NotBuy(GameObject _itemBuyNow, GameObject _itemSoldOut)
+        {
+            _itemBuyNow.SetActive(false);
         }
 
         void AddShopEvents()
@@ -121,6 +162,12 @@ namespace AFG {
 
             closeShop.onClick.RemoveAllListeners();
             closeShop.onClick.AddListener(CloseShop);
+
+            /*_youSure.onClick.RemoveAllListeners();
+            _youSure.onClick.AddListener(BuyNow);
+
+            _notBuy.onClick.RemoveAllListeners();
+            _notBuy.onClick.AddListener(NotBuy);*/
         }
 
         void OpenShop()

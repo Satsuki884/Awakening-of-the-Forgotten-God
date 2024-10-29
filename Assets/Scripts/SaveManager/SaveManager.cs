@@ -33,6 +33,7 @@ namespace AFG
         }
         public void SaveCharacterNames(List<CharacterDataWrapper> characters, string path)
         {
+            
             if (!File.Exists(path))
             {
                 File.Create(path).Dispose();
@@ -42,8 +43,10 @@ namespace AFG
             {
                 characterDataWrappers = characters
             });
+            //Debug.Log(json);
             
             File.WriteAllText(path, json);
+            //Debug.Log("added new character");
         }
 
         //TODO refactoring
@@ -81,9 +84,14 @@ namespace AFG
                     
                     return dataWrapper;
                 }
+                return dataWrapper;
+            }
+            else
+            {
+                return FillAllCharactersDefault(dataWrapperHolder, path);
             }
             
-            return FillAllCharactersDefault(dataWrapperHolder, path);
+            
         }
 
         private CharactersDataWrapper FillAllCharactersDefault(
@@ -100,13 +108,14 @@ namespace AFG
             SaveCharacterNames(dataWrapperNew.characterDataWrappers, path);
             
             string jsonNew = JsonUtility.ToJson(dataWrapperNew);
-            Debug.Log(jsonNew);
+            //Debug.Log(jsonNew);
             
             return dataWrapperNew;
         }
         
         public CharactersDataWrapper LoadPlayerCharacterNames()
         {
+            //Debug.LogWarning("sdfdsfsd");
             return LoadCharacterNames(playerCharacterDataWrapperHolder, _filePathToPlayerCharacters);
         }
 

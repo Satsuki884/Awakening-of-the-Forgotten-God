@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.TextCore.Text;
+using static UnityEditor.Progress;
 
 namespace AFG
 {
@@ -20,14 +21,21 @@ namespace AFG
         [SerializeField] private TMP_Text _def;
         [SerializeField] private TMP_Text _speed;
         [SerializeField] private TMP_Text _characterPrice;
-        [SerializeField] private Button _characterPurchaseButton;
+        [SerializeField] private Button _characterPurchaseButtonInItem;
 
         [SerializeField] private Button _itemButton;
         [SerializeField] private Image _itemImage;
         [SerializeField] private Outline _itemOutline;
 
+        [SerializeField] private GameObject _itemBuyNow;
+        [SerializeField] private Button _characterPurchaseButton;
+        [SerializeField] private Button _notBuy;
+
 
         [SerializeField] private GameObject _itemSoldOut;
+
+
+        
 
         public void SetItemPosition(Vector2 pos)
         {
@@ -72,7 +80,45 @@ namespace AFG
         public void SetSoldOut()
         {
             _itemSoldOut.SetActive(true);
-            _characterPurchaseButton.gameObject.SetActive(false);
+            _characterPurchaseButtonInItem.gameObject.SetActive(false);
+        }
+
+        public void DontBuy()
+        {
+            _notBuy.onClick.RemoveAllListeners();
+            _notBuy.onClick.AddListener(DBuy);
+            
+        }
+
+        public void DBuy()
+        {
+            _itemBuyNow.SetActive(false);
+        }
+
+        private Color _initialColor;
+        private Color _initialColorText;
+
+        public void SetButtonUnEnable()
+        {
+            _characterPurchaseButtonInItem.enabled = false;
+            _initialColor = _characterPurchaseButtonInItem.GetComponent<Image>().color;
+            _characterPurchaseButtonInItem.GetComponent<Image>().color = Color.gray;
+            TMP_Text buttonText = _characterPurchaseButtonInItem.GetComponentInChildren<TMP_Text>();
+            if (buttonText != null)
+            {
+                _initialColorText = buttonText.color;
+                buttonText.color = new Color(0.5f, 0.5f, 0.5f);
+            }
+        }
+        public void SetButtonEnable()
+        {
+            _characterPurchaseButtonInItem.enabled = true;
+            _characterPurchaseButtonInItem.GetComponent<Image>().color = _initialColor;
+            TMP_Text buttonText = _characterPurchaseButtonInItem.GetComponentInChildren<TMP_Text>();
+            if (buttonText != null)
+            {
+                buttonText.color = _initialColorText;
+            }
         }
 
 
@@ -85,10 +131,16 @@ namespace AFG
 
         }*/
 
-        public void OnItemPurchase(int itemIndex, CharacterDataWrapper character, UnityAction<int, CharacterDataWrapper, GameObject> action)
+        public void OnItemPurchase(CharacterShopItemUI item, CharacterDataWrapper character, UnityAction<CharacterShopItemUI, CharacterDataWrapper, GameObject, GameObject> action)
         {
             _characterPurchaseButton.onClick.RemoveAllListeners();
-            _characterPurchaseButton.onClick.AddListener(() => action.Invoke(itemIndex, character, _itemSoldOut));
+            _characterPurchaseButton.onClick.AddListener(() => action.Invoke(item, character, _itemBuyNow, _itemSoldOut));
+        }
+
+        public void ItemPurchaseConfirm(CharacterShopItemUI item, CharacterDataWrapper character, UnityAction<CharacterShopItemUI, CharacterDataWrapper, GameObject, GameObject> action)
+        {
+            _characterPurchaseButton.onClick.RemoveAllListeners();
+            _characterPurchaseButton.onClick.AddListener(() => action.Invoke(item, character, _itemBuyNow, _itemSoldOut));
         }
 
         /*public void OnItemSelect(int itemIndex, UnityAction<int> action)
