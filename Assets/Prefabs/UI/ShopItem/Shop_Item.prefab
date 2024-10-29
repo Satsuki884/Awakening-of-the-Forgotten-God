@@ -1351,7 +1351,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.52743214, y: 1}
-  m_AnchoredPosition: {x: -6.6999817, y: 11.068298}
+  m_AnchoredPosition: {x: -6.700012, y: 11.068298}
   m_SizeDelta: {x: 15, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3374989558314217199
@@ -1429,7 +1429,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.052552357, y: 0.058333334}
   m_AnchorMax: {x: 0.95400006, y: 0.31250003}
-  m_AnchoredPosition: {x: -0.99993896, y: 1}
+  m_AnchoredPosition: {x: -0.99990845, y: 1}
   m_SizeDelta: {x: 0, y: -1}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &4903353763160518559
@@ -1600,6 +1600,9 @@ GameObject:
   - component: {fileID: 8686272982961087498}
   - component: {fileID: 6082715435254469639}
   - component: {fileID: 5960272340948143605}
+  - component: {fileID: 1870799508063155082}
+  - component: {fileID: 6967407551007228445}
+  - component: {fileID: 1811627681525242186}
   m_Layer: 5
   m_Name: Shop_Item
   m_TagString: Untagged
@@ -1666,6 +1669,89 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1870799508063155082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8437011869845254526}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
+  m_EffectDistance: {x: 3, y: 3}
+  m_UseGraphicAlpha: 1
+--- !u!114 &6967407551007228445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8437011869845254526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 5960272340948143605}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1811627681525242186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8437011869845254526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9fa248e0c3b5444299f86a525d5708d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemNotSelectedColor: {r: 0.24786222, g: 0.06123176, b: 0.3018868, a: 0}
+  _itemSelectedColor: {r: 0.4791015, g: 0.048415814, b: 0.6037736, a: 0}
+  _characterName: {fileID: 5570797895519762716}
+  _atk: {fileID: 2721434026527237577}
+  _hp: {fileID: 8857044226319165186}
+  _def: {fileID: 5563039518256438428}
+  _speed: {fileID: 8075636864611490497}
+  _characterPrice: {fileID: 4336219962520660234}
+  _characterPurchaseButton: {fileID: 390758352468273795}
+  _itemButton: {fileID: 6967407551007228445}
+  _itemImage: {fileID: 5960272340948143605}
+  _itemOutline: {fileID: 1870799508063155082}
 --- !u!1 &8709672515374818612
 GameObject:
   m_ObjectHideFlags: 0
