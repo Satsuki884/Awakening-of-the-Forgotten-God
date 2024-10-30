@@ -1,3 +1,4 @@
+using AFG.Stats;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,10 +21,22 @@ namespace AFG
 
         [SerializeField] private Sprite _icon;
         public Sprite Icon => _icon;
-    
-        //TODO add stats
-        //TODO add price
-        
+
+        [SerializeField] private float _health;
+        public float Health => _health;
+
+        [SerializeField] private float _def;
+        public float Def => _def;
+
+        [SerializeField] private float _speed;
+        public float Speed => _speed;
+
+        [SerializeField] private float _atk;
+        public float Atk => _atk;
+
+        [SerializeField] private float _price;
+        public float Price => _price;
+
         [SerializeField] private CharacterController _characterPrefab;
         public CharacterController CharacterPrefab=> _characterPrefab;
         
