@@ -46,15 +46,17 @@ namespace AFG {
         void Start()
         {
             AddShopEvents();
-            
+
             Characters = GameController.
-                   Instance.
-                   SaveManager.
-                   CharacterDataHolder.
-                   CharacterData.
-                   Select(x=>x.CharacterDataWrapper).
-                   ToList();
-           
+                Instance.
+                SaveManager.
+                CharacterDataHolder.
+                CharacterData.
+                Select(x => x.CharacterDataWrapper).
+                ToList();
+
+            
+
 
             PlayerCharacters = GameController.
                 Instance.
@@ -65,7 +67,7 @@ namespace AFG {
             GenerateShopItemsUI();
         }
 
-        private CharacterStats _characterStats;
+        //private CharacterStats _characterStats;
 
         private void GenerateShopItemsUI()
         {
@@ -77,19 +79,20 @@ namespace AFG {
 
             for (int i = 0; i < Characters.Count; i++)
             {
-                _characterStats = Characters[i].CharacterPrefab.GetComponentInChildren<CharacterStats>();
-                //Debug.Log(_characterStats);
+                //_characterStats = Characters[i].CharacterPrefab.GetComponentInChildren<CharacterStats>();
+                Debug.Log(Characters[i].CharacterName);
 
                 CharacterShopItemUI itemUI = Instantiate(_itemPrefab, _shopItemsContainer).GetComponent<CharacterShopItemUI>();
 
                 itemUI.SetItemPosition(Vector3.down * i * (_itemHeight + _itemSpacing));
                 itemUI.gameObject.name = "Item " + i + " - " + Characters[i].CharacterName;
                 itemUI.SetCharacterName(Characters[i].CharacterName);
-                itemUI.SetCharacterAtk(_characterStats.Atk);
-                itemUI.SetCharacterHp(_characterStats.Health);
-                itemUI.SetCharacterDef(_characterStats.Def);
-                itemUI.SetCharacterSpeed(_characterStats.Speed);
-                itemUI.SetCharacterPrice(_characterStats.Speed);
+                itemUI.SetCharacterImage(Characters[i].Icon);
+                itemUI.SetCharacterAtk(Characters[i].Atk);
+                itemUI.SetCharacterHp(Characters[i].Health);
+                itemUI.SetCharacterDef(Characters[i].Def);
+                itemUI.SetCharacterSpeed(Characters[i].Speed);
+                itemUI.SetCharacterPrice(Characters[i].Price);
 
                 //TODO info about user`s money
                 /*if (100 > _playersMoney)

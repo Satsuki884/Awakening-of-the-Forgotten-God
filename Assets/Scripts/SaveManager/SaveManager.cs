@@ -82,9 +82,12 @@ namespace AFG
                     
                     return dataWrapper;
                 }
+                return dataWrapper;
             }
-            
-            return FillAllCharactersDefault(dataHolder, path);
+            else
+            {
+                return FillAllCharactersDefault(dataHolder, path);
+            }
         }
 
         private CharactersDataWrapper FillAllCharactersDefault(

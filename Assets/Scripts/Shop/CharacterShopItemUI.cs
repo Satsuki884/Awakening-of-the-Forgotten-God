@@ -14,7 +14,7 @@ namespace AFG
         [SerializeField] private Color _itemNotSelectedColor;
         [SerializeField] private Color _itemSelectedColor;
 
-        //[SerializeField] private Image _characterImage = null;
+        [SerializeField] private Image _characterImage = null;
         [SerializeField] private TMP_Text _characterName;
         [SerializeField] private TMP_Text _atk;
         [SerializeField] private TMP_Text _hp;
@@ -42,10 +42,10 @@ namespace AFG
             GetComponent<RectTransform>().anchoredPosition += pos;
         }
 
-        /*public void SetCharacterImage(Sprite sprite)
+        public void SetCharacterImage(Sprite sprite)
         {
             _characterImage.sprite = sprite;
-        }*/
+        }
 
         public void SetCharacterName(string name)
         {
@@ -74,7 +74,7 @@ namespace AFG
 
         public void SetCharacterPrice(float price)
         {
-            _characterPrice.text = 100.ToString();
+            _characterPrice.text = price.ToString();
         }
 
         public void SetSoldOut()
