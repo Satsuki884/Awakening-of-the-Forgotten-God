@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18550527fa70b4f4e9ffadbc816dec60, type: 3}
-  m_Name: CharacterDataAmaunet
+  m_Name: CharacterDataTanatos
   m_EditorClassIdentifier: 
   _characterDataWrapper:
-    _characterName: Amaunet
-    _icon: {fileID: 21300000, guid: 203280dedcaa20541802123de876c4b6, type: 3}
-    _health: 95
-    _def: 10
-    _speed: 4
-    _atk: 8
-    _price: 150
-    _characterPrefab: {fileID: 7976691685474019358, guid: 1daa222f654669f4198f7839e1ac0658, type: 3}
+    _characterName: Tanatos
+    _icon: {fileID: 21300000, guid: 99d220901e31024459951c144e991070, type: 3}
+    _health: 105
+    _def: 15
+    _speed: 1
+    _atk: 15
+    _price: 200
+    _characterPrefab: {fileID: 6594763403774803771, guid: 39694e16707c5c14b8c042638f736fdc, type: 3}
