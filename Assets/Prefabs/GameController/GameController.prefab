@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dffcd37137b246808bf12772f241e74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterDataHolder: {fileID: 11400000, guid: f34c54dc4d061496d8fa98e556520cb0, type: 2}
-  playerCharacterDataHolder: {fileID: 11400000, guid: d77260d82a809cc438d58d603835778d, type: 2}
+  allCharactersDataHolder: {fileID: 11400000, guid: f34c54dc4d061496d8fa98e556520cb0, type: 2}
+  playerCharactersDataHolder: {fileID: 11400000, guid: d77260d82a809cc438d58d603835778d, type: 2}
 --- !u!1 &6189943280151018665
 GameObject:
   m_ObjectHideFlags: 0

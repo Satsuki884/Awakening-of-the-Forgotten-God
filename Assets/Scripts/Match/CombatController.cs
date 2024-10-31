@@ -24,12 +24,7 @@ namespace AFG.Combat
         
         private void Start()
         {
-            var playerSquadData = GameController.
-                Instance.
-                SaveManager.
-                PlayerCharacterDataHolder.
-                CharacterData.Select(x=>x.CharacterDataWrapper).
-                ToList();
+            var playerSquadData = GameController.Instance.SaveManager.PlayerCharacters;
             
             var aiSquadData = GameController.
                 Instance.

@@ -11,8 +11,8 @@ namespace AFG.MVP
         {
             Characters = GameController.
                 Instance.
-                SaveManager.LoadPlayerCharacterNames().
-                characterDataWrappers.
+                SaveManager.
+                PlayerCharacters.
                 ToList();
 
             UpdateCharacters();

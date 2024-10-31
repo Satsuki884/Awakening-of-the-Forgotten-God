@@ -1,17 +1,8 @@
-using AFG;
-using AFG.Character;
-using AFG.Stats;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
-
 
 namespace AFG {
     public class ShopControllerUI : MonoBehaviour
@@ -26,10 +17,9 @@ namespace AFG {
         [SerializeField] private GameObject _itemPrefab;
         private float _itemHeight;
 
-
-        [SerializeField] public List<CharacterDataWrapper> Characters { get; set; } = 
+        private List<CharacterDataWrapper> Characters { get; set; } = 
             new List<CharacterDataWrapper>();
-        [SerializeField] public List<CharacterDataWrapper> PlayerCharacters { get; set; } = 
+        private List<CharacterDataWrapper> PlayerCharacters { get; set; } = 
             new List<CharacterDataWrapper>();
 
         [FormerlySerializedAs("playerCharacterDataWrapperHolder")] [SerializeField] private CharacterDataHolder playerCharacterDataHolder;
@@ -49,22 +39,8 @@ namespace AFG {
         {
             AddShopEvents();
 
-            Characters = GameController.
-                Instance.
-                SaveManager.
-                CharacterDataHolder.
-                CharacterData.
-                Select(x => x.CharacterDataWrapper).
-                ToList();
-
-            
-
-
-            PlayerCharacters = GameController.
-                Instance.
-                SaveManager.LoadPlayerCharacterNames().
-                characterDataWrappers.
-                ToList();
+            Characters = GameController.Instance.SaveManager.AllCharacters;
+            PlayerCharacters = GameController.Instance.SaveManager.PlayerCharacters;
 
             GenerateShopItemsUI();
         }
@@ -122,19 +98,22 @@ namespace AFG {
             GameObject _itemBuyNow, GameObject _itemSoldOut)
         {
             PlayerCharacters.Add(character);
+            
             GameController.
                 Instance.
                 SaveManager.
                 SavePurchaseCharacters(PlayerCharacters);
 
+            //synchronize player characters holders (SO)
+            GameController.
+                Instance.
+                SaveManager.
+                SynchronizePlayerCharactersHolders(PlayerCharacters);
+
+            
             _itemBuyNow.SetActive(false);
             _itemSoldOut.SetActive(true);
 
-            PlayerCharacters = GameController.
-                Instance.
-                SaveManager.LoadPlayerCharacterNames().
-                characterDataWrappers.
-                ToList();
             GenerateShopItemsUI();
         }
 

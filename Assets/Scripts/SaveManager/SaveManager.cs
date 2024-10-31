@@ -11,11 +11,41 @@ namespace AFG
     //this is Facade
     public class SaveManager : MonoBehaviour
     {
-        [SerializeField] private CharacterDataHolder characterDataHolder;
-        [SerializeField] private CharacterDataHolder playerCharacterDataHolder;
+        [SerializeField] private CharacterDataHolder allCharactersDataHolder;
+        [SerializeField] private CharacterDataHolder playerCharactersDataHolder;
+
+        private List<CharacterDataWrapper> _allCharactersDataWrapper;
+        public List<CharacterDataWrapper> AllCharacters
+        {
+            get
+            {
+                if(_allCharactersDataWrapper == null || 
+                   _allCharactersDataWrapper.Count == 0)
+                {
+                    _allCharactersDataWrapper = 
+                        LoadCharacterNames(allCharactersDataHolder, _filePathToAllCharacters);
+                }
+
+                return _allCharactersDataWrapper;
+            }
+        }
         
-        public CharacterDataHolder CharacterDataHolder => characterDataHolder;
-        public CharacterDataHolder PlayerCharacterDataHolder => playerCharacterDataHolder;
+        //add set with validation etc
+        private List<CharacterDataWrapper> _playerCharactersDataWrapper;
+        public List<CharacterDataWrapper> PlayerCharacters
+        {
+            get
+            {
+                if(_playerCharactersDataWrapper == null || 
+                   _playerCharactersDataWrapper.Count == 0)
+                {
+                    _playerCharactersDataWrapper = 
+                        LoadCharacterNames(playerCharactersDataHolder, _filePathToPlayerCharacters);
+                }
+
+                return _playerCharactersDataWrapper;
+            }
+        }
         
         private string _filePathToAllCharacters;
         private string _filePathToPlayerCharacters;
@@ -23,6 +53,7 @@ namespace AFG
         public void Awake()
         {
             _filePathToAllCharacters = Path.Combine(Application.persistentDataPath, "AllCharacters.json");
+            Debug.Log(_filePathToAllCharacters);
             _filePathToPlayerCharacters = Path.Combine(Application.persistentDataPath, "PlayerCharacters.json");
         }
 
@@ -30,9 +61,9 @@ namespace AFG
         //DRY
         public void SavePurchaseCharacters(List<CharacterDataWrapper> characters)
         {
-            SaveCharacterNames(characters, _filePathToPlayerCharacters);
+            SaveCharacters(characters, _filePathToPlayerCharacters);
         }
-        public void SaveCharacterNames(List<CharacterDataWrapper> characters, string path)
+        public void SaveCharacters(List<CharacterDataWrapper> characters, string path)
         {
             if (!File.Exists(path))
             {
@@ -42,13 +73,41 @@ namespace AFG
             string json = JsonUtility.ToJson(new CharactersDataWrapper
             {
                 characterDataWrappers = characters
-            });
-            
+            }, true);
+
             File.WriteAllText(path, json);
         }
 
+        public void SynchronizePlayerCharactersHolders(List<CharacterDataWrapper> newPlayerCharacters)
+        {
+            var playerCharacterWrapersInHolder = playerCharactersDataHolder.
+                CharacterData.
+                Select(x => x.CharacterDataWrapper).ToList();
+
+            foreach (var character in playerCharacterWrapersInHolder)
+            {
+                Debug.LogError(character.CharacterName);
+            }
+            
+            if (playerCharacterWrapersInHolder.Count != newPlayerCharacters.Count ||
+                !playerCharacterWrapersInHolder.SequenceEqual(newPlayerCharacters))
+            {
+                foreach (var characterData in allCharactersDataHolder.CharacterData)
+                {
+                    foreach (var newPlayerCharacter in newPlayerCharacters)
+                    {
+                        if (newPlayerCharacter.CharacterName.Equals(characterData.CharacterDataWrapper.CharacterName))
+                        {
+                            playerCharactersDataHolder.CharacterData.Add(characterData);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        
         //TODO refactoring
-        public CharactersDataWrapper LoadCharacterNames(
+        private List<CharacterDataWrapper> LoadCharacterNames(
             CharacterDataHolder dataHolder, 
             string path)
         {
@@ -60,12 +119,12 @@ namespace AFG
                 string json = File.ReadAllText(path);
                 dataWrapper = JsonUtility.FromJson<CharactersDataWrapper>(json);
 
-                int characterWrapperLenght = dataHolder.CharacterData.Length;
+                int characterWrapperLenght = dataHolder.CharacterData.Count;
                 int dataWraperLenght = dataWrapper.characterDataWrappers.Count;
 
                 if (characterWrapperLenght == dataWraperLenght)
                 {
-                    for(int i=0;i<dataHolder.CharacterData.Length;i++)
+                    for(int i=0;i<dataHolder.CharacterData.Count;i++)
                     {
                         for(int j=0;j<dataWrapper.characterDataWrappers.Count;j++)
                         {
@@ -80,9 +139,9 @@ namespace AFG
                         }
                     }
                     
-                    return dataWrapper;
+                    return dataWrapper.characterDataWrappers;
                 }
-                return dataWrapper;
+                return dataWrapper.characterDataWrappers;
             }
             else
             {
@@ -90,7 +149,7 @@ namespace AFG
             }
         }
 
-        private CharactersDataWrapper FillAllCharactersDefault(
+        private List<CharacterDataWrapper> FillAllCharactersDefault(
             CharacterDataHolder dataHolder, 
             string path)
         {
@@ -101,23 +160,12 @@ namespace AFG
             };
             
             //safe to file
-            SaveCharacterNames(dataWrapperNew.characterDataWrappers, path);
+            SaveCharacters(dataWrapperNew.characterDataWrappers, path);
             
-            string jsonNew = JsonUtility.ToJson(dataWrapperNew);
+            string jsonNew = JsonUtility.ToJson(dataWrapperNew, true);
             Debug.Log(jsonNew);
             
-            return dataWrapperNew;
-        }
-        
-        public CharactersDataWrapper LoadPlayerCharacterNames()
-        {
-            return LoadCharacterNames(playerCharacterDataHolder, _filePathToPlayerCharacters);
-        }
-
-        //use for store
-        public CharactersDataWrapper LoadAllCharacterNames()
-        {
-            return LoadCharacterNames(characterDataHolder, _filePathToAllCharacters);
+            return dataWrapperNew.characterDataWrappers;
         }
     }
 }

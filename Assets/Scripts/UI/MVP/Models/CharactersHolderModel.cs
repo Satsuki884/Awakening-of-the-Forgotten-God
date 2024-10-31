@@ -23,13 +23,9 @@ namespace AFG.MVP
 
         public virtual void Start()
         {
-            Characters = GameController.
-                Instance.
-                SaveManager.
-                CharacterDataHolder.
-                CharacterData.
-                Select(x=>x.CharacterDataWrapper).
-                ToList();
+            var saveManager = GameController.Instance.SaveManager;
+            
+            Characters = saveManager.AllCharacters;
 
             UpdateCharacters();
         }
