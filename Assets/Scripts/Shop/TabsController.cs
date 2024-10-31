@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,8 +12,8 @@ public class TabsController : MonoBehaviour
     [SerializeField] private Button _openCharactersTab;
     [SerializeField] private Button _openBooksTabShop;
 
-    [SerializeField] private Color _activeColor = new Color(32, 0, 40, 255);
-    [SerializeField] private Color _inactiveColor = new Color(77, 0, 96, 255);
+    [SerializeField] private Color _activeColor;// = new Color(32, 0, 40, 255);
+    [SerializeField] private Color _inactiveColor;// = new Color(77, 0, 96, 255);
 
 
     void Start()
@@ -36,12 +37,14 @@ public class TabsController : MonoBehaviour
     {
         _booksTabUI.SetActive(true);
         _characterTabUI.SetActive(false);
+        SetButtonColors(_openBooksTabShop, _openCharactersTab);
     }
 
     void OpenCharactersTab()
     {
         _characterTabUI.SetActive(true);
         _booksTabUI.SetActive(false);
+        SetButtonColors(_openCharactersTab, _openBooksTabShop);
     }
 
     void SetButtonColors(Button activeButton, Button inactiveButton)

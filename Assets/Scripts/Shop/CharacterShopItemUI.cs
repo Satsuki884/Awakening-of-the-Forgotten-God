@@ -16,6 +16,7 @@ namespace AFG
 
         [SerializeField] private Image _characterImage = null;
         [SerializeField] private TMP_Text _characterName;
+        [SerializeField] private TMP_Text _characterNameInBuyPanel;
         [SerializeField] private TMP_Text _atk;
         [SerializeField] private TMP_Text _hp;
         [SerializeField] private TMP_Text _def;
@@ -35,7 +36,30 @@ namespace AFG
         [SerializeField] private GameObject _itemSoldOut;
 
 
-        
+        private void Start()
+        {
+            AddShopEvents();
+        }
+
+        void AddShopEvents()
+        {
+            _characterPurchaseButtonInItem.onClick.RemoveAllListeners();
+            _characterPurchaseButtonInItem.onClick.AddListener(OpenBuyPanel);
+
+            _notBuy.onClick.RemoveAllListeners();
+            _notBuy.onClick.AddListener(DBuy);
+        }
+
+        void OpenBuyPanel()
+        {
+            _characterNameInBuyPanel.text = _characterName.text;
+            _itemBuyNow.SetActive(true);
+        }
+
+        public void DBuy()
+        {
+            _itemBuyNow.SetActive(false);
+        }
 
         public void SetItemPosition(Vector2 pos)
         {
@@ -49,6 +73,7 @@ namespace AFG
 
         public void SetCharacterName(string name)
         {
+            _characterName.text = name;
             _characterName.text = name;
         }
 
@@ -83,18 +108,6 @@ namespace AFG
             _characterPurchaseButtonInItem.gameObject.SetActive(false);
         }
 
-        public void DontBuy()
-        {
-            _notBuy.onClick.RemoveAllListeners();
-            _notBuy.onClick.AddListener(DBuy);
-            
-        }
-
-        public void DBuy()
-        {
-            _itemBuyNow.SetActive(false);
-        }
-
         private Color _initialColor;
         private Color _initialColorText;
 
@@ -124,7 +137,7 @@ namespace AFG
 
         /*public void SetCharacterAsPurchased()
         {
-            _characterPurchaseButton.gameObject.SetActive(false);
+            _booksPurchaseButton.gameObject.SetActive(false);
 
             _itemButton.interactable = true;
             _itemImage.color = _itemNotSelectedColor;

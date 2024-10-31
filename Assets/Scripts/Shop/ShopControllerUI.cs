@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -16,7 +17,7 @@ namespace AFG {
     public class ShopControllerUI : MonoBehaviour
     {
         [SerializeField] private float _itemSpacing = .5f;
-        //private float _playersMoney = 10;
+        private float _playersMoney = 150;
 
 
         //[SerializeField] private GameObject _shopPanel;
@@ -24,6 +25,7 @@ namespace AFG {
         [SerializeField] private Transform _shopItemsContainer;
         [SerializeField] private GameObject _itemPrefab;
         private float _itemHeight;
+
 
         [SerializeField] public List<CharacterDataWrapper> Characters { get; set; } = 
             new List<CharacterDataWrapper>();
@@ -80,7 +82,7 @@ namespace AFG {
             for (int i = 0; i < Characters.Count; i++)
             {
                 //_characterStats = Characters[i].CharacterPrefab.GetComponentInChildren<CharacterStats>();
-                Debug.Log(Characters[i].CharacterName);
+                //Debug.Log(Characters[i].CharacterName);
 
                 CharacterShopItemUI itemUI = Instantiate(_itemPrefab, _shopItemsContainer).GetComponent<CharacterShopItemUI>();
 
@@ -95,10 +97,10 @@ namespace AFG {
                 itemUI.SetCharacterPrice(Characters[i].Price);
 
                 //TODO info about user`s money
-                /*if (100 > _playersMoney)
+                if (Characters[i].Price > _playersMoney)
                 {
                     itemUI.SetButtonUnEnable();
-                } */
+                } 
                 
 
                 for (int j = 0; j < PlayerCharacters.Count; j++)
@@ -109,22 +111,10 @@ namespace AFG {
                     }
                 }
 
-                itemUI.OnItemPurchase(itemUI, Characters[i], OnItemPurchased);
+                itemUI.OnItemPurchase(itemUI, Characters[i], OnItemPurchasedConfirmed);
                 _shopItemsContainer.GetComponent<RectTransform>().sizeDelta =
                     Vector3.up * ((_itemHeight + _itemSpacing) * (Characters.Count-1) + _itemSpacing);
             }
-        }
-
-        void OnItemPurchased(CharacterShopItemUI item,
-            CharacterDataWrapper character,
-            GameObject _itemBuyNow, GameObject _itemSoldOut)
-        {
-
-            BuyNow(_itemBuyNow, _itemSoldOut);
-
-            item.ItemPurchaseConfirm(item, character, OnItemPurchasedConfirmed);
-            item.DontBuy();
-
         }
 
         void OnItemPurchasedConfirmed(CharacterShopItemUI item, 
@@ -148,17 +138,6 @@ namespace AFG {
             GenerateShopItemsUI();
         }
 
-        void BuyNow(GameObject _itemBuyNow, GameObject _itemSoldOut)
-        {
-            Debug.Log("sdjkfljsd");
-            _itemBuyNow.SetActive(true);
-        }
-
-        void NotBuy(GameObject _itemBuyNow, GameObject _itemSoldOut)
-        {
-            _itemBuyNow.SetActive(false);
-        }
-
         void AddShopEvents()
         {
             openShop.onClick.RemoveAllListeners();
@@ -167,12 +146,6 @@ namespace AFG {
 
             closeShop.onClick.RemoveAllListeners();
             closeShop.onClick.AddListener(CloseShop);
-
-            /*_youSure.onClick.RemoveAllListeners();
-            _youSure.onClick.AddListener(BuyNow);
-
-            _notBuy.onClick.RemoveAllListeners();
-            _notBuy.onClick.AddListener(NotBuy);*/
         }
 
         void OpenShop()
