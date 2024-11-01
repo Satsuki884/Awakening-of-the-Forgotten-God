@@ -62,9 +62,6 @@ namespace AFG
                 return _playerData;
             }
 
-            set{
-                _playerData = value;
-            }
         }
         
         private string _filePathToAllCharacters;
@@ -87,6 +84,7 @@ namespace AFG
 
             string json = JsonUtility.ToJson(new PlayerDataWrapper
             {
+                PlayerName = playerData.PlayerName,
                 CoinData = playerData.CoinData,
                 BooksData = playerData.BooksData
             }, true);
@@ -99,7 +97,7 @@ namespace AFG
             PlayerDataWrapper dataWrapper = null;
 
             //read file
-            if (File.Exists(_filePathToPlayerData))
+            if (!File.Exists(_filePathToPlayerData))
             {
                 string json = File.ReadAllText(_filePathToPlayerData);
                 dataWrapper = JsonUtility.FromJson<PlayerDataWrapper>(json);
@@ -187,7 +185,7 @@ namespace AFG
             CharactersDataWrapper dataWrapper = null;
 
             //read file
-        if (!File.Exists(path))
+        if (File.Exists(path))
             {
                 string json = File.ReadAllText(path);
                 dataWrapper = JsonUtility.FromJson<CharactersDataWrapper>(json);
@@ -236,7 +234,7 @@ namespace AFG
             SaveCharacters(dataWrapperNew.characterDataWrappers, path);
             
             string jsonNew = JsonUtility.ToJson(dataWrapperNew, true);
-            Debug.Log(jsonNew);
+            //Debug.Log(jsonNew);
             
             return dataWrapperNew.characterDataWrappers;
         }
