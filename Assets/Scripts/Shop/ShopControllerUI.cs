@@ -8,7 +8,7 @@ namespace AFG {
     public class ShopControllerUI : MonoBehaviour
     {
         [SerializeField] private float _itemSpacing = .5f;
-        private float _playersMoney = 150;
+        //private float _playersMoney = 150;
 
 
         //[SerializeField] private GameObject _shopPanel;
@@ -21,6 +21,8 @@ namespace AFG {
             new List<CharacterDataWrapper>();
         private List<CharacterDataWrapper> PlayerCharacters { get; set; } = 
             new List<CharacterDataWrapper>();
+
+        private PlayerDataWrapper PlayerData { get; set; } 
 
         [FormerlySerializedAs("playerCharacterDataWrapperHolder")] [SerializeField] private CharacterDataHolder playerCharacterDataHolder;
 
@@ -41,6 +43,7 @@ namespace AFG {
 
             Characters = GameController.Instance.SaveManager.AllCharacters;
             PlayerCharacters = GameController.Instance.SaveManager.PlayerCharacters;
+            PlayerData = GameController.Instance.SaveManager.PlayerData;
 
             GenerateShopItemsUI();
         }
@@ -73,7 +76,7 @@ namespace AFG {
                 itemUI.SetCharacterPrice(Characters[i].Price);
 
                 //TODO info about user`s money
-                if (Characters[i].Price > _playersMoney)
+                if (Characters[i].Price > PlayerData.CoinData.CoinDataWrapper.CoinCount)
                 {
                     itemUI.SetButtonUnEnable();
                 } 

@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+namespace AFG{
 public class TabsController : MonoBehaviour
 {
 
@@ -52,4 +53,6 @@ public class TabsController : MonoBehaviour
         activeButton.GetComponent<Image>().color = _activeColor;
         inactiveButton.GetComponent<Image>().color = _inactiveColor;
     }
+}
+
 }

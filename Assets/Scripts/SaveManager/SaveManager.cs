@@ -14,6 +14,8 @@ namespace AFG
         [SerializeField] private CharacterDataHolder allCharactersDataHolder;
         [SerializeField] private CharacterDataHolder playerCharactersDataHolder;
 
+        [SerializeField] private PlayererData playerDataDataHolder;
+
         private List<CharacterDataWrapper> _allCharactersDataWrapper;
         public List<CharacterDataWrapper> AllCharacters
         {
@@ -46,16 +48,86 @@ namespace AFG
                 return _playerCharactersDataWrapper;
             }
         }
+
+        private PlayerDataWrapper _playerData;
+        public PlayerDataWrapper PlayerData
+        {
+            get
+            {
+                if(_playerData == null)
+                {
+                    _playerData = LoadPlayerData(playerDataDataHolder);
+                }
+
+                return _playerData;
+            }
+
+            set{
+                _playerData = value;
+            }
+        }
         
         private string _filePathToAllCharacters;
         private string _filePathToPlayerCharacters;
+        private string _filePathToPlayerData;
         
         public void Awake()
         {
             _filePathToAllCharacters = Path.Combine(Application.persistentDataPath, "AllCharacters.json");
-            Debug.Log(_filePathToAllCharacters);
             _filePathToPlayerCharacters = Path.Combine(Application.persistentDataPath, "PlayerCharacters.json");
+            _filePathToPlayerData = Path.Combine(Application.persistentDataPath, "PlayerData.json");
         }
+
+        public void SavePlayerData(PlayerDataWrapper playerData)
+        {
+            if (!File.Exists(_filePathToPlayerData))
+            {
+                File.Create(_filePathToPlayerData).Dispose();
+            }
+
+            string json = JsonUtility.ToJson(new PlayerDataWrapper
+            {
+                CoinData = playerData.CoinData,
+                BooksData = playerData.BooksData
+            }, true);
+
+            File.WriteAllText(_filePathToPlayerData, json);
+        }
+
+        private PlayerDataWrapper LoadPlayerData(PlayererData playerholder)
+        {
+            PlayerDataWrapper dataWrapper = null;
+
+            //read file
+            if (File.Exists(_filePathToPlayerData))
+            {
+                string json = File.ReadAllText(_filePathToPlayerData);
+                dataWrapper = JsonUtility.FromJson<PlayerDataWrapper>(json);
+                return dataWrapper;
+            }
+            else
+            {
+                return LoadDefaultPlayerData(playerholder);
+            }
+        }
+
+        private PlayerDataWrapper LoadDefaultPlayerData(PlayererData player){
+            PlayerDataWrapper dataWrapperNew = new PlayerDataWrapper
+            {
+                PlayerName = player.PlayerDataWrapper.PlayerName,
+                CoinData = player.PlayerDataWrapper.CoinData,
+                BooksData = player.PlayerDataWrapper.BooksData
+            };
+            
+            //safe to file
+            SavePlayerData(dataWrapperNew);
+            
+            string jsonNew = JsonUtility.ToJson(dataWrapperNew, true);
+            Debug.Log(jsonNew);
+            
+            return dataWrapperNew;
+        }
+
 
         //use 2 principles 
         //DRY
@@ -86,12 +158,13 @@ namespace AFG
 
             foreach (var character in playerCharacterWrapersInHolder)
             {
-                Debug.LogError(character.CharacterName);
+                Debug.LogWarning(character.CharacterName);
             }
             
-            if (playerCharacterWrapersInHolder.Count != newPlayerCharacters.Count ||
+            if (playerCharacterWrapersInHolder.Count != newPlayerCharacters.Count &&
                 !playerCharacterWrapersInHolder.SequenceEqual(newPlayerCharacters))
             {
+                playerCharactersDataHolder.CharacterData.Clear();
                 foreach (var characterData in allCharactersDataHolder.CharacterData)
                 {
                     foreach (var newPlayerCharacter in newPlayerCharacters)
@@ -114,7 +187,7 @@ namespace AFG
             CharactersDataWrapper dataWrapper = null;
 
             //read file
-            if (File.Exists(path))
+        if (!File.Exists(path))
             {
                 string json = File.ReadAllText(path);
                 dataWrapper = JsonUtility.FromJson<CharactersDataWrapper>(json);
