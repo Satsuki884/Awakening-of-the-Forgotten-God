@@ -16,7 +16,13 @@ namespace AFG
     public class BooksDataWrapper
     {
         [SerializeField] private int _booksCount;
-        public int BooksCount => _booksCount;
+        public int BooksCount{
+            get => _booksCount;
+            set => _booksCount = value;
+        }
+
+        [SerializeField] private int _booksPrice;
+        public int BooksPrice => _booksPrice;
 
         
 

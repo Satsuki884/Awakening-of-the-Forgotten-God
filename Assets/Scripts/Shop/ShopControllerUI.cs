@@ -106,11 +106,11 @@ namespace AFG
             PlayerData.CoinData.CoinDataWrapper.CoinCount = PlayerData.CoinData.CoinDataWrapper.CoinCount - (int)character.Price;
 
             if(_booksCoinController != null){
-                _booksCoinController.Refresh();
                 GameController.
                 Instance.
                 SaveManager.
                 SavePlayerData(PlayerData);
+                _booksCoinController.Refresh();
             }
                 
 

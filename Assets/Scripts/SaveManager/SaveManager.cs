@@ -97,7 +97,7 @@ namespace AFG
             PlayerDataWrapper dataWrapper = null;
 
             //read file
-            if (!File.Exists(_filePathToPlayerData))
+            if (File.Exists(_filePathToPlayerData))
             {
                 string json = File.ReadAllText(_filePathToPlayerData);
                 dataWrapper = JsonUtility.FromJson<PlayerDataWrapper>(json);

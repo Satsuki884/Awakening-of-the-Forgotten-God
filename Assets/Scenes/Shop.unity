@@ -7343,7 +7343,9 @@ MonoBehaviour:
   _buyNow: {fileID: 828071347043645160}
   _booksPurchaseButton: {fileID: 134132990572597809}
   _purchaseButton: {fileID: 2656513775979356021}
+  _booksPrice: {fileID: 2133805199495355644}
   _notBuy: {fileID: 4186685847443270222}
+  _maxCountToBuy: {fileID: 204295283}
 --- !u!1 &8519110684176328905
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,7 +16,10 @@ namespace AFG
     public class CoinDataWrapper
     {
         [SerializeField] private int _coinCount;
-        public int CoinCount => _coinCount;
+        public int CoinCount {
+            get => _coinCount;
+            set => _coinCount = value;
+        }
 
         
 
