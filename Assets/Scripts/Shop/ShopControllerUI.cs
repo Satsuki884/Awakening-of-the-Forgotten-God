@@ -30,9 +30,8 @@ namespace AFG
 
 
         //[Header("Shop Events")]
-        [SerializeField] GameObject shopUI;
-        [SerializeField] Button openShop;
-        [SerializeField] Button closeShop;
+        [SerializeField] private GameObject shopUI;
+        [SerializeField] private Button closeShop;
         void Start()
         {
             AddShopEvents();
@@ -56,9 +55,6 @@ namespace AFG
 
             for (int i = 0; i < Characters.Count; i++)
             {
-                //_characterStats = Characters[i].CharacterPrefab.GetComponentInChildren<CharacterStats>();
-                //Debug.Log(Characters[i].CharacterName);
-
                 CharacterShopItemUI itemUI = Instantiate(_itemPrefab, _shopItemsContainer).GetComponent<CharacterShopItemUI>();
 
                 itemUI.SetItemPosition(Vector3.down * i * (_itemHeight + _itemSpacing));
@@ -130,17 +126,8 @@ namespace AFG
 
         void AddShopEvents()
         {
-            openShop.onClick.RemoveAllListeners();
-            openShop.onClick.AddListener(OpenShop);
-
-
             closeShop.onClick.RemoveAllListeners();
             closeShop.onClick.AddListener(CloseShop);
-        }
-
-        void OpenShop()
-        {
-            shopUI.SetActive(true);
         }
 
         void CloseShop()

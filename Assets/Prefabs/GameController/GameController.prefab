@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allCharactersDataHolder: {fileID: 11400000, guid: f34c54dc4d061496d8fa98e556520cb0, type: 2}
   playerCharactersDataHolder: {fileID: 11400000, guid: d77260d82a809cc438d58d603835778d, type: 2}
+  playerDataDataHolder: {fileID: 11400000, guid: 6d67d89e32cb2c740b7ae52fcbe35eb2, type: 2}
 --- !u!1 &6189943280151018665
 GameObject:
   m_ObjectHideFlags: 0

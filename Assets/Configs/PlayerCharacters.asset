@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: PlayerCharacters
   m_EditorClassIdentifier: 
   characterData:
-  - {fileID: 11400000, guid: bc38519e63442d34c90a2a7e57355895, type: 2}
   - {fileID: 11400000, guid: b6e8bf760d1a02c4aa0742549782bf96, type: 2}
