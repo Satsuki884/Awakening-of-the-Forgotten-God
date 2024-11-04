@@ -117,7 +117,7 @@ namespace AFG
             SavePlayerData(dataWrapperNew);
             
             string jsonNew = JsonUtility.ToJson(dataWrapperNew, true);
-            Debug.Log(jsonNew);
+            //Debug.Log(jsonNew);
             
             return dataWrapperNew;
         }
@@ -181,7 +181,7 @@ namespace AFG
             CharactersDataWrapper dataWrapper = null;
 
             //read file
-            if (File.Exists(path))
+            if (!File.Exists(path))
             {
                 string json = File.ReadAllText(path);
                 dataWrapper = JsonUtility.FromJson<CharactersDataWrapper>(json);

@@ -24,8 +24,5 @@ namespace AFG
         [SerializeField] private int _booksPrice;
         public int BooksPrice => _booksPrice;
 
-        [SerializeField] private int _booksExp;
-        public int BooksExp => _booksExp;
-
     }
 }

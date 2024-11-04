@@ -32,6 +32,9 @@ namespace AFG
         //[Header("Shop Events")]
         [SerializeField] private GameObject shopUI;
         [SerializeField] private Button closeShop;
+        /*[SerializeField] private GameObject _shopUI;
+        [SerializeField] private Button _closeShop;*/
+        [SerializeField] private Button openShop;
         void Start()
         {
             AddShopEvents();
@@ -101,14 +104,15 @@ namespace AFG
 
             PlayerData.CoinData.CoinDataWrapper.CoinCount = PlayerData.CoinData.CoinDataWrapper.CoinCount - (int)character.Price;
 
-            if(_booksCoinController != null){
+            if (_booksCoinController != null)
+            {
                 GameController.
                 Instance.
                 SaveManager.
                 SavePlayerData(PlayerData);
                 _booksCoinController.Refresh();
             }
-                
+
 
 
             //synchronize player characters holders (SO)
@@ -128,11 +132,21 @@ namespace AFG
         {
             closeShop.onClick.RemoveAllListeners();
             closeShop.onClick.AddListener(CloseShop);
+
+            openShop.onClick.RemoveAllListeners();
+            openShop.onClick.AddListener(OpenShop);
         }
 
         void CloseShop()
         {
             shopUI.SetActive(false);
+        }
+
+        void OpenShop()
+        {
+
+            Debug.Log("Open Shop");
+            shopUI.SetActive(true);
         }
     }
 }

@@ -1077,8 +1077,9 @@ MonoBehaviour:
   _shopItemsContainer: {fileID: 4414189749963528037}
   _itemPrefab: {fileID: 8437011869845254526, guid: a68240b3b3a13d54db2ccbdf28e61018, type: 3}
   playerCharacterDataHolder: {fileID: 11400000, guid: f34c54dc4d061496d8fa98e556520cb0, type: 2}
-  shopUI: {fileID: 219590555240704048}
-  closeShop: {fileID: 355771262519643751}
+  _shopUI: {fileID: 1452507124588369520}
+  _closeShop: {fileID: 355771262519643751}
+  _openShop: {fileID: 0}
 --- !u!1 &1535030942035147448
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,7 +23,10 @@ namespace AFG
         public Sprite Icon => _icon;
 
         [SerializeField] private int _level;
-        public int Level => _level;
+        public int Level{
+            get => _level;
+            set => _level = value;
+        }
         
         [SerializeField] private CharacterStatsData[] _characterStatsData;
         public CharacterStatsData[] CharacterStatsData => _characterStatsData;
