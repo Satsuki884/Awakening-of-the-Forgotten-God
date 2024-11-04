@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 using CharacterController = AFG.Character.CharacterController;
 
 namespace AFG
@@ -10,6 +11,8 @@ namespace AFG
     {
         [SerializeField] private PlayerDataWrapper _playerDataWrapper;
         public PlayerDataWrapper PlayerDataWrapper => _playerDataWrapper;
+
+        
     }
     
 
@@ -36,7 +39,28 @@ namespace AFG
             set => _playerName = value;
         }
 
-        
+        /*[Button("SynchronizeFilePlayerData")]
+        public void SynchronizeFilePlayerData()
+        {
+            var path = SaveManager.FilePathToPlayerData;
+            
+           if (!File.Exists(path))
+            {
+                File.Create(path).Dispose();
+            }
 
+            string json = JsonUtility.ToJson(new PlayerDataWrapper
+            {
+                PlayerName = PlayerName,
+                CoinData = CoinData,
+                BooksData = BooksData
+            }, true);
+
+            File.WriteAllText(path, json);
+            
+            Debug.Log("Synchronize File Data " + path);
+        }*/
     }
+
+    
 }

@@ -65,7 +65,7 @@ namespace AFG
 
         public static string FilePathToPlayerCharacters =>
             Path.Combine(Application.persistentDataPath, "PlayerCharacters.json");
-        private static string FilePathToPlayerData =>
+        public static string FilePathToPlayerData =>
             Path.Combine(Application.persistentDataPath, "PlayerData.json");
         public static string FilePathToAllCharacters =>
             Path.Combine(Application.persistentDataPath, "AllCharacters.json");
