@@ -11,7 +11,8 @@ namespace AFG
         [SerializeField] private float _itemSpacing = .5f;
         //private float _playersMoney = 150;
 
-        private BooksCoinController _booksCoinController;
+        [SerializeField]  private BooksCoinController _booksCoinController;
+        [SerializeField]  private BooksCoinController _booksCoinControllerInShop;
         //[SerializeField] private GameObject _shopPanel;
         [SerializeField] private Transform _shopMenu;
         [SerializeField] private Transform _shopItemsContainer;
@@ -32,13 +33,11 @@ namespace AFG
         //[Header("Shop Events")]
         [SerializeField] private GameObject shopUI;
         [SerializeField] private Button closeShop;
-        /*[SerializeField] private GameObject _shopUI;
-        [SerializeField] private Button _closeShop;*/
         [SerializeField] private Button openShop;
         void Start()
         {
             AddShopEvents();
-            _booksCoinController = FindObjectOfType<BooksCoinController>();
+            //_booksCoinController = FindObjectOfType<BooksCoinController>();
             Characters = GameController.Instance.SaveManager.AllCharacters;
             PlayerCharacters = GameController.Instance.SaveManager.PlayerCharacters;
             PlayerData = GameController.Instance.SaveManager.PlayerData;
@@ -111,6 +110,7 @@ namespace AFG
                 SaveManager.
                 SavePlayerData(PlayerData);
                 _booksCoinController.Refresh();
+                _booksCoinControllerInShop.Refresh();
             }
 
 

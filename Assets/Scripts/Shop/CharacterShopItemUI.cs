@@ -135,15 +135,6 @@ namespace AFG
         }
 
 
-        /*public void SetCharacterAsPurchased()
-        {
-            _booksPurchaseButton.gameObject.SetActive(false);
-
-            _itemButton.interactable = true;
-            _itemImage.color = _itemNotSelectedColor;
-
-        }*/
-
         public void OnItemPurchase(CharacterShopItemUI item, CharacterDataWrapper character, UnityAction<CharacterShopItemUI, CharacterDataWrapper, GameObject, GameObject> action)
         {
             _characterPurchaseButton.onClick.RemoveAllListeners();
@@ -156,27 +147,6 @@ namespace AFG
             _characterPurchaseButton.onClick.AddListener(() => action.Invoke(item, character, _itemBuyNow, _itemSoldOut));
         }
 
-        /*public void OnItemSelect(int itemIndex, UnityAction<int> action)
-        {
-
-            _itemButton.interactable = true;
-            _itemButton.onClick.RemoveAllListeners();
-            _itemButton .onClick.AddListener(() => action.Invoke(itemIndex));
-        }
-
-        public void SelectItem()
-        {
-            _itemOutline.enabled = true;
-            _itemImage.color = _itemSelectedColor;
-            _itemButton.interactable = false;
-        }
-
-        public void deselectItem()
-        {
-            _itemOutline.enabled = false;
-            _itemImage.color = _itemNotSelectedColor;
-            _itemButton.interactable = true;
-        }*/
     }
 }
 
