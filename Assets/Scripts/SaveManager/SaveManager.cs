@@ -25,7 +25,7 @@ namespace AFG
                    _allCharactersDataWrapper.Count == 0)
                 {
                     _allCharactersDataWrapper = 
-                        LoadCharacterNames(allCharactersDataHolder, _filePathToAllCharacters);
+                        LoadCharacter(allCharactersDataHolder, FilePathToAllCharacters);
                 }
 
                 return _allCharactersDataWrapper;
@@ -42,7 +42,7 @@ namespace AFG
                    _playerCharactersDataWrapper.Count == 0)
                 {
                     _playerCharactersDataWrapper = 
-                        LoadCharacterNames(playerCharactersDataHolder, _filePathToPlayerCharacters);
+                        LoadCharacter(playerCharactersDataHolder, FilePathToPlayerCharacters);
                 }
 
                 return _playerCharactersDataWrapper;
@@ -64,22 +64,18 @@ namespace AFG
 
         }
         
-        private string _filePathToAllCharacters;
-        private string _filePathToPlayerCharacters;
-        private string _filePathToPlayerData;
-        
-        public void Awake()
-        {
-            _filePathToAllCharacters = Path.Combine(Application.persistentDataPath, "AllCharacters.json");
-            _filePathToPlayerCharacters = Path.Combine(Application.persistentDataPath, "PlayerCharacters.json");
-            _filePathToPlayerData = Path.Combine(Application.persistentDataPath, "PlayerData.json");
-        }
+        public static string FilePathToPlayerCharacters => 
+            Path.Combine(Application.persistentDataPath, "PlayerCharacters.json");
+        private static string FilePathToPlayerData => 
+            Path.Combine(Application.persistentDataPath, "PlayerData.json");
+        public static string FilePathToAllCharacters => 
+            Path.Combine(Application.persistentDataPath, "AllCharacters.json");
 
         public void SavePlayerData(PlayerDataWrapper playerData)
         {
-            if (!File.Exists(_filePathToPlayerData))
+            if (!File.Exists(FilePathToPlayerData))
             {
-                File.Create(_filePathToPlayerData).Dispose();
+                File.Create(FilePathToPlayerData).Dispose();
             }
 
             string json = JsonUtility.ToJson(new PlayerDataWrapper
@@ -89,7 +85,7 @@ namespace AFG
                 BooksData = playerData.BooksData
             }, true);
 
-            File.WriteAllText(_filePathToPlayerData, json);
+            File.WriteAllText(FilePathToPlayerData, json);
         }
 
         private PlayerDataWrapper LoadPlayerData(PlayererData playerholder)
@@ -97,9 +93,9 @@ namespace AFG
             PlayerDataWrapper dataWrapper = null;
 
             //read file
-            if (File.Exists(_filePathToPlayerData))
+            if (File.Exists(FilePathToPlayerData))
             {
-                string json = File.ReadAllText(_filePathToPlayerData);
+                string json = File.ReadAllText(FilePathToPlayerData);
                 dataWrapper = JsonUtility.FromJson<PlayerDataWrapper>(json);
                 return dataWrapper;
             }
@@ -131,7 +127,7 @@ namespace AFG
         //DRY
         public void SavePurchaseCharacters(List<CharacterDataWrapper> characters)
         {
-            SaveCharacters(characters, _filePathToPlayerCharacters);
+            SaveCharacters(characters, FilePathToPlayerCharacters);
         }
         public void SaveCharacters(List<CharacterDataWrapper> characters, string path)
         {
@@ -178,14 +174,14 @@ namespace AFG
         }
         
         //TODO refactoring
-        private List<CharacterDataWrapper> LoadCharacterNames(
+        private List<CharacterDataWrapper> LoadCharacter(
             CharacterDataHolder dataHolder, 
             string path)
         {
             CharactersDataWrapper dataWrapper = null;
 
             //read file
-        if (File.Exists(path))
+            if (File.Exists(path))
             {
                 string json = File.ReadAllText(path);
                 dataWrapper = JsonUtility.FromJson<CharactersDataWrapper>(json);

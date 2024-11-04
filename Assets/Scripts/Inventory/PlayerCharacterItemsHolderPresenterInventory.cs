@@ -24,9 +24,10 @@ namespace AFG
 
         private void ShowAllPlayersCharacter()
         {
-            var characterItem = Instantiate(_characterItem, _holder.transform);
+            
             foreach (var character in PlayerCharacters)
             {
+                var characterItem = Instantiate(_characterItem, _holder.transform);
                 characterItem.Initialize(character, (characterName) =>
                 {
                     SelectCharacter(character);
