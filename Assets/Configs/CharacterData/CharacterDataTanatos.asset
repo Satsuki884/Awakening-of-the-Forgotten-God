@@ -15,9 +15,27 @@ MonoBehaviour:
   _characterDataWrapper:
     _characterName: Tanatos
     _icon: {fileID: 21300000, guid: 99d220901e31024459951c144e991070, type: 3}
-    _health: 105
-    _def: 15
-    _speed: 1
-    _atk: 15
+    _level: 0
+    _characterStatsData:
+    - _health: 0
+      _def: 0
+      _speed: 0
+      _atk: 0
+    - _health: 0
+      _def: 0
+      _speed: 0
+      _atk: 0
+    - _health: 0
+      _def: 0
+      _speed: 0
+      _atk: 0
+    - _health: 0
+      _def: 0
+      _speed: 0
+      _atk: 0
+    - _health: 0
+      _def: 0
+      _speed: 0
+      _atk: 0
     _price: 200
     _characterPrefab: {fileID: 6594763403774803771, guid: 39694e16707c5c14b8c042638f736fdc, type: 3}

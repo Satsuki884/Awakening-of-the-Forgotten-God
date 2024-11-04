@@ -15,9 +15,27 @@ MonoBehaviour:
   _characterDataWrapper:
     _characterName: Teskatlipoka
     _icon: {fileID: 21300000, guid: dbd171d1409a2be4f955fb0bca83be16, type: 3}
-    _health: 85
-    _def: 40
-    _speed: 1
-    _atk: 15
+    _level: 0
+    _characterStatsData:
+    - _health: 0
+      _def: 0
+      _speed: 0
+      _atk: 0
+    - _health: 0
+      _def: 0
+      _speed: 0
+      _atk: 0
+    - _health: 0
+      _def: 0
+      _speed: 0
+      _atk: 0
+    - _health: 0
+      _def: 0
+      _speed: 0
+      _atk: 0
+    - _health: 0
+      _def: 0
+      _speed: 0
+      _atk: 0
     _price: 100
     _characterPrefab: {fileID: 7536712614303847639, guid: 24c4affcce67d594cbcc7289c3dd0038, type: 3}

@@ -22,6 +22,33 @@ namespace AFG
         [SerializeField] private Sprite _icon;
         public Sprite Icon => _icon;
 
+        [SerializeField] private int _level;
+        public int Level => _level;
+        
+        [SerializeField] private CharacterStatsData[] _characterStatsData;
+        public CharacterStatsData[] CharacterStatsData => _characterStatsData;
+        
+        //TODO add validation for level
+        public float Health => CharacterStatsData[Level].Health;
+        public float Def => CharacterStatsData[Level].Def;
+        public float Speed => CharacterStatsData[Level].Speed;
+        public float Atk => CharacterStatsData[Level].Atk;
+        
+        [SerializeField] private float _price;
+        public float Price => _price;
+
+        [SerializeField] private CharacterController _characterPrefab;
+        public CharacterController CharacterPrefab=> _characterPrefab;
+        
+        public void SetCharacterPrefab(CharacterController characterPrefab)
+        {
+            _characterPrefab = characterPrefab;
+        }
+    }
+
+    [System.Serializable]
+    public class CharacterStatsData
+    {
         [SerializeField] private float _health;
         public float Health => _health;
 
@@ -33,17 +60,6 @@ namespace AFG
 
         [SerializeField] private float _atk;
         public float Atk => _atk;
-
-        [SerializeField] private float _price;
-        public float Price => _price;
-
-        [SerializeField] private CharacterController _characterPrefab;
-        public CharacterController CharacterPrefab=> _characterPrefab;
-        
-        public void SetCharacterPrefab(CharacterController characterPrefab)
-        {
-            _characterPrefab = characterPrefab;
-        }
     }
 }
 

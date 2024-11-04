@@ -15,9 +15,27 @@ MonoBehaviour:
   _characterDataWrapper:
     _characterName: Tayi
     _icon: {fileID: 0}
-    _health: 110
-    _def: 5
-    _speed: 2
-    _atk: 12
+    _level: 0
+    _characterStatsData:
+    - _health: 0
+      _def: 0
+      _speed: 0
+      _atk: 0
+    - _health: 0
+      _def: 0
+      _speed: 0
+      _atk: 0
+    - _health: 0
+      _def: 0
+      _speed: 0
+      _atk: 0
+    - _health: 0
+      _def: 0
+      _speed: 0
+      _atk: 0
+    - _health: 0
+      _def: 0
+      _speed: 0
+      _atk: 0
     _price: 250
     _characterPrefab: {fileID: 3809953032855103970, guid: a0713a34b6799a5458bf913da3d5163c, type: 3}
