@@ -10,8 +10,8 @@ namespace AFG
     {
         [SerializeField] private GameObject shopUI;
         [SerializeField] private Button _openShop;
-        [SerializeField] private Button _openInventory;
-        [SerializeField] private Button _openButtleMap;
+        //[SerializeField] private Button _openInventory;
+        // [SerializeField] private Button _openButtleMap;
         void Start()
         {
             AddShopEvents();
@@ -22,11 +22,11 @@ namespace AFG
             _openShop.onClick.RemoveAllListeners();
             _openShop.onClick.AddListener(OpenShop);
 
-            _openInventory.onClick.RemoveAllListeners();
-            _openInventory.onClick.AddListener(OpenInventory);
+            // _openInventory.onClick.RemoveAllListeners();
+            // _openInventory.onClick.AddListener(OpenInventory);
 
-            _openButtleMap.onClick.RemoveAllListeners();
-            _openButtleMap.onClick.AddListener(OpenButtleMap);
+            // _openButtleMap.onClick.RemoveAllListeners();
+            // _openButtleMap.onClick.AddListener(OpenButtleMap);
         }
 
         private void OpenShop()
@@ -34,14 +34,14 @@ namespace AFG
             shopUI.SetActive(true);
         }
 
-        private void OpenInventory()
-        {
-            SceneManager.LoadScene("Inventory");
-        }
+        // private void OpenInventory()
+        // {
+        //     SceneManager.LoadScene("Inventory");
+        // }
 
-        private void OpenButtleMap()
-        {
-            SceneManager.LoadScene("MenuSquad");
-        }
+        // private void OpenButtleMap()
+        // {
+        //     SceneManager.LoadScene("MenuSquad");
+        // }
     }
 }

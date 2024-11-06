@@ -24,7 +24,7 @@ namespace AFG.MVP
                 {
                     
                     _selectedCharacter = value;
-                    Debug.LogError(_selectedCharacter.name + "\tя хожу");
+                    //Debug.LogError(_selectedCharacter.name + "\tпїЅ пїЅпїЅпїЅпїЅ");
                     OnCharacterSelected?.Invoke(_selectedCharacter);
                 }
             }
