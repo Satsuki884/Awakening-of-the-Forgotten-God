@@ -1043,10 +1043,10 @@ RectTransform:
   - {fileID: 1209625209}
   m_Father: {fileID: 750888592}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: 200, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!1 &480154616
 GameObject:
@@ -1272,10 +1272,10 @@ RectTransform:
   - {fileID: 871333393}
   m_Father: {fileID: 750888592}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400, y: -50}
-  m_SizeDelta: {x: 200, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!1 &742996534
 GameObject:
@@ -2423,7 +2423,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1210885799
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2500,7 +2500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _endGamePopUp: {fileID: 1210885798}
-  _winColor: {r: 0.5411765, g: 0.31764707, b: 0.7960785, a: 0}
+  _winColor: {r: 0.5411765, g: 0.31764707, b: 0.7960785, a: 1}
   _loseColor: {r: 0.8113208, g: 0.2250267, b: 0.2250267, a: 1}
   _level: {fileID: 1152803850}
   _resultCoin: {fileID: 13533847}
@@ -2760,7 +2760,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 66.65
+  m_fontSize: 59.75
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3382,7 +3382,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.056165066, y: 0.8293206}
   m_AnchorMax: {x: 0.135, y: 0.9767736}
-  m_AnchoredPosition: {x: -1.999939, y: 0.50897217}
+  m_AnchoredPosition: {x: -1.9998779, y: 0.50897217}
   m_SizeDelta: {x: 1, y: -2.1097107}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &2117239957

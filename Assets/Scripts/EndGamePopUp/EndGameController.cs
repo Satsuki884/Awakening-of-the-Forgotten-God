@@ -12,6 +12,7 @@ namespace AFG
     public class EndGameController : MonoBehaviour
     {
         [SerializeField] private GameObject _endGamePopUp;
+        private Image _endGamePopUpImage;
         [SerializeField] private Color _winColor;
         [SerializeField] private Color _loseColor;
         [SerializeField] private TMP_Text _level;
@@ -29,6 +30,7 @@ namespace AFG
         void Start()
         {
             PlayerData = GameController.Instance.SaveManager.PlayerData;
+            _endGamePopUpImage = _endGamePopUp.GetComponent<Image>();
             SetResult();
             AddEventListeners();
         }
@@ -37,7 +39,7 @@ namespace AFG
         {
             if (_win)
             {
-                //_endGamePopUp.GetComponent<Image>().color = _winColor;
+                _endGamePopUpImage.color = _winColor;
                 _nextLevelButton.gameObject.SetActive(true);
                 _level.text = "Level 1";
                 _resultCoin.text = Random.Range(20, 41).ToString();
@@ -55,7 +57,7 @@ namespace AFG
             else
             {
                 _rewards.SetActive(false);
-                //_endGamePopUp.GetComponent<Image>().color = _loseColor;
+                _endGamePopUpImage.color = _loseColor;
                 _nextLevelButton.gameObject.SetActive(false);
             }
 
