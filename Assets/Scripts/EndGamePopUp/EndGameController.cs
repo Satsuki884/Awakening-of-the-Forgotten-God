@@ -41,7 +41,7 @@ namespace AFG
             {
                 _endGamePopUpImage.color = _winColor;
                 _nextLevelButton.gameObject.SetActive(true);
-                _level.text = "Level 1";
+                _level.text = "Level 1" + " - " + "Victory";
                 _resultCoin.text = Random.Range(20, 41).ToString();
                 var books = Random.Range(0, 51);
                 if (books != 0)
@@ -57,6 +57,7 @@ namespace AFG
             else
             {
                 _rewards.SetActive(false);
+                _level.text = "Level 1" + " - " + "Defeat";
                 _endGamePopUpImage.color = _loseColor;
                 _nextLevelButton.gameObject.SetActive(false);
             }

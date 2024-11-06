@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BooksData
   m_EditorClassIdentifier: 
   _booskDataWrapper:
-    _booksCount: 3
-    _booksPrice: 200
+    _booksCount: 0
+    _booksPrice: 250
