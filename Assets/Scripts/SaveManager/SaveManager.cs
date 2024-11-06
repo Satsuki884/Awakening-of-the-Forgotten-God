@@ -13,7 +13,7 @@ namespace AFG
     {
         [SerializeField] private CharacterDataHolder allCharactersDataHolder;
         [SerializeField] private CharacterDataHolder playerCharactersDataHolder;
-        [SerializeField] private PlayererData playerDataDataHolder;
+        [SerializeField] private PlayerData playerDataDataHolder;
 
         private List<CharacterDataWrapper> _allCharactersDataWrapper;
         public List<CharacterDataWrapper> AllCharacters
@@ -87,7 +87,7 @@ namespace AFG
             File.WriteAllText(FilePathToPlayerData, json);
         }
 
-        private PlayerDataWrapper LoadPlayerData(PlayererData playerholder)
+        private PlayerDataWrapper LoadPlayerData(PlayerData playerholder)
         {
             PlayerDataWrapper dataWrapper = null;
 
@@ -104,7 +104,7 @@ namespace AFG
             }
         }
 
-        private PlayerDataWrapper LoadDefaultPlayerData(PlayererData player)
+        private PlayerDataWrapper LoadDefaultPlayerData(PlayerData player)
         {
             PlayerDataWrapper dataWrapperNew = new PlayerDataWrapper
             {
