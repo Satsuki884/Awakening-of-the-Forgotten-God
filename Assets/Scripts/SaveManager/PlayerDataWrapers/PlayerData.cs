@@ -7,12 +7,32 @@ using CharacterController = AFG.Character.CharacterController;
 namespace AFG
 {
     [CreateAssetMenu(fileName = "PlayerData", menuName = "Configs/new PlayerData")]
-    public class PlayererData : ScriptableObject
+    public class PlayerData : ScriptableObject
     {
         [SerializeField] private PlayerDataWrapper _playerDataWrapper;
         public PlayerDataWrapper PlayerDataWrapper => _playerDataWrapper;
 
-        
+        [Button("SynchronizeFilePlayerData")]
+        public void SynchronizeFilePlayerData()
+        {
+            var path = SaveManager.FilePathToPlayerData;
+            
+            if (!File.Exists(path))
+            {
+                File.Create(path).Dispose();
+            }
+
+            string json = JsonUtility.ToJson(new PlayerDataWrapper
+            {
+                PlayerName = _playerDataWrapper.PlayerName,
+                CoinData = _playerDataWrapper.CoinData,
+                BooksData = _playerDataWrapper.BooksData
+            }, true);
+
+            File.WriteAllText(path, json);
+            
+            Debug.Log("Synchronize File Data " + path);
+        }
     }
     
 
@@ -38,28 +58,6 @@ namespace AFG
             get=> _playerName;
             set => _playerName = value;
         }
-
-        /*[Button("SynchronizeFilePlayerData")]
-        public void SynchronizeFilePlayerData()
-        {
-            var path = SaveManager.FilePathToPlayerData;
-            
-           if (!File.Exists(path))
-            {
-                File.Create(path).Dispose();
-            }
-
-            string json = JsonUtility.ToJson(new PlayerDataWrapper
-            {
-                PlayerName = PlayerName,
-                CoinData = CoinData,
-                BooksData = BooksData
-            }, true);
-
-            File.WriteAllText(path, json);
-            
-            Debug.Log("Synchronize File Data " + path);
-        }*/
     }
 
     
