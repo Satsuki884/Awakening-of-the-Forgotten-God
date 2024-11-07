@@ -10,6 +10,7 @@ namespace AFG
     public class InventoryController : MonoBehaviour
     {
         [SerializeField] private Button _closeInventory;
+        [SerializeField] private bool _isInventory;
         void Start()
         {
             AddInventoryEvents();
@@ -24,8 +25,14 @@ namespace AFG
 
         private void CloseInventory()
         {
-            GameController.Instance.LevelModel.LoadNewScene("MainMenu");
-            //SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
+            if(_isInventory)
+            {
+                GameController.Instance.LevelModel.UnLoadPrevScene(_isInventory);
+            }
+            else
+            {
+                GameController.Instance.LevelModel.UnLoadPrevScene(_isInventory);
+            }
         }
     }
 }

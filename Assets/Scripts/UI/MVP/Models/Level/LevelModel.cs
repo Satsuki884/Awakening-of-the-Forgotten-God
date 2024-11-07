@@ -13,18 +13,20 @@ public class LevelModel : MonoBehaviour
 
     [SerializeField] private Button _openInventory;
     [SerializeField] private Button _openButtleMap;
-    // [SerializeField] private Button _closeInventory;
+    [SerializeField] private SceneAsset _mainMenuScene;
+    [SerializeField] private SceneAsset _inventoryScene;
+    [SerializeField] private SceneAsset _menuSquadScene;
     void Start()
     {
         LoadBackgroundScene();
 
         //ToDo: refactor
-        if(SceneManager.GetActiveScene().name == "MainMenu"){
-            LoadNewScene("MainMenu");
-        } else if(SceneManager.GetActiveScene().name == "Inventory"){
-            LoadNewScene("Inventory");
-        } else if(SceneManager.GetActiveScene().name == "MenuSquad"){
-            LoadNewScene("MenuSquad");
+        if(SceneManager.GetActiveScene().name == _mainMenuScene.name){
+            LoadNewScene(_mainMenuScene.name);
+        } else if(SceneManager.GetActiveScene().name == _inventoryScene.name){
+            OpenInventory();
+        } else if(SceneManager.GetActiveScene().name == _menuSquadScene.name){
+            OpenButtleMap();
         }
         AddShopEvents();
     }
@@ -45,53 +47,32 @@ public class LevelModel : MonoBehaviour
         _openButtleMap.onClick.RemoveAllListeners();
         _openButtleMap.onClick.AddListener(OpenButtleMap);
     }
-
-    private string _lastLoadedScene;
-
     public void LoadNewScene(string sceneName)
     {
-        Debug.Log("LoadNewScene: " + sceneName);
-        Debug.Log("LastLoadedScene: " + _lastLoadedScene);
-        // if (!string.IsNullOrEmpty(_lastLoadedScene))
-        // {
-        //     SceneManager.UnloadSceneAsync(_lastLoadedScene);
-        // }
-        // SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
-        // _lastLoadedScene = sceneName;
-        // Debug.Log("LastLoadedScene = sceneName: " + _lastLoadedScene);
-        if (!string.IsNullOrEmpty(_lastLoadedScene))
-        {
-            SceneManager.sceneUnloaded += OnSceneUnloaded;
-            SceneManager.UnloadSceneAsync(_lastLoadedScene);
-        }
-        else
-        {
-            SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
-            _lastLoadedScene = sceneName;
-            Debug.Log("LastLoadedScene = sceneName: " + _lastLoadedScene);
-        }
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+        Debug.Log("LoadNewScene: " + SceneManager.GetActiveScene().name);
     }
 
-    private void OnSceneUnloaded(Scene scene)
+    public void UnLoadMainMenuScene(bool typeScene)
     {
-        SceneManager.sceneUnloaded -= OnSceneUnloaded;
-        SceneManager.LoadScene(_lastLoadedScene, LoadSceneMode.Additive);
-        _lastLoadedScene = scene.name;
-        Debug.Log("LastLoadedScene = sceneName: " + _lastLoadedScene);
+        SceneManager.UnloadSceneAsync(_mainMenuScene.name);
+        LoadNewScene(typeScene ? _inventoryScene.name : _menuSquadScene.name);
+    }
+
+    public void UnLoadPrevScene(bool menu)
+    {
+        SceneManager.UnloadSceneAsync(menu ? _inventoryScene.name : _menuSquadScene.name);
+        LoadNewScene(_mainMenuScene.name);
     }
 
     private void OpenInventory()
     {
-        LoadNewScene("Inventory");
-        // SceneManager.LoadScene("Inventory", LoadSceneMode.Additive);
-        // LoadBackgroundScene();
+        UnLoadMainMenuScene(true);
     }
 
     private void OpenButtleMap()
     {
-        LoadNewScene("MenuSquad");
-        // SceneManager.LoadScene("MenuSquad", LoadSceneMode.Additive);
-        // LoadBackgroundScene();
+        UnLoadMainMenuScene(false);
     }
 
     [SerializeField] private SceneAsset _backgroundScene;

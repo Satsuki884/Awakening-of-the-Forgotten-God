@@ -1376,7 +1376,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 200
+  far clip plane: 300
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -2382,6 +2382,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1007492722001565026, guid: 61ef72f673a324105bfec4abf80eb31e, type: 3}
+      propertyPath: _mainMenuScene
+      value: 
+      objectReference: {fileID: 102900000, guid: 27f6a4bebb3843547b9bd451286a87d1, type: 3}
+    - target: {fileID: 1007492722001565026, guid: 61ef72f673a324105bfec4abf80eb31e, type: 3}
       propertyPath: _openButtleMap
       value: 
       objectReference: {fileID: 1905949870}
@@ -2389,6 +2393,14 @@ PrefabInstance:
       propertyPath: _openInventory
       value: 
       objectReference: {fileID: 974762019}
+    - target: {fileID: 1007492722001565026, guid: 61ef72f673a324105bfec4abf80eb31e, type: 3}
+      propertyPath: _inventoryScene
+      value: 
+      objectReference: {fileID: 102900000, guid: ccabe4f7df12123409d93f3728b7fa89, type: 3}
+    - target: {fileID: 1007492722001565026, guid: 61ef72f673a324105bfec4abf80eb31e, type: 3}
+      propertyPath: _menuSquadScene
+      value: 
+      objectReference: {fileID: 102900000, guid: 92eedb5a0e390468caf6dd1a87baebd5, type: 3}
     - target: {fileID: 1440858989652659628, guid: 61ef72f673a324105bfec4abf80eb31e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.0071462393
