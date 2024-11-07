@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -16,6 +17,8 @@ public class TabsController : MonoBehaviour
     [SerializeField] private Color _activeColor;// = new Color(32, 0, 40, 255);
     [SerializeField] private Color _inactiveColor;// = new Color(77, 0, 96, 255);
 
+    [SerializeField] private Button _toUp;
+
 
     void Start()
     {
@@ -32,17 +35,27 @@ public class TabsController : MonoBehaviour
 
         _openBooksTabShop.onClick.RemoveAllListeners();
         _openBooksTabShop.onClick.AddListener(OpenBooksTab);
+
+        _toUp.onClick.RemoveAllListeners(); 
+        _toUp.onClick.AddListener(ToUp);
     }
 
-    void OpenBooksTab()
+        private void ToUp()
+        {
+            _characterTabUI.GetComponent<ScrollRect>().verticalNormalizedPosition = 1;
+        }
+
+        public void OpenBooksTab()
     {
+        _toUp.gameObject.SetActive(false);
         _booksTabUI.SetActive(true);
         _characterTabUI.SetActive(false);
         SetButtonColors(_openBooksTabShop, _openCharactersTab);
     }
 
-    void OpenCharactersTab()
+    public void OpenCharactersTab()
     {
+        _toUp.gameObject.SetActive(true);
         _characterTabUI.SetActive(true);
         _booksTabUI.SetActive(false);
         SetButtonColors(_openCharactersTab, _openBooksTabShop);

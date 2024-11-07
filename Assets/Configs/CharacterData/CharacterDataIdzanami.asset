@@ -17,25 +17,25 @@ MonoBehaviour:
     _icon: {fileID: 21300000, guid: a7811c10b791daa4385b51cecffee2bc, type: 3}
     _level: 0
     _characterStatsData:
-    - _health: 0
-      _def: 0
-      _speed: 0
-      _atk: 0
-    - _health: 0
-      _def: 0
-      _speed: 0
-      _atk: 0
-    - _health: 0
-      _def: 0
-      _speed: 0
-      _atk: 0
-    - _health: 0
-      _def: 0
-      _speed: 0
-      _atk: 0
-    - _health: 0
-      _def: 0
-      _speed: 0
-      _atk: 0
+    - _health: 90
+      _def: 10
+      _speed: 5
+      _atk: 5
+    - _health: 100
+      _def: 15
+      _speed: 5
+      _atk: 8
+    - _health: 115
+      _def: 20
+      _speed: 5
+      _atk: 12
+    - _health: 135
+      _def: 25
+      _speed: 5
+      _atk: 17
+    - _health: 160
+      _def: 30
+      _speed: 5
+      _atk: 23
     _price: 120
     _characterPrefab: {fileID: 1733676684280189680, guid: 97f152cc23a0b4e449ae1cf255f19837, type: 3}

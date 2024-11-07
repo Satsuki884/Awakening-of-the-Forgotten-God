@@ -11,7 +11,8 @@ namespace AFG
         [SerializeField] private float _itemSpacing = .5f;
         //private float _playersMoney = 150;
 
-        private BooksCoinController _booksCoinController;
+        [SerializeField]  private BooksCoinController _booksCoinController;
+        [SerializeField]  private BooksCoinController _booksCoinControllerInShop;
         //[SerializeField] private GameObject _shopPanel;
         [SerializeField] private Transform _shopMenu;
         [SerializeField] private Transform _shopItemsContainer;
@@ -32,10 +33,11 @@ namespace AFG
         //[Header("Shop Events")]
         [SerializeField] private GameObject shopUI;
         [SerializeField] private Button closeShop;
+        [SerializeField] private Button openShop;
         void Start()
         {
             AddShopEvents();
-            _booksCoinController = FindObjectOfType<BooksCoinController>();
+            //_booksCoinController = FindObjectOfType<BooksCoinController>();
             Characters = GameController.Instance.SaveManager.AllCharacters;
             PlayerCharacters = GameController.Instance.SaveManager.PlayerCharacters;
             PlayerData = GameController.Instance.SaveManager.PlayerData;
@@ -101,14 +103,16 @@ namespace AFG
 
             PlayerData.CoinData.CoinDataWrapper.CoinCount = PlayerData.CoinData.CoinDataWrapper.CoinCount - (int)character.Price;
 
-            if(_booksCoinController != null){
+            if (_booksCoinController != null)
+            {
                 GameController.
                 Instance.
                 SaveManager.
                 SavePlayerData(PlayerData);
                 _booksCoinController.Refresh();
+                _booksCoinControllerInShop.Refresh();
             }
-                
+
 
 
             //synchronize player characters holders (SO)
@@ -128,11 +132,21 @@ namespace AFG
         {
             closeShop.onClick.RemoveAllListeners();
             closeShop.onClick.AddListener(CloseShop);
+
+            openShop.onClick.RemoveAllListeners();
+            openShop.onClick.AddListener(OpenShop);
         }
 
         void CloseShop()
         {
             shopUI.SetActive(false);
+        }
+
+        void OpenShop()
+        {
+
+            Debug.Log("Open Shop");
+            shopUI.SetActive(true);
         }
     }
 }

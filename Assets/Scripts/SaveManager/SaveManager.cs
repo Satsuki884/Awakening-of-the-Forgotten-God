@@ -13,35 +13,34 @@ namespace AFG
     {
         [SerializeField] private CharacterDataHolder allCharactersDataHolder;
         [SerializeField] private CharacterDataHolder playerCharactersDataHolder;
-
-        [SerializeField] private PlayererData playerDataDataHolder;
+        [SerializeField] private PlayerData playerDataDataHolder;
 
         private List<CharacterDataWrapper> _allCharactersDataWrapper;
         public List<CharacterDataWrapper> AllCharacters
         {
             get
             {
-                if(_allCharactersDataWrapper == null || 
+                if (_allCharactersDataWrapper == null ||
                    _allCharactersDataWrapper.Count == 0)
                 {
-                    _allCharactersDataWrapper = 
+                    _allCharactersDataWrapper =
                         LoadCharacter(allCharactersDataHolder, FilePathToAllCharacters);
                 }
 
                 return _allCharactersDataWrapper;
             }
         }
-        
+
         //add set with validation etc
         private List<CharacterDataWrapper> _playerCharactersDataWrapper;
         public List<CharacterDataWrapper> PlayerCharacters
         {
             get
             {
-                if(_playerCharactersDataWrapper == null || 
+                if (_playerCharactersDataWrapper == null ||
                    _playerCharactersDataWrapper.Count == 0)
                 {
-                    _playerCharactersDataWrapper = 
+                    _playerCharactersDataWrapper =
                         LoadCharacter(playerCharactersDataHolder, FilePathToPlayerCharacters);
                 }
 
@@ -54,7 +53,7 @@ namespace AFG
         {
             get
             {
-                if(_playerData == null)
+                if (_playerData == null)
                 {
                     _playerData = LoadPlayerData(playerDataDataHolder);
                 }
@@ -63,12 +62,12 @@ namespace AFG
             }
 
         }
-        
-        public static string FilePathToPlayerCharacters => 
+
+        public static string FilePathToPlayerCharacters =>
             Path.Combine(Application.persistentDataPath, "PlayerCharacters.json");
-        private static string FilePathToPlayerData => 
+        public static string FilePathToPlayerData =>
             Path.Combine(Application.persistentDataPath, "PlayerData.json");
-        public static string FilePathToAllCharacters => 
+        public static string FilePathToAllCharacters =>
             Path.Combine(Application.persistentDataPath, "AllCharacters.json");
 
         public void SavePlayerData(PlayerDataWrapper playerData)
@@ -88,7 +87,7 @@ namespace AFG
             File.WriteAllText(FilePathToPlayerData, json);
         }
 
-        private PlayerDataWrapper LoadPlayerData(PlayererData playerholder)
+        private PlayerDataWrapper LoadPlayerData(PlayerData playerholder)
         {
             PlayerDataWrapper dataWrapper = null;
 
@@ -105,20 +104,21 @@ namespace AFG
             }
         }
 
-        private PlayerDataWrapper LoadDefaultPlayerData(PlayererData player){
+        private PlayerDataWrapper LoadDefaultPlayerData(PlayerData player)
+        {
             PlayerDataWrapper dataWrapperNew = new PlayerDataWrapper
             {
                 PlayerName = player.PlayerDataWrapper.PlayerName,
                 CoinData = player.PlayerDataWrapper.CoinData,
                 BooksData = player.PlayerDataWrapper.BooksData
             };
-            
+
             //safe to file
             SavePlayerData(dataWrapperNew);
-            
+
             string jsonNew = JsonUtility.ToJson(dataWrapperNew, true);
-            Debug.Log(jsonNew);
-            
+            //Debug.Log(jsonNew);
+
             return dataWrapperNew;
         }
 
@@ -150,11 +150,6 @@ namespace AFG
                 CharacterData.
                 Select(x => x.CharacterDataWrapper).ToList();
 
-            foreach (var character in playerCharacterWrapersInHolder)
-            {
-                Debug.LogWarning(character.CharacterName);
-            }
-            
             if (playerCharacterWrapersInHolder.Count != newPlayerCharacters.Count &&
                 !playerCharacterWrapersInHolder.SequenceEqual(newPlayerCharacters))
             {
@@ -172,10 +167,37 @@ namespace AFG
                 }
             }
         }
-        
+
+        public void SynchronizeAllCharactersHolders(CharacterDataWrapper updatedAllCharacter)
+        {
+            var allCharactersData = allCharactersDataHolder.
+                CharacterData.ToList();
+
+            foreach (var characterData in allCharactersData)
+            {
+                if (characterData.CharacterDataWrapper.CharacterName ==
+                updatedAllCharacter.CharacterName &&
+                characterData.CharacterDataWrapper.Level !=
+                updatedAllCharacter.Level)
+                {
+                    characterData.CharacterDataWrapper.Level =
+                        updatedAllCharacter.Level;
+                    break;
+                }
+            }
+        }
+
+        public void LevelUpCharacter(List<CharacterDataWrapper> playerCharacters,
+        CharacterDataWrapper allCharacters)
+        {
+            SaveCharacters(playerCharacters, FilePathToPlayerCharacters);
+            SynchronizeAllCharactersHolders(allCharacters);
+
+        }
+
         //TODO refactoring
         private List<CharacterDataWrapper> LoadCharacter(
-            CharacterDataHolder dataHolder, 
+            CharacterDataHolder dataHolder,
             string path)
         {
             CharactersDataWrapper dataWrapper = null;
@@ -184,6 +206,7 @@ namespace AFG
             if (File.Exists(path))
             {
                 string json = File.ReadAllText(path);
+                Debug.Log(json);
                 dataWrapper = JsonUtility.FromJson<CharactersDataWrapper>(json);
 
                 int characterWrapperLenght = dataHolder.CharacterData.Count;
@@ -191,21 +214,21 @@ namespace AFG
 
                 if (characterWrapperLenght == dataWraperLenght)
                 {
-                    for(int i=0;i<dataHolder.CharacterData.Count;i++)
+                    for (int i = 0; i < dataHolder.CharacterData.Count; i++)
                     {
-                        for(int j=0;j<dataWrapper.characterDataWrappers.Count;j++)
+                        for (int j = 0; j < dataWrapper.characterDataWrappers.Count; j++)
                         {
-                            if(dataHolder.CharacterData[i].CharacterDataWrapper.CharacterName.
+                            if (dataHolder.CharacterData[i].CharacterDataWrapper.CharacterName.
                                Equals(dataWrapper.characterDataWrappers[j].CharacterName))
                             {
                                 dataWrapper.characterDataWrappers[j].
                                     SetCharacterPrefab(dataHolder.CharacterData[i].CharacterDataWrapper.CharacterPrefab);
-                           
+
                                 break;
                             }
                         }
                     }
-                    
+
                     return dataWrapper.characterDataWrappers;
                 }
                 return dataWrapper.characterDataWrappers;
@@ -217,21 +240,21 @@ namespace AFG
         }
 
         private List<CharacterDataWrapper> FillAllCharactersDefault(
-            CharacterDataHolder dataHolder, 
+            CharacterDataHolder dataHolder,
             string path)
         {
             CharactersDataWrapper dataWrapperNew = new CharactersDataWrapper
             {
                 characterDataWrappers = dataHolder.
-                    CharacterData.Select(x=>x.CharacterDataWrapper).ToList()
+                    CharacterData.Select(x => x.CharacterDataWrapper).ToList()
             };
-            
+
             //safe to file
             SaveCharacters(dataWrapperNew.characterDataWrappers, path);
-            
+
             string jsonNew = JsonUtility.ToJson(dataWrapperNew, true);
             //Debug.Log(jsonNew);
-            
+
             return dataWrapperNew.characterDataWrappers;
         }
     }

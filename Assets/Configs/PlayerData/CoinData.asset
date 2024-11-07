@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: CoinData
   m_EditorClassIdentifier: 
   _coinDataWrapper:
-    _coinCount: 130
+    _coinCount: 120

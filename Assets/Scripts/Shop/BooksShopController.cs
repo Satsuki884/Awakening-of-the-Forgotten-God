@@ -51,7 +51,7 @@ namespace AFG
                                 .ToString();
             if (PlayerData.BooksData.BooksDataWrapper.BooksPrice > PlayerData.CoinData.CoinDataWrapper.CoinCount)
             {
-                _booksBuyPanel.SetActive(true);
+                //_booksBuyPanel.SetActive(false);
                 SetButtonUnEnable();
             }
         }
