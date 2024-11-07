@@ -23,16 +23,21 @@ namespace AFG
             _closeInventory.onClick.AddListener(CloseInventory);
         }
 
+        // private string InventoryScene => GameController.Instance.LevelModel.InventoryScene.name;
+        // private string MenuSquadScene => GameController.Instance.LevelModel.MenuSquadScene.name;
+        LevelModel LevelModel => GameController.Instance.LevelModel;
+
         private void CloseInventory()
         {
-            if(_isInventory)
-            {
-                GameController.Instance.LevelModel.UnLoadPrevScene(_isInventory);
-            }
-            else
-            {
-                GameController.Instance.LevelModel.UnLoadPrevScene(_isInventory);
-            }
+            // GameController.Instance.LevelModel.LoadedSceneName;
+            // if(_isInventory)
+            // {
+                LevelModel.UnLoadPrevScene(LevelModel.LoadedSceneName);
+            // }
+            // else
+            // {
+            //     GameController.Instance.LevelModel.UnLoadPrevScene(MenuSquadScene);
+            // }
         }
     }
 }

@@ -2121,7 +2121,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 614286505}
   m_CullTransparentMesh: 1
-  _isInventory: 1
 --- !u!1 &640242272
 GameObject:
   m_ObjectHideFlags: 0
@@ -6853,6 +6852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _closeInventory: {fileID: 4222117263851390506}
+  _isInventory: 1
 --- !u!114 &2984231598637451128
 MonoBehaviour:
   m_ObjectHideFlags: 0

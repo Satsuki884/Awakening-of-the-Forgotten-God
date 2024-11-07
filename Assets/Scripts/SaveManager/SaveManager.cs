@@ -206,7 +206,7 @@ namespace AFG
             if (File.Exists(path))
             {
                 string json = File.ReadAllText(path);
-                Debug.Log(json);
+                // Debug.Log(json);
                 dataWrapper = JsonUtility.FromJson<CharactersDataWrapper>(json);
 
                 int characterWrapperLenght = dataHolder.CharacterData.Count;
