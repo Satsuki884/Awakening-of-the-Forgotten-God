@@ -24,7 +24,8 @@ namespace AFG
 
         private void CloseInventory()
         {
-            SceneManager.LoadScene("MainMenu");
+            GameController.Instance.LevelModel.LoadNewScene("MainMenu");
+            //SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
         }
     }
 }

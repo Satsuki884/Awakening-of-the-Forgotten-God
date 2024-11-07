@@ -18,6 +18,9 @@ public class LevelModel : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         LoadBackgroundScene();
+        if(SceneManager.GetActiveScene().name == "MainMenu"){
+            LoadNewScene("MainMenu");
+        }
         AddShopEvents();
     }
 
@@ -35,7 +38,9 @@ public class LevelModel : MonoBehaviour
     {
         if (_backgroundScene != null && !SceneManager.GetSceneByName(_backgroundScene.name).isLoaded)
         {
-            SceneManager.LoadScene(_backgroundScene.name, LoadSceneMode.Additive);
+            SceneManager.LoadScene(_backgroundScene.name);
+            //LoadNewScene(SceneManager.GetActiveScene().name);
+            // SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Additive);
         }
     }
 
@@ -51,15 +56,34 @@ public class LevelModel : MonoBehaviour
         _openButtleMap.onClick.AddListener(OpenButtleMap);
     }
 
+    private string _lastLoadedScene;
+
+    public void LoadNewScene(string sceneName)
+    {
+        // Unload the last loaded scene if it exists
+        if (!string.IsNullOrEmpty(_lastLoadedScene))
+        {
+            SceneManager.UnloadSceneAsync(_lastLoadedScene);
+        }
+
+        // Load the new scene additively
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+
+        // Update the last loaded scene
+        _lastLoadedScene = sceneName;
+    }
+
     private void OpenInventory()
     {
-        SceneManager.LoadScene("Inventory");
+        LoadNewScene("Inventory");
+        // SceneManager.LoadScene("Inventory", LoadSceneMode.Additive);
         // LoadBackgroundScene();
     }
 
     private void OpenButtleMap()
     {
-        SceneManager.LoadScene("MenuSquad");
+        LoadNewScene("MenuSquad");
+        // SceneManager.LoadScene("MenuSquad", LoadSceneMode.Additive);
         // LoadBackgroundScene();
     }
 
