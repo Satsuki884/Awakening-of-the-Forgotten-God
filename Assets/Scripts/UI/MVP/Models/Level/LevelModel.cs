@@ -16,22 +16,17 @@ public class LevelModel : MonoBehaviour
     // [SerializeField] private Button _closeInventory;
     void Start()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
         LoadBackgroundScene();
+
+        //ToDo: refactor
         if(SceneManager.GetActiveScene().name == "MainMenu"){
             LoadNewScene("MainMenu");
+        } else if(SceneManager.GetActiveScene().name == "Inventory"){
+            LoadNewScene("Inventory");
+        } else if(SceneManager.GetActiveScene().name == "MenuSquad"){
+            LoadNewScene("MenuSquad");
         }
         AddShopEvents();
-    }
-
-    void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        LoadBackgroundScene();
     }
 
     private void LoadBackgroundScene()
@@ -39,16 +34,11 @@ public class LevelModel : MonoBehaviour
         if (_backgroundScene != null && !SceneManager.GetSceneByName(_backgroundScene.name).isLoaded)
         {
             SceneManager.LoadScene(_backgroundScene.name);
-            //LoadNewScene(SceneManager.GetActiveScene().name);
-            // SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Additive);
         }
     }
 
     private void AddShopEvents()
     {
-        // _closeInventory.onClick.RemoveAllListeners();
-        // _closeInventory.onClick.AddListener(CloseInventory);
-
         _openInventory.onClick.RemoveAllListeners();
         _openInventory.onClick.AddListener(OpenInventory);
 
@@ -60,17 +50,34 @@ public class LevelModel : MonoBehaviour
 
     public void LoadNewScene(string sceneName)
     {
-        // Unload the last loaded scene if it exists
+        Debug.Log("LoadNewScene: " + sceneName);
+        Debug.Log("LastLoadedScene: " + _lastLoadedScene);
+        // if (!string.IsNullOrEmpty(_lastLoadedScene))
+        // {
+        //     SceneManager.UnloadSceneAsync(_lastLoadedScene);
+        // }
+        // SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+        // _lastLoadedScene = sceneName;
+        // Debug.Log("LastLoadedScene = sceneName: " + _lastLoadedScene);
         if (!string.IsNullOrEmpty(_lastLoadedScene))
         {
+            SceneManager.sceneUnloaded += OnSceneUnloaded;
             SceneManager.UnloadSceneAsync(_lastLoadedScene);
         }
+        else
+        {
+            SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+            _lastLoadedScene = sceneName;
+            Debug.Log("LastLoadedScene = sceneName: " + _lastLoadedScene);
+        }
+    }
 
-        // Load the new scene additively
-        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
-
-        // Update the last loaded scene
-        _lastLoadedScene = sceneName;
+    private void OnSceneUnloaded(Scene scene)
+    {
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
+        SceneManager.LoadScene(_lastLoadedScene, LoadSceneMode.Additive);
+        _lastLoadedScene = scene.name;
+        Debug.Log("LastLoadedScene = sceneName: " + _lastLoadedScene);
     }
 
     private void OpenInventory()

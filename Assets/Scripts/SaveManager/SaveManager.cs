@@ -131,7 +131,7 @@ namespace AFG
         }
         public void SaveCharacters(List<CharacterDataWrapper> characters, string path)
         {
-            if (!File.Exists(path))
+            if (File.Exists(path))
             {
                 File.Create(path).Dispose();
             }
