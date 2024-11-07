@@ -87,10 +87,8 @@ namespace AFG
             {
                 SavePlayerData();
             }
-            else
-            {
-                GameController.Instance.LevelModel.ReLoadScene(MenuSquadScene);
-            }
+            Debug.Log("Restart");
+            GameController.Instance.LevelModel.ReLoadScene(MenuSquadScene);
 
         }
 
