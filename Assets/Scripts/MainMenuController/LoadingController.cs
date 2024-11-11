@@ -22,7 +22,7 @@ namespace AFG
                 }
                 StartCoroutine(ShowLoadingPage());
                 StartCoroutine(BlinkLoadingTexts());
-                
+
             }
             else
             {
