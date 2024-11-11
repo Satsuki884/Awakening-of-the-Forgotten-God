@@ -10,6 +10,17 @@ using UnityEngine.UI;
 
 public class LevelModel : MonoBehaviour
 {
+    [SerializeField] private Animator transition;
+    [SerializeField] private float _transitionTime = 2f;
+
+    IEnumerator LoadScene(string sceneName)
+    {
+
+        transition.SetBool("Start", true);
+        yield return new WaitForSeconds(_transitionTime);
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+        transition.SetBool("Start", false);
+    }
 
     [SerializeField] private SceneAsset _mainMenuScene;
     public SceneAsset MainMenuScene => _mainMenuScene;
@@ -50,8 +61,7 @@ public class LevelModel : MonoBehaviour
 
     public void LoadNewScene(string sceneName)
     {
-
-        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+        StartCoroutine(LoadScene(sceneName));
     }
 
     public void UnLoadMainMenuScene(string sceneName)

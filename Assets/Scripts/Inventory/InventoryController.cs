@@ -16,28 +16,16 @@ namespace AFG
             AddInventoryEvents();
         }
 
-        // Update is called once per frame
         private void AddInventoryEvents()
         {
             _closeInventory.onClick.RemoveAllListeners();
             _closeInventory.onClick.AddListener(CloseInventory);
         }
-
-        // private string InventoryScene => GameController.Instance.LevelModel.InventoryScene.name;
-        // private string MenuSquadScene => GameController.Instance.LevelModel.MenuSquadScene.name;
         LevelModel LevelModel => GameController.Instance.LevelModel;
 
         private void CloseInventory()
         {
-            // GameController.Instance.LevelModel.LoadedSceneName;
-            // if(_isInventory)
-            // {
-                LevelModel.UnLoadPrevScene(LevelModel.LoadedSceneName);
-            // }
-            // else
-            // {
-            //     GameController.Instance.LevelModel.UnLoadPrevScene(MenuSquadScene);
-            // }
+            LevelModel.UnLoadPrevScene(LevelModel.LoadedSceneName);
         }
     }
 }
