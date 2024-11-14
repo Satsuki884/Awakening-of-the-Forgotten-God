@@ -10,15 +10,6 @@ public class SettingController : MonoBehaviour
     [SerializeField] private GameObject _settingPanel;
     [SerializeField] private Button _openSettingsButton;
     [SerializeField] private Button _closeSettingsButton;
-    [SerializeField] private Slider _volumeSlider;
-
-    [SerializeField] private AudioMixer _audioMixer;
-
-    public void SetVolume()
-    {
-        Debug.Log(_volumeSlider.value);
-        _audioMixer.SetFloat("Volume", _volumeSlider.value);
-    }
 
     Resolution[] resolutions;
 
@@ -41,7 +32,8 @@ public class SettingController : MonoBehaviour
         _resolutionDropdown.AddOptions(options);
         _resolutionDropdown.value = currentResolutionIndex;
         _resolutionDropdown.RefreshShownValue();
-        
+
+        SetBetweenSession();
         AddEventListeners();
         CloseSettings();
     }
@@ -59,6 +51,36 @@ public class SettingController : MonoBehaviour
         _resolutionDropdown.onValueChanged.AddListener(delegate { SetResolution(); });
     }
 
+    public void SetBetweenSession()
+    {
+        if (PlayerPrefs.HasKey("QualityLevel"))
+        {
+            int savedQualityLevel = PlayerPrefs.GetInt("QualityLevel");
+            _qualityDropdown.value = savedQualityLevel;
+            QualitySettings.SetQualityLevel(savedQualityLevel);
+        }
+        if (PlayerPrefs.HasKey("FullScreen"))
+        {
+            bool isFullScreen = PlayerPrefs.GetInt("FullScreen") == 1;
+            _fullScreenToggle.isOn = isFullScreen;
+            Screen.fullScreen = isFullScreen;
+        }
+        if (PlayerPrefs.HasKey("Resolution"))
+        {
+            int savedResolutionIndex = PlayerPrefs.GetInt("Resolution");
+            _resolutionDropdown.value = savedResolutionIndex;
+            Resolution savedResolution = resolutions[savedResolutionIndex];
+            Screen.SetResolution(savedResolution.width, savedResolution.height, Screen.fullScreen);
+        }
+        if (PlayerPrefs.HasKey("Volume"))
+        {
+            float savedVolume = PlayerPrefs.GetFloat("Volume");
+            _volumeSlider.value = savedVolume;
+            _audioMixer.SetFloat("Volume", savedVolume);
+        }
+
+    }
+
     private void OpenSettings()
     {
         _settingPanel.SetActive(true);
@@ -68,28 +90,49 @@ public class SettingController : MonoBehaviour
     {
         _settingPanel.SetActive(false);
     }
+    [SerializeField] private Slider _volumeSlider;
+
+    [SerializeField] private AudioMixer _audioMixer;
+
+    public void SetVolume()
+    {
+        float volume = _volumeSlider.value;
+        Debug.Log(volume);
+        _audioMixer.SetFloat("Volume", volume);
+        PlayerPrefs.SetFloat("Volume", volume);
+        PlayerPrefs.Save();
+    }
 
     [SerializeField] private TMP_Dropdown _qualityDropdown;
 
     public void SetQuality()
     {
-        Debug.Log(_qualityDropdown.value);
-        QualitySettings.SetQualityLevel(_qualityDropdown.value);
+        int qualityLevel = _qualityDropdown.value;
+        Debug.Log(qualityLevel);
+        QualitySettings.SetQualityLevel(qualityLevel);
+        PlayerPrefs.SetInt("QualityLevel", qualityLevel);
+        PlayerPrefs.Save();
     }
 
     [SerializeField] private Toggle _fullScreenToggle;
 
     public void SetFullScreen()
     {
-        Screen.fullScreen = _fullScreenToggle.isOn;
+        bool isFullScreen = _fullScreenToggle.isOn;
+        Screen.fullScreen = isFullScreen;
+        PlayerPrefs.SetInt("FullScreen", isFullScreen ? 1 : 0);
+        PlayerPrefs.Save();
     }
 
     [SerializeField] private TMP_Dropdown _resolutionDropdown;
 
     public void SetResolution()
     {
-        Debug.Log(_resolutionDropdown.value);
-        Resolution resolution = resolutions[_resolutionDropdown.value];
+        int resolutionIndex = _resolutionDropdown.value;
+        Debug.Log(resolutionIndex);
+        Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        PlayerPrefs.SetInt("Resolution", resolutionIndex);
+        PlayerPrefs.Save();
     }
 }
