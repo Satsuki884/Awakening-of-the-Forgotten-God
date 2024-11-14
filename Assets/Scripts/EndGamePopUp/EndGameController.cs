@@ -92,7 +92,7 @@ namespace AFG
 
         }
 
-        private string MenuSquadScene => GameController.Instance.LevelModel.MenuSquadScene.name;
+        private string MenuSquadScene => GameController.Instance.LevelModel.MenuSquadScene;
         private void OnMenuButtonClicked()
         {
             if (_win)

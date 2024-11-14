@@ -15,20 +15,19 @@ public class LevelModel : MonoBehaviour
 
     IEnumerator LoadScene(string sceneName)
     {
-
         transition.SetBool("Start", true);
         yield return new WaitForSeconds(_transitionTime);
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
-        // yield return new WaitForSeconds(_transitionTime);
         transition.SetBool("Start", false);
     }
 
-    [SerializeField] private SceneAsset _mainMenuScene;
-    public SceneAsset MainMenuScene => _mainMenuScene;
-    [SerializeField] private SceneAsset _inventoryScene;
-    public SceneAsset InventoryScene => _inventoryScene;
-    [SerializeField] private SceneAsset _menuSquadScene;
-    public SceneAsset MenuSquadScene => _menuSquadScene;
+    [SerializeField] private string _mainMenuScene;
+    public string MainMenuScene => _mainMenuScene;
+    [SerializeField] private string _inventoryScene;
+    public string InventoryScene => _inventoryScene;
+    [SerializeField] private string _menuSquadScene;
+    public string MenuSquadScene => _menuSquadScene;
+
     void Start()
     {
         LoadBackgroundScene();
@@ -36,11 +35,10 @@ public class LevelModel : MonoBehaviour
 
     private void LoadBackgroundScene()
     {
-        if (_backgroundScene != null && !SceneManager.GetSceneByName(_backgroundScene.name).isLoaded)
+        if (_backgroundScene != null && !SceneManager.GetSceneByName(_backgroundScene).isLoaded)
         {
-            SceneManager.LoadScene(_mainMenuScene.name);
-            SceneManager.LoadScene(_backgroundScene.name, LoadSceneMode.Additive);
-            
+            SceneManager.LoadScene(_mainMenuScene);
+            SceneManager.LoadScene(_backgroundScene, LoadSceneMode.Additive);
         }
     }
 
@@ -68,14 +66,14 @@ public class LevelModel : MonoBehaviour
 
     public void UnLoadMainMenuScene(string sceneName)
     {
-        SceneManager.UnloadSceneAsync(_mainMenuScene.name);
+        SceneManager.UnloadSceneAsync(_mainMenuScene);
         LoadNewScene(sceneName);
     }
 
     public void UnLoadPrevScene(string sceneName)
     {
         SceneManager.UnloadSceneAsync(sceneName);
-        LoadNewScene(_mainMenuScene.name);
+        LoadNewScene(_mainMenuScene);
     }
 
     public void ReLoadScene(string sceneName)
@@ -86,15 +84,15 @@ public class LevelModel : MonoBehaviour
 
     public void OpenInventory()
     {
-        UnLoadMainMenuScene(_inventoryScene.name);
+        UnLoadMainMenuScene(_inventoryScene);
     }
 
     public void OpenButtleMap()
     {
-        UnLoadMainMenuScene(_menuSquadScene.name);
+        UnLoadMainMenuScene(_menuSquadScene);
     }
 
-    [SerializeField] private SceneAsset _backgroundScene;
+    [SerializeField] private string _backgroundScene;
     public event Action<int> OnLevelStarted;
     public event Action<int> OnLevelFinish;
 
@@ -105,13 +103,10 @@ public class LevelModel : MonoBehaviour
 
     public CharacterDataWrapper[] PlayerSquad { get; set; }
 
-    //private string _currentScene => SceneManager.GetActiveScene().name;
-
     public void StartLevel()
     {
         OnLevelStarted?.Invoke(LevelIndex);
-        SceneManager.LoadScene(GetLevelScene().name, LoadSceneMode.Additive);
-        //SceneManager.UnloadSceneAsync(_currentScene);
+        SceneManager.LoadScene(GetLevelScene(), LoadSceneMode.Additive);
     }
 
     public void FinishLevel()
@@ -120,19 +115,17 @@ public class LevelModel : MonoBehaviour
         _levelIndex = LevelIndex >= _levels.Length - 1 ? 0 : LevelIndex + 1;
     }
 
-
-
     public CharacterDataWrapper[] GetAiSquad()
     {
         return _levels[LevelIndex].AISquad.CharacterData.Select(x => x.CharacterDataWrapper).ToArray();
     }
 
-    public SceneAsset GetLevelScene()
+    public string GetLevelScene()
     {
         return _levels[LevelIndex].LevelScene;
     }
 
-    public SceneAsset GetPrevLevelScene()
+    public string GetPrevLevelScene()
     {
         return _levels[LevelIndex - 1].LevelScene;
     }

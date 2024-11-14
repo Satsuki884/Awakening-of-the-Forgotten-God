@@ -45,8 +45,12 @@ public class SettingController : MonoBehaviour
         _volumeSlider.onValueChanged.RemoveAllListeners();
         _openSettingsButton.onClick.AddListener(OpenSettings);
         _closeSettingsButton.onClick.AddListener(CloseSettings);
-        _volumeSlider.onValueChanged.AddListener(delegate { SetVolume(); });
-        _qualityDropdown.onValueChanged.AddListener(delegate { SetQuality(); });
+        
+        _volumeSlider.onValueChanged.AddListener(SetVolume);
+        
+        _qualityDropdown.onValueChanged.AddListener(SetQuality);
+        _qualityDropdown.onValueChanged.AddListener(SetQuality);
+        
         _fullScreenToggle.onValueChanged.AddListener(delegate { SetFullScreen(); });
         _resolutionDropdown.onValueChanged.AddListener(delegate { SetResolution(); });
     }
@@ -94,9 +98,8 @@ public class SettingController : MonoBehaviour
 
     [SerializeField] private AudioMixer _audioMixer;
 
-    public void SetVolume()
+    public void SetVolume(float volume)
     {
-        float volume = _volumeSlider.value;
         Debug.Log(volume);
         _audioMixer.SetFloat("Volume", volume);
         PlayerPrefs.SetFloat("Volume", volume);
@@ -105,9 +108,8 @@ public class SettingController : MonoBehaviour
 
     [SerializeField] private TMP_Dropdown _qualityDropdown;
 
-    public void SetQuality()
+    public void SetQuality(int qualityLevel)
     {
-        int qualityLevel = _qualityDropdown.value;
         Debug.Log(qualityLevel);
         QualitySettings.SetQualityLevel(qualityLevel);
         PlayerPrefs.SetInt("QualityLevel", qualityLevel);

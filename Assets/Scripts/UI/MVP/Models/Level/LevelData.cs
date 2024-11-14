@@ -7,10 +7,10 @@ namespace AFG
     public class LevelData : ScriptableObject
     {
         [SerializeField] private CharacterDataHolder _aiSquad;
-        [SerializeField] private SceneAsset _levelScene;
+        [SerializeField] private string _levelScene;
     
         public CharacterDataHolder AISquad => _aiSquad;
-        public SceneAsset LevelScene => _levelScene;
+        public string LevelScene => _levelScene;
     }
 }
 

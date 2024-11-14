@@ -1019,10 +1019,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transition: {fileID: 4618891617784079383}
   _transitionTime: 1
-  _mainMenuScene: {fileID: 102900000, guid: 27f6a4bebb3843547b9bd451286a87d1, type: 3}
-  _inventoryScene: {fileID: 102900000, guid: ccabe4f7df12123409d93f3728b7fa89, type: 3}
-  _menuSquadScene: {fileID: 102900000, guid: 92eedb5a0e390468caf6dd1a87baebd5, type: 3}
-  _backgroundScene: {fileID: 102900000, guid: 2679ff2e8f20f31498869d088d1143ef, type: 3}
+  _mainMenuScene: MainMenu
+  _inventoryScene: Inventory
+  _menuSquadScene: MenuSquad
+  _backgroundScene: Background
   _levelIndex: 0
   _levels:
   - {fileID: 11400000, guid: 0e2d3d357e678436b96a54b0ffe80667, type: 2}

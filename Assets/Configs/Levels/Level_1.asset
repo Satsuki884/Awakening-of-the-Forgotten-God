@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Level_1
   m_EditorClassIdentifier: 
   _aiSquad: {fileID: 11400000, guid: 7ab386b0fc84e464cad1bc5ec2eac61e, type: 2}
-  _levelScene: {fileID: 102900000, guid: 2cda990e2423bbf4892e6590ba056729, type: 3}
+  _levelScene: Level_1
