@@ -51,8 +51,8 @@ public class SettingController : MonoBehaviour
         _qualityDropdown.onValueChanged.AddListener(SetQuality);
         _qualityDropdown.onValueChanged.AddListener(SetQuality);
         
-        _fullScreenToggle.onValueChanged.AddListener(delegate { SetFullScreen(); });
-        _resolutionDropdown.onValueChanged.AddListener(delegate { SetResolution(); });
+        _fullScreenToggle.onValueChanged.AddListener(SetFullScreen);
+        _resolutionDropdown.onValueChanged.AddListener(SetResolution);
     }
 
     public void SetBetweenSession()
@@ -118,9 +118,8 @@ public class SettingController : MonoBehaviour
 
     [SerializeField] private Toggle _fullScreenToggle;
 
-    public void SetFullScreen()
+    public void SetFullScreen(bool isFullScreen)
     {
-        bool isFullScreen = _fullScreenToggle.isOn;
         Screen.fullScreen = isFullScreen;
         PlayerPrefs.SetInt("FullScreen", isFullScreen ? 1 : 0);
         PlayerPrefs.Save();
@@ -128,9 +127,8 @@ public class SettingController : MonoBehaviour
 
     [SerializeField] private TMP_Dropdown _resolutionDropdown;
 
-    public void SetResolution()
+    public void SetResolution(int resolutionIndex)
     {
-        int resolutionIndex = _resolutionDropdown.value;
         Debug.Log(resolutionIndex);
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
