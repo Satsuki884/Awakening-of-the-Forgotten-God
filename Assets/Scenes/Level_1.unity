@@ -296,13 +296,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.37448522, y: 0, z: 0, w: 0.9272329}
-  m_LocalPosition: {x: -0, y: 9.8, z: -0.577}
+  m_LocalRotation: {x: 0.4236541, y: 0, z: 0, w: 0.90582407}
+  m_LocalPosition: {x: -0, y: 15.65, z: -0.568}
   m_LocalScale: {x: 0.05, y: 0.069326535, z: 0.15207946}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 958947657}
-  m_LocalEulerAnglesHint: {x: 43.985, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 50.131, y: 0, z: 0}
 --- !u!1001 &562713022
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1068,6 +1068,14 @@ PrefabInstance:
     - target: {fileID: 3344729739209147323, guid: 7c6198395e9a9457d8d5952ec7c972fc, type: 3}
       propertyPath: m_Name
       value: CombatPresenter
+      objectReference: {fileID: 0}
+    - target: {fileID: 4322169725535592522, guid: 7c6198395e9a9457d8d5952ec7c972fc, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4322169725535592522, guid: 7c6198395e9a9457d8d5952ec7c972fc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
