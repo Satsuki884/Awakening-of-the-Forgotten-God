@@ -26,15 +26,15 @@ PrefabInstance:
       objectReference: {fileID: 6394513305067255813, guid: fd2b27f6a2e7f2e48b05055acae2394b, type: 3}
     - target: {fileID: 5307354103079997627, guid: 0b6f743e46a484787b04c762df2c2b51, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -32.783554
       objectReference: {fileID: 0}
     - target: {fileID: 5307354103079997627, guid: 0b6f743e46a484787b04c762df2c2b51, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 4.81
       objectReference: {fileID: 0}
     - target: {fileID: 5307354103079997627, guid: 0b6f743e46a484787b04c762df2c2b51, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 176.0066
       objectReference: {fileID: 0}
     - target: {fileID: 5307354103079997627, guid: 0b6f743e46a484787b04c762df2c2b51, type: 3}
       propertyPath: m_LocalRotation.w
@@ -99,8 +99,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.3159487, y: 3.7170625, z: 4.5369296}
-  m_Center: {x: 0.39909804, y: 1.8331351, z: 0.43366003}
+  m_Size: {x: 2.3159487, y: 2.0633414, z: 2.390396}
+  m_Center: {x: 0.39909804, y: 1.0062746, z: 0.15859222}
 --- !u!114 &2492853500929829157 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 596756449076775240, guid: 0b6f743e46a484787b04c762df2c2b51, type: 3}

@@ -51,8 +51,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animationController: {fileID: 8380994519039996886}
   _moveController: {fileID: 262785950620959673}
-  _damageController: {fileID: 0}
-  _healController: {fileID: 0}
+  _damageController: {fileID: 5667478600148470615}
+  _healController: {fileID: 596756449076775240}
   _deBufController: {fileID: 2752516492794495008}
   _selectionIndicatorPrefab: {fileID: 6394513305067255813, guid: fd2b27f6a2e7f2e48b05055acae2394b, type: 3}
 --- !u!114 &8380994519039996886
