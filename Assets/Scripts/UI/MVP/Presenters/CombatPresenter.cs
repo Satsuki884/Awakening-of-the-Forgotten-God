@@ -29,15 +29,19 @@ namespace AFG.MVP
         {
             GameController.Instance.CombatModel.OnCharacterSelected -= OnCharacterSelected;
         }
-        
+
         private void OnCharacterSelected(CharacterController _selectedCharacter)
         {
             DeactivateAllButton();
+            if (_selectedCharacter != null)
+            {
+                HighlightCharacter(_selectedCharacter, false);
+            }
             HighlightCharacter(_selectedCharacter, true);
             string fullName = _selectedCharacter.name.ToString();
             string firstWord = fullName.Split(' ')[0];
             _currentCharacter.text = firstWord;
-            Action onFinishMove = ()=> GameController.Instance.CombatModel.FinishMove();
+            Action onFinishMove = () => GameController.Instance.CombatModel.FinishMove();
 
             ActivateButtons(_selectedCharacter, onFinishMove);
         }
@@ -48,9 +52,9 @@ namespace AFG.MVP
         private void ActivateButtons(CharacterController selectedCharacter, Action onFinishMove)
         {
             SquadController parent = selectedCharacter.GetComponentInParent<SquadController>();
-            
+
             //TODO implement brain check
-            if(parent.name == "SquadPlayerController")
+            if (parent.name == "SquadPlayerController")
             {
                 tempAISquad = GameController.Instance.CombatModel.AiSquad;
                 tempPlayerSquad = GameController.Instance.CombatModel.PlayerSquad;
@@ -61,73 +65,73 @@ namespace AFG.MVP
                 tempPlayerSquad = GameController.Instance.CombatModel.AiSquad;
             }
 
-            
+
             for (int i = 0; i < selectedCharacter.Skills.Length; i++)
             {
                 var skill = selectedCharacter.Skills[i];
 
                 if (skill is CharacterMeleSkill)
                 {
-                    AddActionToButton(_attackMeleButton, 
-                        selectedCharacter, 
-                        skill, 
-                        tempAISquad.Characters, 
+                    AddActionToButton(_attackMeleButton,
+                        selectedCharacter,
+                        skill,
+                        tempAISquad.Characters,
                         onFinishMove);
                 }
                 if (skill is CharacterRangeSkill)
                 {
-                    AddActionToButton(_attackMeleButton, 
-                        selectedCharacter, 
-                        skill, 
-                        tempAISquad.Characters, 
+                    AddActionToButton(_attackMeleButton,
+                        selectedCharacter,
+                        skill,
+                        tempAISquad.Characters,
                         onFinishMove);
                 }
                 if (skill is CharacterBufSkill)
                 {
-                    AddActionToButton(_bufButton, 
-                        selectedCharacter, 
-                        skill, 
-                        tempPlayerSquad.Characters, 
+                    AddActionToButton(_bufButton,
+                        selectedCharacter,
+                        skill,
+                        tempPlayerSquad.Characters,
                         onFinishMove);
                 }
                 if (skill is CharacterDebufSkill)
                 {
-                    AddActionToButton(_debuffButton, 
-                        selectedCharacter, 
-                        skill, 
-                        tempAISquad.Characters, 
+                    AddActionToButton(_debuffButton,
+                        selectedCharacter,
+                        skill,
+                        tempAISquad.Characters,
                         onFinishMove);
                 }
                 if (skill is CharacterHealSkill)
                 {
-                    AddActionToButton(_healButton, 
-                        selectedCharacter, 
-                        skill, 
-                        tempPlayerSquad.Characters, 
+                    AddActionToButton(_healButton,
+                        selectedCharacter,
+                        skill,
+                        tempPlayerSquad.Characters,
                         onFinishMove);
                 }
                 if (skill is CharacterAreaDamageSkill)
                 {
-                    AddActionToButton(_attackAreaButton, 
-                        selectedCharacter, 
-                        skill, 
-                        tempAISquad.Characters, 
+                    AddActionToButton(_attackAreaButton,
+                        selectedCharacter,
+                        skill,
+                        tempAISquad.Characters,
                         onFinishMove);
                 }
             }
         }
 
         //principle DRY (Don't Repeat Yourself)
-        private void AddActionToButton(Button button, 
-            CharacterController selectedCharacter, 
+        private void AddActionToButton(Button button,
+            CharacterController selectedCharacter,
             CharacterSkill skill,
             List<CharacterController> characterTargets,
             Action onFinishMove)
         {
             button.gameObject.SetActive(true);
-            
+
             button.onClick.RemoveAllListeners();
-            
+
             button.onClick.AddListener(() =>
             {
                 skill.UseSkill(
@@ -140,11 +144,11 @@ namespace AFG.MVP
                 Debug.LogWarning(selectedCharacter.name + "\t� �������� ������");
             });
         }
-        
+
         private void HighlightCharacter(CharacterController character, bool enableHighlight)
         {
             Renderer characterRenderer = character.GetComponentInChildren<Renderer>();
-            
+
             if (characterRenderer != null)
             {
                 if (enableHighlight)
