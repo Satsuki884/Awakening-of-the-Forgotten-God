@@ -98,7 +98,7 @@ namespace AFG.Character
 
         public virtual void Initialization(CharacterBrain brain, CharacterDataWrapper characterDataWrapper)
         {
-            Debug.Log("Initialized character "+gameObject.name);
+            //Debug.Log("Initialized character "+gameObject.name);
            
             _brain = brain;
             _characterDataWrapper = characterDataWrapper;

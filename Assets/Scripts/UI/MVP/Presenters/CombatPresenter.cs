@@ -141,31 +141,38 @@ namespace AFG.MVP
 
                 DeactivateAllButton();
                 HighlightCharacter(selectedCharacter, false);
-                Debug.LogWarning(selectedCharacter.name + "\t� �������� ������");
             });
         }
 
         private void HighlightCharacter(CharacterController character, bool enableHighlight)
         {
-            Renderer characterRenderer = character.GetComponentInChildren<Renderer>();
+            string fullName = character.name.ToString();
+            string firstWord = fullName.Split(' ')[0];
 
-            if (characterRenderer != null)
+            // Find the child object that matches the first word of the character's name
+            Transform targetTransform = character.transform.Find(firstWord);
+            Debug.Log("\t" + targetTransform);
+            if (targetTransform != null)
             {
-                if (enableHighlight)
+                Renderer characterRenderer = targetTransform.GetComponentInChildren<Renderer>();
+                Debug.Log("\t" + "f\t" + characterRenderer);
+
+                if (characterRenderer != null)
                 {
-                    Debug.Log(character.name + " \t����");
-                    characterRenderer.material.DOColor(Color.green, 0.5f)
-                        .OnComplete(() =>
-                        {
-                            characterRenderer.material.DOColor(new Color(1f, 1f, 1f, 0.5f), 0.5f)
-                                .SetLoops(-1, LoopType.Yoyo);
-                        });
-                }
-                else
-                {
-                    Debug.Log(character.name + " \t����");
-                    characterRenderer.material.DOKill();
-                    characterRenderer.material.DOColor(Color.white, 0.5f);
+                    if (enableHighlight)
+                    {
+                        characterRenderer.material.DOColor(Color.green, 0.5f) // Light gray
+                            .OnComplete(() =>
+                            {
+                                characterRenderer.material.DOColor(new Color(1f, 1f, 1f, 0.5f), 0.5f) // Semi-transparent white
+                                    .SetLoops(-1, LoopType.Yoyo);
+                            });
+                    }
+                    else
+                    {
+                        characterRenderer.material.DOKill();
+                        characterRenderer.material.DOColor(Color.white, 0.5f);
+                    }
                 }
             }
         }
