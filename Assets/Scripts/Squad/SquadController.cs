@@ -12,9 +12,6 @@ namespace AFG.Squad
         protected List<CharacterController> _characters = new List<CharacterController>();
         public List<CharacterController> Characters => _characters;
 
-        //[SerializeField] private List<Transform> _points = new List<Transform>();
-        //[SerializeField] private List<Transform> _pointsAI = new List<Transform>();
-
         public bool IsActive { get; set; }
 
 
@@ -45,10 +42,6 @@ namespace AFG.Squad
 
                 positionOffset = new Vector3(i * step - halfWidth, 1, 0);
                 characterController.transform.localPosition = positionOffset;
-                if (_brainType == CharacterBrainType.AI)
-                {
-                    characterController.transform.eulerAngles = new Vector3(0, 180, 0); // ������� �� 180 ��������
-                }
 
                 //inject brain
                 characterController.Initialization(characterBrain, characterDataWrappers[i]);

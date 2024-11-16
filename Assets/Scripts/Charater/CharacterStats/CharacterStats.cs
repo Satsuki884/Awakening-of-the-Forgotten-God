@@ -9,8 +9,10 @@ namespace AFG.Stats
     public class CharacterStatsData
     {
         public float health;
+        public float maxHealth;
         public float speed;
         public float def;
+        public float maxDef;
         public float atk;
     }
 
@@ -37,6 +39,13 @@ namespace AFG.Stats
             }
         }
 
+        [SerializeField] private float _maxHealth;
+        public float MaxHealth
+        {
+            get => _maxHealth;
+            set => _maxHealth = value;
+        }
+
         [SerializeField] private float _speed;
 
         public float Speed
@@ -51,6 +60,13 @@ namespace AFG.Stats
         {
             get => _def;
             set => _def = value;
+        }
+
+        [SerializeField] private float _maxDef;
+        public float MaxDef
+        {
+            get => _maxDef;
+            set => _maxDef = value;
         }
 
         [SerializeField] private float _atk;

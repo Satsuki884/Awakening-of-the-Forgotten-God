@@ -123,8 +123,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 95
+  _maxHealth: 95
   _speed: 4
   _def: 10
+  _maxDef: 10
   _atk: 8
 --- !u!95 &1284245164250326487
 Animator:

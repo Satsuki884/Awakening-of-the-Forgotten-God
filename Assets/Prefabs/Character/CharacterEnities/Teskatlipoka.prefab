@@ -120,6 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 85
+  _maxHealth: 85
   _speed: 1
   _def: 40
+  _maxDef: 40
   _atk: 15

@@ -33,7 +33,9 @@ namespace AFG
         
         //TODO add validation for level
         public float Health => CharacterStatsData[Level].Health;
+        public float MaxHealth => CharacterStatsData[Level].Health;
         public float Def => CharacterStatsData[Level].Def;
+        public float MaxDef => CharacterStatsData[Level].Def;
         public float Speed => CharacterStatsData[Level].Speed;
         public float Atk => CharacterStatsData[Level].Atk;
         

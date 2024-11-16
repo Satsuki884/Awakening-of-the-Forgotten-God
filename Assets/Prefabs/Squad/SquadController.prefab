@@ -48,8 +48,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32826d06a12a24207b1009a79edb7e61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _brainType: 1
-  _characterPrefabs:
-  - {fileID: 7536712614303847639, guid: 24c4affcce67d594cbcc7289c3dd0038, type: 3}
-  - {fileID: 6594763403774803771, guid: 39694e16707c5c14b8c042638f736fdc, type: 3}
-  - {fileID: 3809953032855103970, guid: a0713a34b6799a5458bf913da3d5163c, type: 3}
+  _brainType: 2

@@ -78,6 +78,12 @@ namespace AFG.Character
             set => _characterStats.Def = value; // ������ ��� ������
         }
 
+        public float MaxDef
+        {
+            get => _characterStats.MaxDef;
+            set => _characterStats.MaxDef = value;
+        }
+
         public float Speed
         {
             get => _characterStats.Speed;
@@ -94,6 +100,12 @@ namespace AFG.Character
         {
             get => _characterStats.Health;
             set => _characterStats.Health = value; // ������ ��� ��������
+        }
+
+        public float MaxHealth
+        {
+            get => _characterStats.MaxHealth;
+            set => _characterStats.MaxHealth = value;
         }
 
         public virtual void Initialization(CharacterBrain brain, CharacterDataWrapper characterDataWrapper)
