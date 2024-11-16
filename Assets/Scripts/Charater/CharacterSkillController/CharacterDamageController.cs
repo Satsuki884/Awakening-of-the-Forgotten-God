@@ -21,7 +21,7 @@ namespace AFG.Character
             {
                 float temp = target.Def - i;
                 target.Def = 0;
-                target.Health += temp;
+                target.Health -= temp;
             }else if(target.Health > i)
             {
                 target.Health -= i;
