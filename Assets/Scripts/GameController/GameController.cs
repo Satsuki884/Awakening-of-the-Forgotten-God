@@ -19,15 +19,30 @@ namespace AFG
                     _instance.Initialize();
                     DontDestroyOnLoad(_instance);
                 }
+                else
+                {
+                    GameController sceneController = FindObjectOfType<GameController>();
+                    if (_instance != sceneController)
+                    {
+                        Destroy(sceneController.gameObject);
+                    }
+                }
                 return _instance;
             }
         }
 
         [SerializeField] private SaveManager _saveManager;
-        public SaveManager SaveManager 
+        public SaveManager SaveManager
         {
             get => _saveManager;
             set => _saveManager = value;
+        }
+
+        [SerializeField] private AudioManager _audioManager;
+        public AudioManager AudioManager
+        {
+            get => _audioManager;
+            set => _audioManager = value;
         }
 
         [SerializeField] private LevelModel _levelModel;
@@ -36,7 +51,7 @@ namespace AFG
             get => _levelModel;
             set => _levelModel = value;
         }
-        
+
         public CombatModel CombatModel { get; set; }
 
         [Header("Models")]
@@ -46,7 +61,7 @@ namespace AFG
             get => _playerCharactersHolderModel;
             set => _playerCharactersHolderModel = value;
         }
-        
+
         [SerializeField] private CharactersHolderModel _charactersHolderModel;
         public CharactersHolderModel CharactersHolderModel
         {

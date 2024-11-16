@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 2983681685793560644}
   - component: {fileID: 7293695621386463542}
   - component: {fileID: 5537882017319264765}
+  - component: {fileID: 1718903493132863147}
   m_Layer: 5
   m_Name: AttackDebufButton
   m_TagString: Untagged
@@ -200,6 +201,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1718903493132863147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011560140397877820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4692b8e3971144099bcd1d89efb63e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonClickSound: {fileID: 5537882017319264765}
 --- !u!1 &1111865683003410218
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,6 +226,7 @@ GameObject:
   - component: {fileID: 748834006737208894}
   - component: {fileID: 1231787507521727350}
   - component: {fileID: 1257050711316015312}
+  - component: {fileID: 7208475767667487212}
   m_Layer: 5
   m_Name: AttackRangeButton
   m_TagString: Untagged
@@ -321,6 +336,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7208475767667487212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111865683003410218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4692b8e3971144099bcd1d89efb63e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonClickSound: {fileID: 1257050711316015312}
 --- !u!1 &1207401390331359533
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,6 +440,7 @@ GameObject:
   - component: {fileID: 2861798955096770319}
   - component: {fileID: 6259066223549057263}
   - component: {fileID: 2222489978199485174}
+  - component: {fileID: 2906172181733098284}
   m_Layer: 5
   m_Name: AttackAreaButton
   m_TagString: Untagged
@@ -521,6 +550,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2906172181733098284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611699712114095161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4692b8e3971144099bcd1d89efb63e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonClickSound: {fileID: 2222489978199485174}
 --- !u!1 &3344729739209147323
 GameObject:
   m_ObjectHideFlags: 0
@@ -775,7 +817,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 20, y: -50}
+  m_AnchoredPosition: {x: 0, y: -10}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &6010153744234570166
@@ -887,6 +929,7 @@ GameObject:
   - component: {fileID: 1453110783579264709}
   - component: {fileID: 7095439226579557971}
   - component: {fileID: 7398377265305242818}
+  - component: {fileID: 1963222776383225694}
   m_Layer: 5
   m_Name: AttackBufButton
   m_TagString: Untagged
@@ -996,6 +1039,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1963222776383225694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3883603915619966091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4692b8e3971144099bcd1d89efb63e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonClickSound: {fileID: 7398377265305242818}
 --- !u!1 &5026468478670793149
 GameObject:
   m_ObjectHideFlags: 0
@@ -1008,6 +1064,7 @@ GameObject:
   - component: {fileID: 6857667616438148356}
   - component: {fileID: 5999244166734971780}
   - component: {fileID: 4764437353557642557}
+  - component: {fileID: 992600219873290081}
   m_Layer: 5
   m_Name: AttackHealButton
   m_TagString: Untagged
@@ -1117,6 +1174,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &992600219873290081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5026468478670793149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4692b8e3971144099bcd1d89efb63e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonClickSound: {fileID: 4764437353557642557}
 --- !u!1 &5564282575556055979
 GameObject:
   m_ObjectHideFlags: 0
@@ -1129,6 +1199,7 @@ GameObject:
   - component: {fileID: 1651663313190636853}
   - component: {fileID: 108952622041570314}
   - component: {fileID: 6275994116498496726}
+  - component: {fileID: 7566044182784911509}
   m_Layer: 5
   m_Name: AttackMeleButton
   m_TagString: Untagged
@@ -1238,6 +1309,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7566044182784911509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5564282575556055979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4692b8e3971144099bcd1d89efb63e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonClickSound: {fileID: 6275994116498496726}
 --- !u!1 &7560899950533636866
 GameObject:
   m_ObjectHideFlags: 0

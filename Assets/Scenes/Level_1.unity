@@ -1069,14 +1069,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CombatPresenter
       objectReference: {fileID: 0}
-    - target: {fileID: 4322169725535592522, guid: 7c6198395e9a9457d8d5952ec7c972fc, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4322169725535592522, guid: 7c6198395e9a9457d8d5952ec7c972fc, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

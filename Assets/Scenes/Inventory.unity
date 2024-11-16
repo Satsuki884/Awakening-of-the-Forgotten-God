@@ -2090,6 +2090,7 @@ GameObject:
   - component: {fileID: 593025875}
   - component: {fileID: 593025874}
   - component: {fileID: 593025873}
+  - component: {fileID: 593025876}
   m_Layer: 5
   m_Name: ButtonUp
   m_TagString: Untagged
@@ -2199,6 +2200,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593025871}
   m_CullTransparentMesh: 1
+--- !u!114 &593025876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593025871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ce463be27abcb4babf17eb563d9703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonClickSound: {fileID: 593025873}
 --- !u!1 &614286505
 GameObject:
   m_ObjectHideFlags: 0
@@ -3680,6 +3694,7 @@ GameObject:
   - component: {fileID: 1072270400}
   - component: {fileID: 1072270399}
   - component: {fileID: 1072270398}
+  - component: {fileID: 1072270401}
   m_Layer: 5
   m_Name: Close
   m_TagString: Untagged
@@ -3789,6 +3804,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1072270396}
   m_CullTransparentMesh: 1
+--- !u!114 &1072270401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072270396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4692b8e3971144099bcd1d89efb63e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonClickSound: {fileID: 1072270398}
 --- !u!1 &1188286495
 GameObject:
   m_ObjectHideFlags: 0
@@ -3801,6 +3829,7 @@ GameObject:
   - component: {fileID: 1188286499}
   - component: {fileID: 1188286498}
   - component: {fileID: 1188286497}
+  - component: {fileID: 1188286500}
   m_Layer: 5
   m_Name: ButtonUp
   m_TagString: Untagged
@@ -3910,6 +3939,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1188286495}
   m_CullTransparentMesh: 1
+--- !u!114 &1188286500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188286495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4692b8e3971144099bcd1d89efb63e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonClickSound: {fileID: 1188286497}
 --- !u!1 &1231398308
 GameObject:
   m_ObjectHideFlags: 0
@@ -4811,6 +4853,7 @@ GameObject:
   - component: {fileID: 1522800968}
   - component: {fileID: 1522800967}
   - component: {fileID: 1522800966}
+  - component: {fileID: 1522800969}
   m_Layer: 5
   m_Name: Close
   m_TagString: Untagged
@@ -4920,6 +4963,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1522800964}
   m_CullTransparentMesh: 1
+--- !u!114 &1522800969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522800964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4692b8e3971144099bcd1d89efb63e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonClickSound: {fileID: 1522800966}
 --- !u!1 &1549304079
 GameObject:
   m_ObjectHideFlags: 0
@@ -7465,6 +7521,7 @@ GameObject:
   - component: {fileID: 8307029266056185570}
   - component: {fileID: 7226920739706111517}
   - component: {fileID: 4222117263851390506}
+  - component: {fileID: 8307029266056185571}
   m_Layer: 5
   m_Name: BackToMainMenu
   m_TagString: Untagged
@@ -7743,6 +7800,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3419194333802781694}
   m_CullTransparentMesh: 1
+--- !u!114 &8307029266056185571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3419194333802781694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4692b8e3971144099bcd1d89efb63e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonClickSound: {fileID: 4222117263851390506}
 --- !u!224 &8548283419703922582
 RectTransform:
   m_ObjectHideFlags: 0
