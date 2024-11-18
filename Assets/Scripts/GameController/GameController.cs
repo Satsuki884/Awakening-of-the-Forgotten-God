@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using AFG.Character;
@@ -9,27 +10,7 @@ namespace AFG
     public class GameController : MonoBehaviour
     {
         private static GameController _instance;
-        public static GameController Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = FindObjectOfType<GameController>();
-                    _instance.Initialize();
-                    DontDestroyOnLoad(_instance);
-                }
-                else
-                {
-                    GameController sceneController = FindObjectOfType<GameController>();
-                    if (_instance != sceneController)
-                    {
-                        Destroy(sceneController.gameObject);
-                    }
-                }
-                return _instance;
-            }
-        }
+        public static GameController Instance => _instance;
 
         [SerializeField] private SaveManager _saveManager;
         public SaveManager SaveManager
@@ -67,6 +48,20 @@ namespace AFG
         {
             get => _charactersHolderModel;
             set => _charactersHolderModel = value;
+        }
+
+        private void Awake()
+        {
+            if (_instance == null)
+            {
+                _instance = this;
+                _instance.Initialize();
+                DontDestroyOnLoad(_instance);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
         public void Initialize()
