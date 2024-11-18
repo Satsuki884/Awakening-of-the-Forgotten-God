@@ -20,12 +20,12 @@ namespace AFG.MVP
         [SerializeField] private Button _debuffButton;
         [SerializeField] private TextMeshProUGUI _currentCharacter;
 
-        public void OnEnable()
+        public void Start()
         {
             GameController.Instance.CombatModel.OnCharacterSelected += OnCharacterSelected;
         }
 
-        public void OnDisable()
+        public void OnDestroy()
         {
             GameController.Instance.CombatModel.OnCharacterSelected -= OnCharacterSelected;
         }
@@ -37,7 +37,7 @@ namespace AFG.MVP
             {
                 HighlightCharacter(_selectedCharacter, false);
             }
-            HighlightCharacter(_selectedCharacter, true);
+           // HighlightCharacter(_selectedCharacter, true);
             string fullName = _selectedCharacter.name.ToString();
             string firstWord = fullName.Split(' ')[0];
             _currentCharacter.text = firstWord;
@@ -140,7 +140,7 @@ namespace AFG.MVP
                     onFinishMove);
 
                 DeactivateAllButton();
-                HighlightCharacter(selectedCharacter, false);
+                //HighlightCharacter(selectedCharacter, false);
             });
         }
 
