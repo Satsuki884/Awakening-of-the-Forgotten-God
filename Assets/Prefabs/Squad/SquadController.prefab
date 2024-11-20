@@ -48,4 +48,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32826d06a12a24207b1009a79edb7e61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _brainType: 2
+  _brainType: 1

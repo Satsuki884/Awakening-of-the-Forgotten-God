@@ -9,7 +9,7 @@ namespace AFG.Character
         public override void Initialization(CharacterController characterController)
         {
             base.Initialization(characterController);
-            _brainType = CharacterBrainType.Player;
+            Type = CharacterBrainType.Player;
         }
     }
 }

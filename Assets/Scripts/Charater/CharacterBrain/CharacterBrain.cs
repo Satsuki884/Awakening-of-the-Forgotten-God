@@ -8,7 +8,8 @@ namespace AFG.Character
     [System.Serializable]
     public class CharacterBrain
     {
-        protected CharacterBrainType _brainType;
+        public CharacterBrainType Type { get; set; }
+        
         protected CharacterController _characterController;
         
         public virtual void Initialization(CharacterController characterController)

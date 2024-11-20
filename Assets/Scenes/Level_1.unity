@@ -292,6 +292,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -373,6 +374,30 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c37f4408b72b48bab8045b2ff1c7e46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 958947657}
+  rotationSpeed: 5
+  moveSpeed: 5
+  zoomSpeed: 2
+  minZoomDistance: 5
+  maxZoomDistance: 20
+  minYAngle: -45
+  maxYAngle: 45
+  minZAngle: -45
+  maxZAngle: 45
+  minXPosition: -10
+  maxXPosition: 10
 --- !u!1001 &562713022
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -384,6 +409,10 @@ PrefabInstance:
     - target: {fileID: 812340672008140000, guid: 540b92bf5fa3a4c7fa8979438014e293, type: 3}
       propertyPath: m_Name
       value: SquadAIController
+      objectReference: {fileID: 0}
+    - target: {fileID: 1257455408958391666, guid: 540b92bf5fa3a4c7fa8979438014e293, type: 3}
+      propertyPath: _brainType
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7510881702350321048, guid: 540b92bf5fa3a4c7fa8979438014e293, type: 3}
       propertyPath: m_Pivot.x

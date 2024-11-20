@@ -68,6 +68,8 @@ namespace AFG.Character
         }
 
         protected CharacterBrain _brain;
+        public CharacterBrain Brain => _brain;
+        
         protected CharacterStats _characterStats;
         
         protected CharacterSkill[] _skills;

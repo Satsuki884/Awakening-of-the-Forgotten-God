@@ -21,6 +21,9 @@ namespace AFG.MVP
         [SerializeField] private Button _debuffButton;
         [SerializeField] private TextMeshProUGUI _currentCharacter;
 
+        private SquadController _tempAISquad;
+        private SquadController _tempPlayerSquad;
+        
         public void Start()
         {
             GameController.Instance.CombatModel.OnCharacterSelected += OnCharacterSelected;
@@ -33,7 +36,8 @@ namespace AFG.MVP
 
         private void OnCharacterSelected(CharacterController selectedCharacter)
         {
-            if (selectedCharacter != null)
+            //TODO move to PlayerBrain
+            if (selectedCharacter != null && selectedCharacter.Brain.Type == CharacterBrainType.Player)
             {
                 DeactivateAllButton();
 
@@ -45,25 +49,22 @@ namespace AFG.MVP
             }
         }
 
-        SquadController tempAISquad;
-        SquadController tempPlayerSquad;
-
         private void ActivateButtons(CharacterController selectedCharacter)
         {
             SquadController parent = selectedCharacter.GetComponentInParent<SquadController>();
 
             //TODO implement brain check
+            //TODO "SquadPlayerController" move to variable
             if (parent.name == "SquadPlayerController")
             {
-                tempAISquad = GameController.Instance.CombatModel.AiSquad;
-                tempPlayerSquad = GameController.Instance.CombatModel.PlayerSquad;
+                _tempAISquad = GameController.Instance.CombatModel.AiSquad;
+                _tempPlayerSquad = GameController.Instance.CombatModel.PlayerSquad;
             }
             else if (parent.name == "SquadAIController")
             {
-                tempAISquad = GameController.Instance.CombatModel.PlayerSquad;
-                tempPlayerSquad = GameController.Instance.CombatModel.AiSquad;
+                _tempAISquad = GameController.Instance.CombatModel.PlayerSquad;
+                _tempPlayerSquad = GameController.Instance.CombatModel.AiSquad;
             }
-
 
             for (int i = 0; i < selectedCharacter.Skills.Length; i++)
             {
@@ -74,42 +75,42 @@ namespace AFG.MVP
                     AddActionToButton(_attackMeleButton,
                         selectedCharacter,
                         skill,
-                        tempAISquad.Characters);
+                        _tempAISquad.Characters);
                 }
                 else if (skill is CharacterRangeSkill)
                 {
                     AddActionToButton(_attackMeleButton,
                         selectedCharacter,
                         skill,
-                        tempAISquad.Characters);
+                        _tempAISquad.Characters);
                 }
                 else if (skill is CharacterBufSkill)
                 {
                     AddActionToButton(_bufButton,
                         selectedCharacter,
                         skill,
-                        tempPlayerSquad.Characters);
+                        _tempPlayerSquad.Characters);
                 }
                 else if (skill is CharacterDebufSkill)
                 {
                     AddActionToButton(_debuffButton,
                         selectedCharacter,
                         skill,
-                        tempAISquad.Characters);
+                        _tempAISquad.Characters);
                 }
                 else if (skill is CharacterHealSkill)
                 {
                     AddActionToButton(_healButton,
                         selectedCharacter,
                         skill,
-                        tempPlayerSquad.Characters);
+                        _tempPlayerSquad.Characters);
                 }
                 else if (skill is CharacterAreaDamageSkill)
                 {
                     AddActionToButton(_attackAreaButton,
                         selectedCharacter,
                         skill,
-                        tempAISquad.Characters);
+                        _tempAISquad.Characters);
                 }
             }
         }
