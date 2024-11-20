@@ -20,16 +20,16 @@ namespace AFG.Character
                 int j = i;
                 targets[j].IsAbleToSelect = true;
                 
-                targets[j].OnSelected += OnCharacterSelected;
+                targets[j].OnSelected -= OnTargetSelected;
+                targets[j].OnSelected += OnTargetSelected;
             }
             
             //Debug.Log("Mele skill used");
         }
         
-        public override void OnCharacterSelected(CharacterController characterController)
+        protected override void OnTargetSelected(CharacterController characterController)
         {
-            base.OnCharacterSelected(characterController);
-            DeactivateSelectionAbility(_targets);
+            base.OnTargetSelected(characterController);
 
             //play run animation
             _user.AnimationController.PlayRunAnimation(_user);
@@ -61,8 +61,6 @@ namespace AFG.Character
                     });
                 });
             });
-            
-            DeactivateSelectionAbility(_targets);
         }
     }
 }

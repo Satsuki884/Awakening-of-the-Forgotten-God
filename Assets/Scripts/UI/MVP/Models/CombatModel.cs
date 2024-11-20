@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using AFG.Squad;
 using UnityEngine;
 using CharacterController = AFG.Character.CharacterController;
@@ -19,14 +20,31 @@ namespace AFG.MVP
             }
             set
             {
-                if (_selectedCharacter == null || 
-                    !_selectedCharacter.Equals(value))
+                if (value != null)
                 {
-                    
-                    _selectedCharacter = value;
-                    //Debug.LogError(_selectedCharacter.name + "\t� ����");
-                    OnCharacterSelected?.Invoke(_selectedCharacter);
+                    value.IsSelected = true;
                 }
+                else if (_selectedCharacter != null)
+                {
+                    _selectedCharacter.IsSelected = false;
+                }
+                
+                _selectedCharacter = value;
+                OnCharacterSelected?.Invoke(_selectedCharacter);
+            }
+        }
+
+        private List<CharacterController> _selectedTargets;
+        public List<CharacterController> SelectedTargets
+        {
+            get
+            {
+                return _selectedTargets;
+            }
+            set
+            {
+                _selectedTargets = value;
+                UseSelectedCharacterSkill();
             }
         }
         
@@ -35,7 +53,23 @@ namespace AFG.MVP
 
         public void FinishMove()
         {
+            SelectedCharacter = null;
+            SelectedTargets = null;
             OnMoveFinished?.Invoke();
+        }
+
+        public void UseSelectedCharacterSkill()
+        {
+            if (_selectedCharacter!=null && 
+                _selectedCharacter.IsSelected &&
+                _selectedTargets!=null && 
+                _selectedTargets.Count > 0)
+            {
+                _selectedCharacter.SelectedCharacterSkill.UseSkill(
+                    _selectedCharacter, 
+                    _selectedTargets, 
+                    FinishMove);
+            }
         }
     }
 }

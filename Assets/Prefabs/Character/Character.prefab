@@ -252,6 +252,7 @@ MonoBehaviour:
   _healController: {fileID: 596756449076775240}
   _deBufController: {fileID: 2752516492794495008}
   _selectionIndicatorPrefab: {fileID: 6394513305067255813, guid: fd2b27f6a2e7f2e48b05055acae2394b, type: 3}
+  _selectedIndicatorPrefab: {fileID: 6394513305067255813, guid: 0dea01b3d38ec4b1390a7b138216fa11, type: 3}
 --- !u!114 &8380994519039996886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,8 +329,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hpSpriteRenderer: {fileID: 767362791350924431}
   _defSpriteRenderer: {fileID: 3116777714943888125}
-  maxHealth: 100
-  maxDef: 100
 --- !u!1 &4320903407492816857
 GameObject:
   m_ObjectHideFlags: 0

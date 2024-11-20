@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using AFG.Character;
 using AFG.Squad;
 using DG.Tweening;
@@ -30,26 +31,24 @@ namespace AFG.MVP
             GameController.Instance.CombatModel.OnCharacterSelected -= OnCharacterSelected;
         }
 
-        private void OnCharacterSelected(CharacterController _selectedCharacter)
+        private void OnCharacterSelected(CharacterController selectedCharacter)
         {
-            DeactivateAllButton();
-            if (_selectedCharacter != null)
+            if (selectedCharacter != null)
             {
-                HighlightCharacter(_selectedCharacter, false);
-            }
-           // HighlightCharacter(_selectedCharacter, true);
-            string fullName = _selectedCharacter.name.ToString();
-            string firstWord = fullName.Split(' ')[0];
-            _currentCharacter.text = firstWord;
-            Action onFinishMove = () => GameController.Instance.CombatModel.FinishMove();
+                DeactivateAllButton();
 
-            ActivateButtons(_selectedCharacter, onFinishMove);
+                string fullName = selectedCharacter.name.ToString();
+                string firstWord = fullName.Split(' ')[0];
+                _currentCharacter.text = firstWord;
+
+                ActivateButtons(selectedCharacter);
+            }
         }
 
         SquadController tempAISquad;
         SquadController tempPlayerSquad;
 
-        private void ActivateButtons(CharacterController selectedCharacter, Action onFinishMove)
+        private void ActivateButtons(CharacterController selectedCharacter)
         {
             SquadController parent = selectedCharacter.GetComponentInParent<SquadController>();
 
@@ -75,48 +74,42 @@ namespace AFG.MVP
                     AddActionToButton(_attackMeleButton,
                         selectedCharacter,
                         skill,
-                        tempAISquad.Characters,
-                        onFinishMove);
+                        tempAISquad.Characters);
                 }
-                if (skill is CharacterRangeSkill)
+                else if (skill is CharacterRangeSkill)
                 {
                     AddActionToButton(_attackMeleButton,
                         selectedCharacter,
                         skill,
-                        tempAISquad.Characters,
-                        onFinishMove);
+                        tempAISquad.Characters);
                 }
-                if (skill is CharacterBufSkill)
+                else if (skill is CharacterBufSkill)
                 {
                     AddActionToButton(_bufButton,
                         selectedCharacter,
                         skill,
-                        tempPlayerSquad.Characters,
-                        onFinishMove);
+                        tempPlayerSquad.Characters);
                 }
-                if (skill is CharacterDebufSkill)
+                else if (skill is CharacterDebufSkill)
                 {
                     AddActionToButton(_debuffButton,
                         selectedCharacter,
                         skill,
-                        tempAISquad.Characters,
-                        onFinishMove);
+                        tempAISquad.Characters);
                 }
-                if (skill is CharacterHealSkill)
+                else if (skill is CharacterHealSkill)
                 {
                     AddActionToButton(_healButton,
                         selectedCharacter,
                         skill,
-                        tempPlayerSquad.Characters,
-                        onFinishMove);
+                        tempPlayerSquad.Characters);
                 }
-                if (skill is CharacterAreaDamageSkill)
+                else if (skill is CharacterAreaDamageSkill)
                 {
                     AddActionToButton(_attackAreaButton,
                         selectedCharacter,
                         skill,
-                        tempAISquad.Characters,
-                        onFinishMove);
+                        tempAISquad.Characters);
                 }
             }
         }
@@ -125,8 +118,7 @@ namespace AFG.MVP
         private void AddActionToButton(Button button,
             CharacterController selectedCharacter,
             CharacterSkill skill,
-            List<CharacterController> characterTargets,
-            Action onFinishMove)
+            List<CharacterController> characterTargets)
         {
             button.gameObject.SetActive(true);
 
@@ -134,47 +126,11 @@ namespace AFG.MVP
 
             button.onClick.AddListener(() =>
             {
-                skill.UseSkill(
-                    selectedCharacter,
-                    characterTargets,
-                    onFinishMove);
-
+                selectedCharacter.SelectedCharacterSkill = skill;
+                GameController.Instance.CombatModel.SelectedTargets = characterTargets;
+                
                 DeactivateAllButton();
-                //HighlightCharacter(selectedCharacter, false);
             });
-        }
-
-        private void HighlightCharacter(CharacterController character, bool enableHighlight)
-        {
-            string fullName = character.name.ToString();
-            string firstWord = fullName.Split(' ')[0];
-
-            // Find the child object that matches the first word of the character's name
-            Transform targetTransform = character.transform.Find(firstWord);
-            Debug.Log("\t" + targetTransform);
-            if (targetTransform != null)
-            {
-                Renderer characterRenderer = targetTransform.GetComponentInChildren<Renderer>();
-                Debug.Log("\t" + "f\t" + characterRenderer);
-
-                if (characterRenderer != null)
-                {
-                    if (enableHighlight)
-                    {
-                        characterRenderer.material.DOColor(Color.green, 0.5f) // Light gray
-                            .OnComplete(() =>
-                            {
-                                characterRenderer.material.DOColor(new Color(1f, 1f, 1f, 0.5f), 0.5f) // Semi-transparent white
-                                    .SetLoops(-1, LoopType.Yoyo);
-                            });
-                    }
-                    else
-                    {
-                        characterRenderer.material.DOKill();
-                        characterRenderer.material.DOColor(Color.white, 0.5f);
-                    }
-                }
-            }
         }
 
         private void DeactivateAllButton()

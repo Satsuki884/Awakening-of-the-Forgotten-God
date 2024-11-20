@@ -26,7 +26,9 @@ namespace AFG.Character
         private bool _isAbleToSelect;
 
         [SerializeField] private GameObject _selectionIndicatorPrefab;
+        [SerializeField] private GameObject _selectedIndicatorPrefab;
         private GameObject _selectionIndicator;
+        private GameObject _selectedIndicator;
         public bool IsAbleToSelect
         {
             get => _isAbleToSelect;
@@ -44,24 +46,25 @@ namespace AFG.Character
             }
         }
 
-        
-        private void Start()
+        private bool _isSelected;
+        public bool IsSelected
         {
-            _selectionIndicator = Instantiate(_selectionIndicatorPrefab, transform);
-            _selectionIndicator.transform.localScale = new Vector3(5, 5, 1);
-            _selectionIndicator.transform.rotation = Quaternion.Euler(90, 0, 0);
-            _selectionIndicator.SetActive(false);
-        }
-
-        private void ShowSelectionIndicator()
-        {
-            _selectionIndicator.SetActive(true);
-            _selectionIndicator.transform.position = transform.position + Vector3.up * 0.1f;
-        }
-
-        private void HideSelectionIndicator()
-        {
-            _selectionIndicator.SetActive(false);
+            get=>_isSelected;
+            set
+            {
+                _isSelected = value;
+                if (_isSelected)
+                {
+                    _selectedIndicator = Instantiate(_selectedIndicatorPrefab, transform);
+                    _selectedIndicator.transform.localScale = new Vector3(5, 5, 1);
+                    _selectedIndicator.transform.rotation = Quaternion.Euler(90, 0, 0);
+                    _selectedIndicator.SetActive(true);
+                }
+                else
+                {
+                    Destroy(_selectedIndicator);
+                }
+            }
         }
 
         protected CharacterBrain _brain;
@@ -69,7 +72,9 @@ namespace AFG.Character
         
         protected CharacterSkill[] _skills;
         public CharacterSkill[] Skills => _skills;
-
+        
+        public CharacterSkill SelectedCharacterSkill { get; set; }
+        
         private CharacterDataWrapper _characterDataWrapper;
         
         public float Def
@@ -108,6 +113,25 @@ namespace AFG.Character
             set => _characterStats.MaxHealth = value;
         }
 
+        private void Start()
+        {
+            _selectionIndicator = Instantiate(_selectionIndicatorPrefab, transform);
+            _selectionIndicator.transform.localScale = new Vector3(5, 5, 1);
+            _selectionIndicator.transform.rotation = Quaternion.Euler(90, 0, 0);
+            _selectionIndicator.SetActive(false);
+        }
+
+        private void ShowSelectionIndicator()
+        {
+            _selectionIndicator.SetActive(true);
+            _selectionIndicator.transform.position = transform.position + Vector3.up * 0.1f;
+        }
+
+        private void HideSelectionIndicator()
+        {
+            _selectionIndicator.SetActive(false);
+        }
+        
         public virtual void Initialization(CharacterBrain brain, CharacterDataWrapper characterDataWrapper)
         {
             //Debug.Log("Initialized character "+gameObject.name);

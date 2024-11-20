@@ -16,23 +16,23 @@ namespace AFG.Character
             List<CharacterController> targets,
             Action OnSkillUsed = null)
         {
-            //Debug.Log("Skill used by " + user.name);
             _user = user;
             _targets = targets;
             onSkillUsed = OnSkillUsed;
         }
 
-        public virtual void DeactivateSelectionAbility(List<CharacterController> targets)
+        private void DeactivateSelectionAbility()
         {
-            for(int i=0; i < targets.Count; i++)
+            for(int i=0; i < _targets.Count; i++)
             {
-                targets[i].IsAbleToSelect = false;
+                _targets[i].IsAbleToSelect = false;
+                _targets[i].OnSelected -= OnTargetSelected;
             }
         }
         
-        public virtual void OnCharacterSelected(CharacterController characterController)
+        protected virtual void OnTargetSelected(CharacterController characterController)
         {
-            characterController.OnSelected -= OnCharacterSelected;
+            DeactivateSelectionAbility();
         }
     }
 }

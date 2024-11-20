@@ -22,15 +22,16 @@ namespace AFG.Character
                 int j = i;
                 targets[j].IsAbleToSelect = true;
                 
-                targets[j].OnSelected += OnCharacterSelected;
+                targets[j].OnSelected -= OnTargetSelected;
+                targets[j].OnSelected += OnTargetSelected;
             }
 
             //Debug.Log("Range skill used");
         }
 
-        public override void OnCharacterSelected(CharacterController characterController)
+        protected override void OnTargetSelected(CharacterController characterController)
         {
-            base.OnCharacterSelected(characterController);
+            base.OnTargetSelected(characterController);
 
             //start hit enemy
             _user.AnimationController.PlayRangeAttackAnimation(_user, () =>
@@ -41,8 +42,6 @@ namespace AFG.Character
                 _user.AnimationController.PlayIdleAnimation(_user);
                 onSkillUsed?.Invoke();
             });
-
-            DeactivateSelectionAbility(_targets);
         }
     }
 }

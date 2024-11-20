@@ -107,7 +107,7 @@ public class CharacterAnimationController : MonoBehaviour
             childAnimator.SetBool("range", true);
             StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, "range"), () =>
             {
-                childAnimator.SetBool("range", false); // Останавливаем анимацию после выполнения
+                childAnimator.SetBool("range", false); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 OnRange?.Invoke();
             }));
         }
@@ -126,7 +126,7 @@ public class CharacterAnimationController : MonoBehaviour
             childAnimator.SetBool("heal", true);
             StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, "heal"), () =>
             {
-                childAnimator.SetBool("heal", false); // Останавливаем анимацию после выполнения
+                childAnimator.SetBool("heal", false); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 OnHeal?.Invoke();
             }));
         }
@@ -145,7 +145,7 @@ public class CharacterAnimationController : MonoBehaviour
             childAnimator.SetBool("buf", true);
             StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, "buf"), () =>
             {
-                childAnimator.SetBool("buf", false); // Останавливаем анимацию после выполнения
+                childAnimator.SetBool("buf", false); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 OnBuf?.Invoke();
             }));
         }
@@ -164,7 +164,7 @@ public class CharacterAnimationController : MonoBehaviour
             childAnimator.SetBool("debuf", true);
             StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, "debuf"), () =>
             {
-                childAnimator.SetBool("debuf", false); // Останавливаем анимацию после выполнения
+                childAnimator.SetBool("debuf", false); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 OnDebuf?.Invoke();
             }));
         }
@@ -183,7 +183,7 @@ public class CharacterAnimationController : MonoBehaviour
             childAnimator.SetBool("area", true);
             StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, "area"), () =>
             {
-                childAnimator.SetBool("area", false); // Останавливаем анимацию после выполнения
+                childAnimator.SetBool("area", false); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 OnArea?.Invoke();
             }));
         }
