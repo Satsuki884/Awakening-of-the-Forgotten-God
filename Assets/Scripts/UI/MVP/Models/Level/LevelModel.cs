@@ -13,13 +13,6 @@ public class LevelModel : MonoBehaviour
     [SerializeField] private Animator transition;
     [SerializeField] private float _transitionTime = 0.5f;
 
-    IEnumerator LoadScene(string sceneName)
-    {
-        transition.SetBool("Start", true);
-        yield return new WaitForSeconds(_transitionTime);
-        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
-        transition.SetBool("Start", false);
-    }
 
     [SerializeField] private string _mainMenuScene;
     public string MainMenuScene => _mainMenuScene;
@@ -33,11 +26,22 @@ public class LevelModel : MonoBehaviour
         LoadBackgroundScene();
     }
 
+    IEnumerator LoadScene(string sceneName)
+    {
+        transition.SetBool("End", false);
+        transition.SetBool("Start", true);
+        yield return new WaitForSeconds(_transitionTime);
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+        transition.SetBool("End", true);
+        yield return new WaitForSeconds(_transitionTime);
+        transition.SetBool("Start", false);
+    }
+
     private void LoadBackgroundScene()
     {
         if (_backgroundScene != null && !SceneManager.GetSceneByName(_backgroundScene).isLoaded)
         {
-            SceneManager.LoadScene(_mainMenuScene);
+            //SceneManager.LoadScene(_mainMenuScene);
             SceneManager.LoadScene(_backgroundScene, LoadSceneMode.Additive);
         }
     }

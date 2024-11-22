@@ -9,10 +9,11 @@ namespace AFG.Character
     {
         protected CharacterController _user;
         protected List<CharacterController> _targets;
-        
+        protected CharacterController _aiTarget;
+
         protected Action onSkillUsed;
-        
-        public virtual void UseSkill(CharacterController user, 
+
+        public virtual void UseSkill(CharacterController user,
             List<CharacterController> targets,
             Action OnSkillUsed = null)
         {
@@ -21,15 +22,28 @@ namespace AFG.Character
             onSkillUsed = OnSkillUsed;
         }
 
+        public virtual void UseAISkill(CharacterController user,
+            CharacterController AITarget,
+            Action OnSkillUsed = null)
+        {
+            _user = user;
+            _aiTarget = AITarget;
+            onSkillUsed = OnSkillUsed;
+        }
+
         private void DeactivateSelectionAbility()
         {
-            for(int i=0; i < _targets.Count; i++)
+            if (_targets != null)
             {
-                _targets[i].IsAbleToSelect = false;
-                _targets[i].OnSelected -= OnTargetSelected;
+                for (int i = 0; i < _targets.Count; i++)
+                {
+                    _targets[i].IsAbleToSelect = false;
+                    _targets[i].OnSelected -= OnTargetSelected;
+                }
             }
+
         }
-        
+
         protected virtual void OnTargetSelected(CharacterController characterController)
         {
             DeactivateSelectionAbility();

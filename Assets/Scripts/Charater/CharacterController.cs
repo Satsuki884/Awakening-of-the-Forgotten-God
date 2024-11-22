@@ -126,7 +126,7 @@ namespace AFG.Character
         private void ShowSelectionIndicator()
         {
             _selectionIndicator.SetActive(true);
-            _selectionIndicator.transform.position = transform.position + Vector3.up * 0.1f;
+            _selectionIndicator.transform.position = transform.position + Vector3.up;
         }
 
         private void HideSelectionIndicator()
@@ -145,9 +145,6 @@ namespace AFG.Character
             _characterStats = GetComponentInChildren<CharacterStats>();
             
             _skills = GetComponentsInChildren<CharacterSkill>();
-            //Debug.Log("Character skill" + _skills);
-            //TODO add load from file
-            //_characterStats.Initialize("{\n    \"health\": 100.0,\n    \"speed\": 5.5\n}\n");
         }
 
         public virtual void SelectCharacter()

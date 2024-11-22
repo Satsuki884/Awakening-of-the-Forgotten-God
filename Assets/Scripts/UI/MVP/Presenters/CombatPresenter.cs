@@ -23,7 +23,7 @@ namespace AFG.MVP
 
         private SquadController _tempAISquad;
         private SquadController _tempPlayerSquad;
-        
+
         public void Start()
         {
             GameController.Instance.CombatModel.OnCharacterSelected += OnCharacterSelected;
@@ -36,15 +36,15 @@ namespace AFG.MVP
 
         private void OnCharacterSelected(CharacterController selectedCharacter)
         {
+            DeactivateAllButton();
+            Debug.Log(selectedCharacter.name);
+            string fullName = selectedCharacter.name.ToString();
+            string firstWord = fullName.Split(' ')[0];
+            _currentCharacter.text = firstWord;
+
             //TODO move to PlayerBrain
             if (selectedCharacter != null && selectedCharacter.Brain.Type == CharacterBrainType.Player)
             {
-                DeactivateAllButton();
-
-                string fullName = selectedCharacter.name.ToString();
-                string firstWord = fullName.Split(' ')[0];
-                _currentCharacter.text = firstWord;
-
                 ActivateButtons(selectedCharacter);
             }
         }
@@ -129,7 +129,7 @@ namespace AFG.MVP
             {
                 selectedCharacter.SelectedCharacterSkill = skill;
                 GameController.Instance.CombatModel.SelectedTargets = characterTargets;
-                
+
                 DeactivateAllButton();
             });
         }

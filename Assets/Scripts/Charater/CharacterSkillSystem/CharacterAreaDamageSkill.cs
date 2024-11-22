@@ -29,6 +29,14 @@ namespace AFG.Character
             }
         }
 
+        public override void UseAISkill(CharacterController user,
+           CharacterController AITarget, Action OnSkillUsed)
+        {
+            base.UseAISkill(user, AITarget, OnSkillUsed);
+
+            OnTargetSelected(AITarget);
+        }
+
         protected override void OnTargetSelected(CharacterController characterController)
         {
             base.OnTargetSelected(characterController);
@@ -47,17 +55,17 @@ namespace AFG.Character
             _user.MoveController.MoveTo(_user, adjustedPosition, () =>
             {
                 //start hit enemy
-                _user.AnimationController.PlayAreaAnimation(_user ,() =>
+                _user.AnimationController.PlayAreaAnimation(_user, () =>
                 {
                     //Debug.LogWarning("Start area dmdge");
                     //enemy hit
                     for (int i = 0; i < _targets.Count; i++)
                     {
-                           
+
                         //enemy hit
                         _targets[i].DamageController.TakeDamage(_user.Atk, _targets[i]);
-                            //return to start point
-                           
+                        //return to start point
+
                     }
                     _user.AnimationController.PlayRunAnimation(_user);
                     _user.MoveController.MoveBack(_user, startPoint, initialRotation, () =>

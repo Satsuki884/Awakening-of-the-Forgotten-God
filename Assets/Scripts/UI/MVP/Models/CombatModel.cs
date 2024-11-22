@@ -10,7 +10,7 @@ namespace AFG.MVP
     {
         public event Action<CharacterController> OnCharacterSelected;
         public event Action OnMoveFinished;
-        
+
         private CharacterController _selectedCharacter;
         public CharacterController SelectedCharacter
         {
@@ -28,7 +28,7 @@ namespace AFG.MVP
                 {
                     _selectedCharacter.IsSelected = false;
                 }
-                
+
                 _selectedCharacter = value;
                 OnCharacterSelected?.Invoke(_selectedCharacter);
             }
@@ -44,10 +44,24 @@ namespace AFG.MVP
             set
             {
                 _selectedTargets = value;
-                UseSelectedCharacterSkill();
+                UseSelectedCharacterSkill("Player");
             }
         }
-        
+
+        private CharacterController _selectedAITarget;
+        public CharacterController SelectedAITarget
+        {
+            get
+            {
+                return _selectedAITarget;
+            }
+            set
+            {
+                _selectedAITarget = value;
+                UseSelectedCharacterSkill("AI");
+            }
+        }
+
         public SquadController PlayerSquad { get; set; }
         public SquadController AiSquad { get; set; }
 
@@ -58,18 +72,29 @@ namespace AFG.MVP
             OnMoveFinished?.Invoke();
         }
 
-        public void UseSelectedCharacterSkill()
+        public void UseSelectedCharacterSkill(string type)
         {
-            if (_selectedCharacter!=null && 
-                _selectedCharacter.IsSelected &&
-                _selectedTargets!=null && 
-                _selectedTargets.Count > 0)
+            if (type == "AI")
             {
-                _selectedCharacter.SelectedCharacterSkill.UseSkill(
-                    _selectedCharacter, 
-                    _selectedTargets, 
+                _selectedCharacter.SelectedCharacterSkill.UseAISkill(
+                    _selectedCharacter,
+                    _selectedAITarget,
                     FinishMove);
             }
+            else if (type == "Player")
+            {
+                if (_selectedCharacter != null &&
+                _selectedCharacter.IsSelected &&
+                _selectedTargets != null &&
+                _selectedTargets.Count > 0)
+                {
+                    _selectedCharacter.SelectedCharacterSkill.UseSkill(
+                        _selectedCharacter,
+                        _selectedTargets,
+                        FinishMove);
+                }
+            }
+
         }
     }
 }

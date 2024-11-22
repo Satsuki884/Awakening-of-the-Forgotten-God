@@ -8,17 +8,6 @@ using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class CharacterMoveController : MonoBehaviour
 {
-    //TODO add realization
-    public void MoveLeft()
-    {
-       Debug.Log("Move left");
-    }
-
-    public void MoveRight()
-    {
-        Debug.Log("Move right");
-    }
-
     public void MoveTo(CharacterController user, Vector3 transformPosition, Action OnMoveFinished)
     {
         //user.AnimationController.PlayRunAnimation(user);

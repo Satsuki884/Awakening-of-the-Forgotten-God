@@ -26,6 +26,14 @@ namespace AFG.Character
             
             //Debug.Log("Mele skill used");
         }
+
+        public override void UseAISkill(CharacterController user,
+           CharacterController AITarget, Action OnSkillUsed)
+        {
+            base.UseAISkill(user, AITarget, OnSkillUsed);
+
+            OnTargetSelected(AITarget);
+        }
         
         protected override void OnTargetSelected(CharacterController characterController)
         {

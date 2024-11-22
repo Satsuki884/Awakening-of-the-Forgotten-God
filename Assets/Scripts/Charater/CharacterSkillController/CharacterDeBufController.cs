@@ -32,20 +32,20 @@ namespace AFG.Character
         {
             if (bufType == 1) //speed
             {
-                Debug.Log("Got a speed ��buf");
+                Debug.Log("Got a speed debuf");
 
                 target.Speed = (target.Speed >= bufValue) ? target.Speed - bufValue : 0;
 
             }
             else if (bufType == 2) // def
             {
-                Debug.Log("Got a def ��buf");
+                Debug.Log("Got a def debuf");
 
                 target.Def = (target.Def >= bufValue) ? target.Def - bufValue : 0;
             }
             else if (bufType == 3) // atk
             {
-                Debug.Log("Got a atk ��buf");
+                Debug.Log("Got a atk debuf");
 
                 target.Atk = (target.Atk >= bufValue) ? target.Atk - bufValue : 0;
             }

@@ -10,14 +10,14 @@ namespace AFG.Character
         private void Update()
         {
             bool isMoveLeft = UnityEngine.Random.Range(0, 2) == 0;
-            if (isMoveLeft)
-            {
-                _moveController.MoveLeft();
-            }
-            else
-            {
-                _moveController.MoveRight();
-            }
+            // if (isMoveLeft)
+            // {
+            //     _moveController.MoveLeft();
+            // }
+            // else
+            // {
+            //     _moveController.MoveRight();
+            // }
         }
     }
 }

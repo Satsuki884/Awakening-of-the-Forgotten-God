@@ -25,6 +25,14 @@ namespace AFG.Character
             //Debug.Log("Debuf skill used");
         }
 
+        public override void UseAISkill(CharacterController user,
+           CharacterController AITarget, Action OnSkillUsed)
+        {
+            base.UseAISkill(user, AITarget, OnSkillUsed);
+
+            OnTargetSelected(AITarget);
+        }
+
         protected override void OnTargetSelected(CharacterController characterController)
         {
             base.OnTargetSelected(characterController);
@@ -46,8 +54,23 @@ namespace AFG.Character
                 //start debuf enemy
                 _user.AnimationController.PlayDebufAnimation(_user ,() =>
                 {
+
+                    int randomBuf = UnityEngine.Random.Range(1, 4);
+                    int randomBufValue = 1;
+                    if(randomBuf == 1)
+                    {
+                        randomBufValue = UnityEngine.Random.Range(1, 3);
+                    }
+                    else if(randomBuf == 2)
+                    {
+                        randomBufValue = UnityEngine.Random.Range(1, 5);
+                    }
+                    else if(randomBuf == 3)
+                    {
+                        randomBufValue = UnityEngine.Random.Range(1, 5);
+                    }
                     //enemy debuf
-                    characterController.DeBufController.TakeDeBuf(characterController, 2, 2);
+                    characterController.DeBufController.TakeDeBuf(characterController, randomBuf, randomBufValue);
                     _user.AnimationController.PlayRunAnimation(_user);
 
                     //return to start point

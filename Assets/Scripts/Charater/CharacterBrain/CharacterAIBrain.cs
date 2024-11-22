@@ -9,12 +9,12 @@ namespace AFG.Character
     {
         private SquadController _tempAISquad;
         private SquadController _tempPlayerSquad;
-        
+
         public override void Initialization(CharacterController characterController)
         {
             base.Initialization(characterController);
             Type = CharacterBrainType.AI;
-            
+
             GameController.Instance.CombatModel.OnCharacterSelected += OnCharacterSelected;
         }
 
@@ -25,7 +25,7 @@ namespace AFG.Character
                 DoAiMove(selectedCharacter);
             }
         }
-        
+
         private void DoAiMove(CharacterController selectedCharacter)
         {
             SquadController parent = selectedCharacter.GetComponentInParent<SquadController>();
@@ -92,8 +92,10 @@ namespace AFG.Character
             CharacterSkill skill,
             List<CharacterController> characterTargets)
         {
+            var randomIndex = UnityEngine.Random.Range(0, characterTargets.Count);
+            var selectedTarget = characterTargets[randomIndex];
             selectedCharacter.SelectedCharacterSkill = skill;
-            GameController.Instance.CombatModel.SelectedTargets = characterTargets;
+            GameController.Instance.CombatModel.SelectedAITarget = selectedTarget;
         }
     }
 }

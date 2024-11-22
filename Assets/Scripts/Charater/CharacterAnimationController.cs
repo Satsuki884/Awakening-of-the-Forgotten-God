@@ -18,7 +18,6 @@ public class CharacterAnimationController : MonoBehaviour
             var skill = character.Skills[i];
             if (skill is CharacterMeleSkill)
             {
-                //TODO move "melee" to variables
                 SetAllAnimationInFalse(animator, "melee");
             }
             if (skill is CharacterRangeSkill)

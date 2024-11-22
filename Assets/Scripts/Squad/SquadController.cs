@@ -8,7 +8,7 @@ namespace AFG.Squad
     public class SquadController : MonoBehaviour
     {
         [SerializeField] private CharacterBrainType _brainType;
-        
+
         protected List<CharacterController> _characters = new List<CharacterController>();
         public List<CharacterController> Characters => _characters;
 
@@ -35,9 +35,24 @@ namespace AFG.Squad
             int totalCharacters = characterDataWrappers.Count;
             float halfWidth = (totalCharacters - 1) * step / 2;
 
-            for (int i=0;i<totalCharacters;i++)
+            for (int i = 0; i < totalCharacters; i++)
             {
                 var characterData = characterDataWrappers[i];
+                if (_brainType == CharacterBrainType.AI)
+                {
+                    var hpBar = characterData.CharacterPrefab.transform.Find("HPBar");
+                    var defBar = characterData.CharacterPrefab.transform.Find("DefBar");
+
+                    if (hpBar != null)
+                    {
+                        hpBar.Rotate(0, 180, 0);
+                    }
+
+                    if (defBar != null)
+                    {
+                        defBar.Rotate(0, 180, 0);
+                    }
+                }
                 characterController = Instantiate(characterData.CharacterPrefab, transform);
 
                 positionOffset = new Vector3(i * step - halfWidth, 1, 0);
@@ -45,7 +60,7 @@ namespace AFG.Squad
 
                 //inject brain
                 characterController.Initialization(characterBrain, characterDataWrappers[i]);
-                
+
                 _characters.Add(characterController);
             }
         }
@@ -53,11 +68,11 @@ namespace AFG.Squad
         public virtual void SetActive(bool isActive)
         {
             IsActive = isActive;
-        }   
+        }
 
         public virtual void SelectCharacter()
         {
-            
+
         }
     }
 }
