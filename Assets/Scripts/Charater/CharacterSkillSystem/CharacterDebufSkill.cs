@@ -55,13 +55,9 @@ namespace AFG.Character
                 _user.AnimationController.PlayDebufAnimation(_user ,() =>
                 {
 
-                    int randomBuf = UnityEngine.Random.Range(1, 4);
+                    int randomBuf = UnityEngine.Random.Range(2, 4);
                     int randomBufValue = 1;
-                    if(randomBuf == 1)
-                    {
-                        randomBufValue = UnityEngine.Random.Range(1, 3);
-                    }
-                    else if(randomBuf == 2)
+                    if(randomBuf == 2)
                     {
                         randomBufValue = UnityEngine.Random.Range(1, 5);
                     }
