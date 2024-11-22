@@ -37,10 +37,14 @@ namespace AFG.MVP
         private void OnCharacterSelected(CharacterController selectedCharacter)
         {
             DeactivateAllButton();
-            Debug.Log(selectedCharacter.name);
-            string fullName = selectedCharacter.name.ToString();
-            string firstWord = fullName.Split(' ')[0];
-            _currentCharacter.text = firstWord;
+            
+            if (selectedCharacter != null)
+            {
+                Debug.Log(selectedCharacter);
+                string fullName = selectedCharacter.name.ToString();
+                string firstWord = fullName.Split(' ')[0];
+                _currentCharacter.text = firstWord;
+            }
 
             //TODO move to PlayerBrain
             if (selectedCharacter != null && selectedCharacter.Brain.Type == CharacterBrainType.Player)

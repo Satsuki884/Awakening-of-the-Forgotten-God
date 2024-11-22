@@ -43,15 +43,9 @@ namespace AFG.Squad
                     var hpBar = characterData.CharacterPrefab.transform.Find("HPBar");
                     var defBar = characterData.CharacterPrefab.transform.Find("DefBar");
 
-                    if (hpBar != null)
-                    {
-                        hpBar.Rotate(0, 180, 0);
-                    }
+                    hpBar?.Rotate(0, 180, 0);
 
-                    if (defBar != null)
-                    {
-                        defBar.Rotate(0, 180, 0);
-                    }
+                    defBar?.Rotate(0, 180, 0);
                 }
                 characterController = Instantiate(characterData.CharacterPrefab, transform);
 

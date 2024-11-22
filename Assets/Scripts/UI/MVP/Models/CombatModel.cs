@@ -69,6 +69,7 @@ namespace AFG.MVP
         {
             SelectedCharacter = null;
             SelectedTargets = null;
+            // SelectedAITarget = null;
             OnMoveFinished?.Invoke();
         }
 
