@@ -21,7 +21,7 @@ namespace AFG
 
         private void CloseInventory()
         {
-            LevelModel.UnLoadPrevScene(LevelModel.LoadedSceneName);
+            LevelModel.UnLoadPrevScene(LevelModel.LoadedSceneName, LevelModel.MainMenuScene);
         }
     }
 }

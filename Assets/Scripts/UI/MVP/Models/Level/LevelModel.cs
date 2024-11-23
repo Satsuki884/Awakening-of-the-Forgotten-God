@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using AFG;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -20,6 +21,11 @@ public class LevelModel : MonoBehaviour
     public string InventoryScene => _inventoryScene;
     [SerializeField] private string _menuSquadScene;
     public string MenuSquadScene => _menuSquadScene;
+    [SerializeField] private string _levelMenuScene;
+    public string LevelMenuScene => _levelMenuScene;
+    [SerializeField] private string _levelScene;
+    public string LevelScene => _levelScene;
+
 
     void Start()
     {
@@ -41,7 +47,6 @@ public class LevelModel : MonoBehaviour
     {
         if (_backgroundScene != null && !SceneManager.GetSceneByName(_backgroundScene).isLoaded)
         {
-            //SceneManager.LoadScene(_mainMenuScene);
             SceneManager.LoadScene(_backgroundScene, LoadSceneMode.Additive);
         }
     }
@@ -63,38 +68,15 @@ public class LevelModel : MonoBehaviour
         }
     }
 
-    public void LoadNewScene(string sceneName)
+    public void UnLoadPrevScene(string prevSceneName, string nextSceneName)
     {
-        StartCoroutine(LoadScene(sceneName));
+        SceneManager.UnloadSceneAsync(prevSceneName);
+        StartCoroutine(LoadScene(nextSceneName));
     }
 
-    public void UnLoadMainMenuScene(string sceneName)
-    {
-        SceneManager.UnloadSceneAsync(_mainMenuScene);
-        LoadNewScene(sceneName);
-    }
+    [Header("Level Menu")]
 
-    public void UnLoadPrevScene(string sceneName)
-    {
-        SceneManager.UnloadSceneAsync(sceneName);
-        LoadNewScene(_mainMenuScene);
-    }
-
-    public void ReLoadScene(string sceneName)
-    {
-        SceneManager.UnloadSceneAsync(sceneName);
-        LoadNewScene(sceneName);
-    }
-
-    public void OpenInventory()
-    {
-        UnLoadMainMenuScene(_inventoryScene);
-    }
-
-    public void OpenButtleMap()
-    {
-        UnLoadMainMenuScene(_menuSquadScene);
-    }
+    // [SerializeField] private TMP_Text _levelName;
 
     [SerializeField] private string _backgroundScene;
     public event Action<int> OnLevelStarted;
@@ -106,6 +88,7 @@ public class LevelModel : MonoBehaviour
     [SerializeField] private LevelData[] _levels;
 
     public CharacterDataWrapper[] PlayerSquad { get; set; }
+    public object UnLoadPrevSceneLevelModel { get; internal set; }
 
     public void StartLevel()
     {

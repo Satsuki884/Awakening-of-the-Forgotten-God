@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2feec8e5d7ab14427a3ce7408dccfffc, type: 3}
-  m_Name: PlayerCharacters
+  m_Name: AI_Level_5_Squad
   m_EditorClassIdentifier: 
-  _isPlayerCharacter: 1
+  _isPlayerCharacter: 0
   characterData:
+  - {fileID: 11400000, guid: e728a7f510e0849e4b4c2767fc770ee7, type: 2}
   - {fileID: 11400000, guid: b6e8bf760d1a02c4aa0742549782bf96, type: 2}
-  - {fileID: 11400000, guid: bc38519e63442d34c90a2a7e57355895, type: 2}
+  - {fileID: 11400000, guid: a2f664a2de7c8944bace4d0aa10e89ae, type: 2}

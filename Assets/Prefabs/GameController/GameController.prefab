@@ -1034,10 +1034,17 @@ MonoBehaviour:
   _mainMenuScene: MainMenu
   _inventoryScene: Inventory
   _menuSquadScene: MenuSquad
+  _levelMenuScene: LevelMenu
+  _levelScene: Level
+  _levelName: {fileID: 0}
   _backgroundScene: Background
   _levelIndex: 0
   _levels:
   - {fileID: 11400000, guid: 0e2d3d357e678436b96a54b0ffe80667, type: 2}
+  - {fileID: 11400000, guid: a07b6bc8fa48924409c53564b2ff513e, type: 2}
+  - {fileID: 11400000, guid: 69398568512f4fb44b19b0642ae45ac0, type: 2}
+  - {fileID: 11400000, guid: a6a505808f86f3244b8d427aba0a8535, type: 2}
+  - {fileID: 11400000, guid: baf515dedab7bf649b71e71be0e30b84, type: 2}
 --- !u!1 &6206583459541209664
 GameObject:
   m_ObjectHideFlags: 0

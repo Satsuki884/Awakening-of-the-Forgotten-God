@@ -88,18 +88,18 @@ namespace AFG
                 SavePlayerData();
             }
             Debug.Log("Restart");
-            GameController.Instance.LevelModel.ReLoadScene(MenuSquadScene);
+            GameController.Instance.LevelModel.UnLoadPrevScene(LevelModel.MenuSquadScene, LevelModel.MenuSquadScene);
 
         }
 
-        private string MenuSquadScene => GameController.Instance.LevelModel.MenuSquadScene;
+        private LevelModel LevelModel => GameController.Instance.LevelModel;
         private void OnMenuButtonClicked()
         {
             if (_win)
             {
                 SavePlayerData();
             }
-            GameController.Instance.LevelModel.UnLoadPrevScene(MenuSquadScene);
+            GameController.Instance.LevelModel.UnLoadPrevScene(LevelModel.MenuSquadScene, LevelModel.LevelMenuScene);
         }
 
         private void SavePlayerData()
