@@ -7,7 +7,6 @@ using UnityEngine.Serialization;
 
 namespace AFG
 {
-    //TODO cashe character data saves
     //this is Facade
     public class SaveManager : MonoBehaviour
     {
@@ -195,7 +194,6 @@ namespace AFG
 
         }
 
-        //TODO refactoring
         private List<CharacterDataWrapper> LoadCharacter(
             CharacterDataHolder dataHolder,
             string path)

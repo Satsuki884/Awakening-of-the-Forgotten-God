@@ -69,7 +69,6 @@ namespace AFG
                 itemUI.SetCharacterSpeed(Characters[i].Speed);
                 itemUI.SetCharacterPrice(Characters[i].Price);
 
-                //TODO info about user`s money
                 if (Characters[i].Price > PlayerData.CoinData.CoinDataWrapper.CoinCount)
                 {
                     itemUI.SetButtonUnEnable();

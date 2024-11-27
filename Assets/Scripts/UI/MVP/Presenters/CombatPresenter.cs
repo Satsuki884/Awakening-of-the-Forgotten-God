@@ -60,8 +60,6 @@ namespace AFG.MVP
         {
             SquadController parent = selectedCharacter.GetComponentInParent<SquadController>();
 
-            //TODO implement brain check
-            //TODO "SquadPlayerController" move to variable
             if (parent.name == _squadPlayerController)
             {
                 _tempAISquad = GameController.Instance.CombatModel.AiSquad;

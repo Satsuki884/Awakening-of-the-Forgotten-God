@@ -10,7 +10,6 @@ namespace AFG.Character
     {
         public event Action<CharacterController> OnSelected;
         
-        //TODO refactoring change after buf-debuf
         [SerializeField] protected CharacterAnimationController _animationController;
         [SerializeField] protected CharacterMoveController _moveController;
         [SerializeField] protected CharacterDamageController _damageController;

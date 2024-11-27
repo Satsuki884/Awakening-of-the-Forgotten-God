@@ -16,7 +16,6 @@ namespace AFG.Combat
         [SerializeField] private SquadController _playerSquad;
         [SerializeField] private SquadController _aiSquad;
 
-        //TODO change after buf-debuf
         private List<CharacterController> _charactersQueue;
 
         private CharacterController _selectedCharacter;

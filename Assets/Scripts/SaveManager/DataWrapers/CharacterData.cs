@@ -31,7 +31,6 @@ namespace AFG
         [SerializeField] private CharacterStatsData[] _characterStatsData;
         public CharacterStatsData[] CharacterStatsData => _characterStatsData;
         
-        //TODO add validation for level
         public float Health => CharacterStatsData[Level].Health;
         public float MaxHealth => CharacterStatsData[Level].Health;
         public float Def => CharacterStatsData[Level].Def;
