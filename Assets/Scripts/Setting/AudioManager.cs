@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 namespace AFG
@@ -52,7 +53,7 @@ namespace AFG
 
         public void PlaySFX(string clipName)
         {
-            Debug.Log("Playing SFX: " + clipName);
+            // Debug.Log("Playing SFX: " + clipName);
             switch (clipName)
             {
                 case "buttonClick":

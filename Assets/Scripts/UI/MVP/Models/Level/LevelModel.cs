@@ -39,8 +39,8 @@ public class LevelModel : MonoBehaviour
         yield return new WaitForSeconds(_transitionTime);
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
         transition.SetBool("End", true);
-        yield return new WaitForSeconds(_transitionTime);
         transition.SetBool("Start", false);
+        yield return new WaitForSeconds(_transitionTime);
     }
 
     private void LoadBackgroundScene()
@@ -91,8 +91,13 @@ public class LevelModel : MonoBehaviour
         return _levels[LevelNumber].AISquad.CharacterData.Select(x => x.CharacterDataWrapper).ToArray();
     }
 
+    public void StartNextLevel(){
+        LevelNumber++;
+        StartCurrentLevel();
+    }
+
     public void StartCurrentLevel(){
         OnLevelStarted?.Invoke(LevelNumber);
-        UnLoadPrevScene(SceneManager.GetActiveScene().name, LevelScene);
+        UnLoadPrevScene(MenuSquadScene, LevelScene);
     }
 }

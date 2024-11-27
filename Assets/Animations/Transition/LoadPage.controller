@@ -38,6 +38,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: Start
     m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: End
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2159716635766178246}
   m_Solo: 0
@@ -63,6 +66,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: Start
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: End
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5708616514308280755}
   m_Solo: 0
@@ -87,6 +93,12 @@ AnimatorController:
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Start
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: End
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0

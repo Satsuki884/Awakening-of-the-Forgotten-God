@@ -175,6 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _closeMenuSquad: {fileID: 2117239957}
   _levelName: {fileID: 1865704113}
+  _startLevel: {fileID: 162740812}
 --- !u!1 &162740810
 GameObject:
   m_ObjectHideFlags: 0
@@ -1938,7 +1939,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.051000003, y: 0}
   m_AnchorMax: {x: 0.13000001, y: 1}
-  m_AnchoredPosition: {x: -1.0000305, y: 0}
+  m_AnchoredPosition: {x: -1, y: 0}
   m_SizeDelta: {x: 1, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2117239957
@@ -2050,6 +2051,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _closeMenuSquad: {fileID: 2117239957}
   _levelName: {fileID: 0}
+  _startLevel: {fileID: 0}
 --- !u!1001 &801095967136717907
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -42,11 +42,13 @@ public class SettingController : MonoBehaviour
     {
         _openSettingsButton.onClick.RemoveAllListeners();
         _closeSettingsButton.onClick.RemoveAllListeners();
-        _volumeSlider.onValueChanged.RemoveAllListeners();
+        _volumeSliderMusic.onValueChanged.RemoveAllListeners();
+        _volumeSliderSFX.onValueChanged.RemoveAllListeners();
         _openSettingsButton.onClick.AddListener(OpenSettings);
         _closeSettingsButton.onClick.AddListener(CloseSettings);
         
-        _volumeSlider.onValueChanged.AddListener(SetVolume);
+        _volumeSliderMusic.onValueChanged.AddListener(SetVolumeMusic);
+        _volumeSliderSFX.onValueChanged.AddListener(SetVolumeSFP);
         
         _qualityDropdown.onValueChanged.AddListener(SetQuality);
         _qualityDropdown.onValueChanged.AddListener(SetQuality);
@@ -76,11 +78,17 @@ public class SettingController : MonoBehaviour
             Resolution savedResolution = resolutions[savedResolutionIndex];
             Screen.SetResolution(savedResolution.width, savedResolution.height, Screen.fullScreen);
         }
-        if (PlayerPrefs.HasKey("Volume"))
+        if (PlayerPrefs.HasKey("VolumeMusic"))
         {
-            float savedVolume = PlayerPrefs.GetFloat("Volume");
-            _volumeSlider.value = savedVolume;
-            _audioMixer.SetFloat("Volume", savedVolume);
+            float savedVolume = PlayerPrefs.GetFloat("VolumeMusic");
+            _volumeSliderMusic.value = savedVolume;
+            _audioMixer.SetFloat("Music", savedVolume);
+        }
+        if (PlayerPrefs.HasKey("VolumeSFX"))
+        {
+            float savedVolume = PlayerPrefs.GetFloat("VolumeSFX");
+            _volumeSliderSFX.value = savedVolume;
+            _audioMixer.SetFloat("SFX", savedVolume);
         }
 
     }
@@ -94,15 +102,25 @@ public class SettingController : MonoBehaviour
     {
         _settingPanel.SetActive(false);
     }
-    [SerializeField] private Slider _volumeSlider;
 
+    [Header("Audio")]
+    [SerializeField] private Slider _volumeSliderMusic;
+    [SerializeField] private Slider _volumeSliderSFX;
     [SerializeField] private AudioMixer _audioMixer;
 
-    public void SetVolume(float volume)
+    public void SetVolumeMusic(float volume)
     {
         Debug.Log(volume);
-        _audioMixer.SetFloat("Volume", volume);
-        PlayerPrefs.SetFloat("Volume", volume);
+        _audioMixer.SetFloat("Music", volume);
+        PlayerPrefs.SetFloat("Music", volume);
+        PlayerPrefs.Save();
+    }
+
+    public void SetVolumeSFP(float volume)
+    {
+        Debug.Log(volume);
+        _audioMixer.SetFloat("SFX", volume);
+        PlayerPrefs.SetFloat("SFX", volume);
         PlayerPrefs.Save();
     }
 
