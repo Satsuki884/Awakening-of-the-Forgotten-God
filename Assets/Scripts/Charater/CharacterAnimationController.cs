@@ -8,6 +8,14 @@ using CharacterController = AFG.Character.CharacterController;
 public class CharacterAnimationController : MonoBehaviour
 {
 
+    private string _melee = "melee";
+    private string _range = "range";
+    private string _buf = "buf";
+    private string _debuf = "debuf";
+    private string _heal = "heal";
+    private string _area = "area";
+    private string _run = "run";
+
     private Animator childAnimator;
 
     public void CheckSkill(CharacterController character, Animator animator)
@@ -18,28 +26,28 @@ public class CharacterAnimationController : MonoBehaviour
             var skill = character.Skills[i];
             if (skill is CharacterMeleSkill)
             {
-                SetAllAnimationInFalse(animator, "melee");
+                SetAllAnimationInFalse(animator, _melee);
             }
             if (skill is CharacterRangeSkill)
             {
-                SetAllAnimationInFalse(animator, "range");
+                SetAllAnimationInFalse(animator, _range);
             }
             if (skill is CharacterBufSkill)
             {
-                SetAllAnimationInFalse(animator, "buf");
+                SetAllAnimationInFalse(animator, _buf);
             }
             if (skill is CharacterDebufSkill)
             {
-                SetAllAnimationInFalse(animator, "debuf");
+                SetAllAnimationInFalse(animator, _debuf);
             }
             if (skill is CharacterHealSkill)
             {
-                SetAllAnimationInFalse(animator, "heal");
+                SetAllAnimationInFalse(animator, _heal);
 
             }
             if (skill is CharacterAreaDamageSkill)
             {
-                SetAllAnimationInFalse(animator, "area");
+                SetAllAnimationInFalse(animator, _area);
 
             }
         }
@@ -48,7 +56,7 @@ public class CharacterAnimationController : MonoBehaviour
     public void SetAllAnimationInFalse(Animator animator, string type)
     {
         animator.SetBool(type, false);
-        animator.SetBool("run", false);
+        animator.SetBool(_run, false);
     }
 
     public void PlayRunAnimation(CharacterController character)
@@ -59,7 +67,7 @@ public class CharacterAnimationController : MonoBehaviour
         if (childAnimator != null)
         {
             CheckSkill(character, childAnimator);
-            childAnimator.SetBool("run", true);
+            childAnimator.SetBool(_run, true);
         }
     }
 
@@ -71,10 +79,10 @@ public class CharacterAnimationController : MonoBehaviour
         if (childAnimator != null)
         {
             CheckSkill(character, childAnimator);
-            childAnimator.SetBool("melee", true);
-            StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, "melee"), () =>
+            childAnimator.SetBool(_melee, true);
+            StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, _melee), () =>
             {
-                childAnimator.SetBool("melee", false);
+                childAnimator.SetBool(_melee, false);
                 OnHit?.Invoke();
             }));
             
@@ -110,10 +118,10 @@ public class CharacterAnimationController : MonoBehaviour
         if (childAnimator != null)
         {
             CheckSkill(character, childAnimator);
-            childAnimator.SetBool("range", true);
-            StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, "range"), () =>
+            childAnimator.SetBool(_range, true);
+            StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, _range), () =>
             {
-                childAnimator.SetBool("range", false);
+                childAnimator.SetBool(_range, false);
                 OnRange?.Invoke();
             }));
         }
@@ -129,10 +137,10 @@ public class CharacterAnimationController : MonoBehaviour
         if (childAnimator != null)
         {
             CheckSkill(character, childAnimator);
-            childAnimator.SetBool("heal", true);
-            StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, "heal"), () =>
+            childAnimator.SetBool(_heal, true);
+            StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, _heal), () =>
             {
-                childAnimator.SetBool("heal", false);
+                childAnimator.SetBool(_heal, false);
                 OnHeal?.Invoke();
             }));
         }
@@ -148,10 +156,10 @@ public class CharacterAnimationController : MonoBehaviour
         if (childAnimator != null)
         {
             CheckSkill(character, childAnimator);
-            childAnimator.SetBool("buf", true);
-            StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, "buf"), () =>
+            childAnimator.SetBool(_buf, true);
+            StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, _buf), () =>
             {
-                childAnimator.SetBool("buf", false); // ������������� �������� ����� ����������
+                childAnimator.SetBool(_buf, false); 
                 OnBuf?.Invoke();
             }));
         }
@@ -167,10 +175,10 @@ public class CharacterAnimationController : MonoBehaviour
         if (childAnimator != null)
         {
             CheckSkill(character, childAnimator);
-            childAnimator.SetBool("debuf", true);
-            StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, "debuf"), () =>
+            childAnimator.SetBool(_debuf, true);
+            StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, _debuf), () =>
             {
-                childAnimator.SetBool("debuf", false); // ������������� �������� ����� ����������
+                childAnimator.SetBool(_debuf, false);
                 OnDebuf?.Invoke();
             }));
         }
@@ -186,10 +194,10 @@ public class CharacterAnimationController : MonoBehaviour
         if (childAnimator != null)
         {
             CheckSkill(character, childAnimator);
-            childAnimator.SetBool("area", true);
-            StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, "area"), () =>
+            childAnimator.SetBool(_area, true);
+            StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, _area), () =>
             {
-                childAnimator.SetBool("area", false); // ������������� �������� ����� ����������
+                childAnimator.SetBool(_area, false);
                 OnArea?.Invoke();
             }));
         }
