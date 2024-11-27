@@ -74,46 +74,25 @@ public class LevelModel : MonoBehaviour
         StartCoroutine(LoadScene(nextSceneName));
     }
 
-    [Header("Level Menu")]
+    //[Header("Level Menu")]
 
-    // [SerializeField] private TMP_Text _levelName;
+    public int LevelNumber{ get; set; }
 
     [SerializeField] private string _backgroundScene;
     public event Action<int> OnLevelStarted;
     public event Action<int> OnLevelFinish;
 
-    [SerializeField] private int _levelIndex;
-    public int LevelIndex => _levelIndex;
-
     [SerializeField] private LevelData[] _levels;
 
     public CharacterDataWrapper[] PlayerSquad { get; set; }
-    public object UnLoadPrevSceneLevelModel { get; internal set; }
-
-    public void StartLevel()
-    {
-        OnLevelStarted?.Invoke(LevelIndex);
-        SceneManager.LoadScene(GetLevelScene(), LoadSceneMode.Additive);
-    }
-
-    public void FinishLevel()
-    {
-        OnLevelFinish?.Invoke(LevelIndex);
-        _levelIndex = LevelIndex >= _levels.Length - 1 ? 0 : LevelIndex + 1;
-    }
 
     public CharacterDataWrapper[] GetAiSquad()
     {
-        return _levels[LevelIndex].AISquad.CharacterData.Select(x => x.CharacterDataWrapper).ToArray();
+        return _levels[LevelNumber].AISquad.CharacterData.Select(x => x.CharacterDataWrapper).ToArray();
     }
 
-    public string GetLevelScene()
-    {
-        return _levels[LevelIndex].LevelScene;
-    }
-
-    public string GetPrevLevelScene()
-    {
-        return _levels[LevelIndex - 1].LevelScene;
+    public void StartCurrentLevel(){
+        OnLevelStarted?.Invoke(LevelNumber);
+        UnLoadPrevScene(SceneManager.GetActiveScene().name, LevelScene);
     }
 }

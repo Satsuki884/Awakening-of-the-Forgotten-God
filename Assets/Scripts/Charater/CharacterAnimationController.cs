@@ -72,9 +72,15 @@ public class CharacterAnimationController : MonoBehaviour
         {
             CheckSkill(character, childAnimator);
             childAnimator.SetBool("melee", true);
+            StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, "melee"), () =>
+            {
+                childAnimator.SetBool("melee", false);
+                OnHit?.Invoke();
+            }));
+            
         }
 
-        OnHit?.Invoke();
+        // OnHit?.Invoke();
     }
 
     private IEnumerator WaitForAnimation(float delay, Action onComplete)
@@ -107,7 +113,7 @@ public class CharacterAnimationController : MonoBehaviour
             childAnimator.SetBool("range", true);
             StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, "range"), () =>
             {
-                childAnimator.SetBool("range", false); // ������������� �������� ����� ����������
+                childAnimator.SetBool("range", false);
                 OnRange?.Invoke();
             }));
         }
@@ -126,12 +132,12 @@ public class CharacterAnimationController : MonoBehaviour
             childAnimator.SetBool("heal", true);
             StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, "heal"), () =>
             {
-                childAnimator.SetBool("heal", false); // ������������� �������� ����� ����������
+                childAnimator.SetBool("heal", false);
                 OnHeal?.Invoke();
             }));
         }
 
-        OnHeal?.Invoke();
+        // OnHeal?.Invoke();
     }
 
     public void PlayBufAnimation(CharacterController character, Action OnBuf)
@@ -150,7 +156,7 @@ public class CharacterAnimationController : MonoBehaviour
             }));
         }
 
-        OnBuf?.Invoke();
+        // OnBuf?.Invoke();
     }
 
     public void PlayDebufAnimation(CharacterController character, Action OnDebuf)
@@ -169,7 +175,7 @@ public class CharacterAnimationController : MonoBehaviour
             }));
         }
 
-        OnDebuf?.Invoke();
+        // OnDebuf?.Invoke();
     }
 
     public void PlayAreaAnimation(CharacterController character, Action OnArea)
@@ -188,7 +194,7 @@ public class CharacterAnimationController : MonoBehaviour
             }));
         }
 
-        OnArea?.Invoke();
+        // OnArea?.Invoke();
     }
 
     public void PlayIdleAnimation(CharacterController character)

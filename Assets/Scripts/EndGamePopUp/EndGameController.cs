@@ -108,5 +108,11 @@ namespace AFG
             PlayerData.BooksData.BooksDataWrapper.BooksCount += int.Parse(_resultBooks.text);
             GameController.Instance.SaveManager.SavePlayerData(PlayerData);
         }
+
+        public void EndLevel(bool result)
+        {
+            _win = result;
+            _endGamePopUp.SetActive(true);
+        }
     }
 }

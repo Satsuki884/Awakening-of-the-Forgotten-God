@@ -1036,7 +1036,6 @@ MonoBehaviour:
   _menuSquadScene: MenuSquad
   _levelMenuScene: LevelMenu
   _levelScene: Level
-  _levelName: {fileID: 0}
   _backgroundScene: Background
   _levelIndex: 0
   _levels:
@@ -1189,6 +1188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2495560584030677065}
   - component: {fileID: 4418798635735090231}
+  - component: {fileID: 4622408180170396091}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -1234,6 +1234,14 @@ MonoBehaviour:
   _levelDefeat: {fileID: 8300000, guid: 31a7dece47b26634bb20f4caba1d4ccd, type: 3}
   _combatMusic: {fileID: 8300000, guid: 4371766678306e0469793cfa6ecb5b2d, type: 3}
   _saleMusic: {fileID: 8300000, guid: 384b30f018b81d34daa24cf4ea723982, type: 3}
+--- !u!81 &4622408180170396091
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429405311941830106}
+  m_Enabled: 1
 --- !u!1 &8103934002544113080
 GameObject:
   m_ObjectHideFlags: 0
