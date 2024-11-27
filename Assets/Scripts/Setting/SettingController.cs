@@ -57,38 +57,46 @@ public class SettingController : MonoBehaviour
         _resolutionDropdown.onValueChanged.AddListener(SetResolution);
     }
 
+    private string QualityLevel = "QualityLevel";
+    private string FullScreen = "FullScreen";
+    private string Resolution = "Resolution";
+    private string VolumeMusic = "VolumeMusic";
+    private string VolumeSFX = "VolumeSFX";
+    private string Music = "Music";
+    private string SFX = "SFX";
+
     public void SetBetweenSession()
     {
-        if (PlayerPrefs.HasKey("QualityLevel"))
+        if (PlayerPrefs.HasKey(QualityLevel))
         {
-            int savedQualityLevel = PlayerPrefs.GetInt("QualityLevel");
+            int savedQualityLevel = PlayerPrefs.GetInt(QualityLevel);
             _qualityDropdown.value = savedQualityLevel;
             QualitySettings.SetQualityLevel(savedQualityLevel);
         }
-        if (PlayerPrefs.HasKey("FullScreen"))
+        if (PlayerPrefs.HasKey(FullScreen))
         {
-            bool isFullScreen = PlayerPrefs.GetInt("FullScreen") == 1;
+            bool isFullScreen = PlayerPrefs.GetInt(FullScreen) == 1;
             _fullScreenToggle.isOn = isFullScreen;
             Screen.fullScreen = isFullScreen;
         }
-        if (PlayerPrefs.HasKey("Resolution"))
+        if (PlayerPrefs.HasKey(Resolution))
         {
-            int savedResolutionIndex = PlayerPrefs.GetInt("Resolution");
+            int savedResolutionIndex = PlayerPrefs.GetInt(Resolution);
             _resolutionDropdown.value = savedResolutionIndex;
             Resolution savedResolution = resolutions[savedResolutionIndex];
             Screen.SetResolution(savedResolution.width, savedResolution.height, Screen.fullScreen);
         }
-        if (PlayerPrefs.HasKey("VolumeMusic"))
+        if (PlayerPrefs.HasKey(VolumeMusic))
         {
-            float savedVolume = PlayerPrefs.GetFloat("VolumeMusic");
+            float savedVolume = PlayerPrefs.GetFloat(VolumeMusic);
             _volumeSliderMusic.value = savedVolume;
-            _audioMixer.SetFloat("Music", savedVolume);
+            _audioMixer.SetFloat(Music, savedVolume);
         }
-        if (PlayerPrefs.HasKey("VolumeSFX"))
+        if (PlayerPrefs.HasKey(VolumeSFX))
         {
-            float savedVolume = PlayerPrefs.GetFloat("VolumeSFX");
+            float savedVolume = PlayerPrefs.GetFloat(VolumeSFX);
             _volumeSliderSFX.value = savedVolume;
-            _audioMixer.SetFloat("SFX", savedVolume);
+            _audioMixer.SetFloat(SFX, savedVolume);
         }
 
     }
@@ -111,16 +119,16 @@ public class SettingController : MonoBehaviour
     public void SetVolumeMusic(float volume)
     {
         Debug.Log(volume);
-        _audioMixer.SetFloat("Music", volume);
-        PlayerPrefs.SetFloat("Music", volume);
+        _audioMixer.SetFloat(Music, volume);
+        PlayerPrefs.SetFloat(Music, volume);
         PlayerPrefs.Save();
     }
 
     public void SetVolumeSFP(float volume)
     {
         Debug.Log(volume);
-        _audioMixer.SetFloat("SFX", volume);
-        PlayerPrefs.SetFloat("SFX", volume);
+        _audioMixer.SetFloat(SFX, volume);
+        PlayerPrefs.SetFloat(SFX, volume);
         PlayerPrefs.Save();
     }
 
@@ -130,7 +138,7 @@ public class SettingController : MonoBehaviour
     {
         Debug.Log(qualityLevel);
         QualitySettings.SetQualityLevel(qualityLevel);
-        PlayerPrefs.SetInt("QualityLevel", qualityLevel);
+        PlayerPrefs.SetInt(QualityLevel, qualityLevel);
         PlayerPrefs.Save();
     }
 
@@ -139,7 +147,7 @@ public class SettingController : MonoBehaviour
     public void SetFullScreen(bool isFullScreen)
     {
         Screen.fullScreen = isFullScreen;
-        PlayerPrefs.SetInt("FullScreen", isFullScreen ? 1 : 0);
+        PlayerPrefs.SetInt(FullScreen, isFullScreen ? 1 : 0);
         PlayerPrefs.Save();
     }
 
@@ -150,7 +158,7 @@ public class SettingController : MonoBehaviour
         Debug.Log(resolutionIndex);
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-        PlayerPrefs.SetInt("Resolution", resolutionIndex);
+        PlayerPrefs.SetInt(Resolution, resolutionIndex);
         PlayerPrefs.Save();
     }
 }

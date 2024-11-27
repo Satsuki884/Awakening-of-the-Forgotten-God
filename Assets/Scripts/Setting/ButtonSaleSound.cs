@@ -17,7 +17,7 @@ public class ButtonSaleSound : MonoBehaviour
     {
         if (GameController.Instance.AudioManager != null)
         {
-            GameController.Instance.AudioManager.PlaySFX("saleMusic");
+            GameController.Instance.AudioManager.PlaySFX(GameController.Instance.AudioManager.SaleMusic);
         }
     }
 }

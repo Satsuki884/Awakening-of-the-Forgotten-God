@@ -11,6 +11,9 @@ namespace AFG.MVP
         public event Action<CharacterController> OnCharacterSelected;
         public event Action OnMoveFinished;
 
+        private string _ai = "AI";
+        private string _player = "Player";
+
         private CharacterController _selectedCharacter;
         public CharacterController SelectedCharacter
         {
@@ -44,7 +47,7 @@ namespace AFG.MVP
             set
             {
                 _selectedTargets = value;
-                UseSelectedCharacterSkill("Player");
+                UseSelectedCharacterSkill(_player);
             }
         }
 
@@ -58,7 +61,7 @@ namespace AFG.MVP
             set
             {
                 _selectedAITarget = value;
-                UseSelectedCharacterSkill("AI");
+                UseSelectedCharacterSkill(_ai);
             }
         }
 
@@ -75,14 +78,14 @@ namespace AFG.MVP
 
         public void UseSelectedCharacterSkill(string type)
         {
-            if (type == "AI")
+            if (type == _ai)
             {
                 _selectedCharacter.SelectedCharacterSkill.UseAISkill(
                     _selectedCharacter,
                     _selectedAITarget,
                     FinishMove);
             }
-            else if (type == "Player")
+            else if (type == _player)
             {
                 if (_selectedCharacter != null &&
                 _selectedCharacter.IsSelected &&

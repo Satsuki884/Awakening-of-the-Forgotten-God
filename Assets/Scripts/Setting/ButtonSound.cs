@@ -15,9 +15,9 @@ public class ButtonSound : MonoBehaviour
 
     private void PlaySound()
     {
-        // if (GameController.Instance.AudioManager != null)
-        // {
-            GameController.Instance.AudioManager.PlaySFX("buttonClick");
-        // }
+        if (GameController.Instance.AudioManager != null)
+        {
+            GameController.Instance.AudioManager.PlaySFX(GameController.Instance.AudioManager.ButtonClick);
+        }
     }
 }

@@ -51,6 +51,12 @@ namespace AFG
             _musicSource.Play();
         }
 
+        public string ButtonClick = "buttonClick";
+        public string LevelVictory = "levelVictory";
+        public string LevelUp = "levelUp";
+        public string LevelDefeat = "levelDefeat";
+        public string SaleMusic = "saleMusic";
+
         public void PlaySFX(string clipName)
         {
             // Debug.Log("Playing SFX: " + clipName);

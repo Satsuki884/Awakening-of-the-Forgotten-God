@@ -13,7 +13,8 @@ namespace AFG.Squad
         public List<CharacterController> Characters => _characters;
 
         public bool IsActive { get; set; }
-
+        private string _hp = "HPBar";
+        private string _def = "DefBar";
 
         public virtual void Initialization(List<CharacterDataWrapper> characterDataWrappers)
         {
@@ -40,8 +41,8 @@ namespace AFG.Squad
                 var characterData = characterDataWrappers[i];
                 if (_brainType == CharacterBrainType.AI)
                 {
-                    var hpBar = characterData.CharacterPrefab.transform.Find("HPBar");
-                    var defBar = characterData.CharacterPrefab.transform.Find("DefBar");
+                    var hpBar = characterData.CharacterPrefab.transform.Find(_hp);
+                    var defBar = characterData.CharacterPrefab.transform.Find(_def);
 
                     hpBar?.Rotate(0, 180, 0);
 

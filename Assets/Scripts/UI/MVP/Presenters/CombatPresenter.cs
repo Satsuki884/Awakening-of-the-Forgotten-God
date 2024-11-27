@@ -24,6 +24,9 @@ namespace AFG.MVP
         private SquadController _tempAISquad;
         private SquadController _tempPlayerSquad;
 
+        private string _squadPlayerController = "SquadPlayerController";
+        private string _squadAIController = "SquadAIController";
+
         public void Start()
         {
             GameController.Instance.CombatModel.OnCharacterSelected += OnCharacterSelected;
@@ -59,12 +62,12 @@ namespace AFG.MVP
 
             //TODO implement brain check
             //TODO "SquadPlayerController" move to variable
-            if (parent.name == "SquadPlayerController")
+            if (parent.name == _squadPlayerController)
             {
                 _tempAISquad = GameController.Instance.CombatModel.AiSquad;
                 _tempPlayerSquad = GameController.Instance.CombatModel.PlayerSquad;
             }
-            else if (parent.name == "SquadAIController")
+            else if (parent.name == _squadAIController)
             {
                 _tempAISquad = GameController.Instance.CombatModel.PlayerSquad;
                 _tempPlayerSquad = GameController.Instance.CombatModel.AiSquad;

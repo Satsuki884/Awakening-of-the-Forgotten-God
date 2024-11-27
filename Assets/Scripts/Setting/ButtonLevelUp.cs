@@ -17,7 +17,7 @@ public class ButtonLevelUp : MonoBehaviour
     {
         if (GameController.Instance.AudioManager != null)
         {
-            GameController.Instance.AudioManager.PlaySFX("levelUp");
+            GameController.Instance.AudioManager.PlaySFX(GameController.Instance.AudioManager.LevelUp);
         }
     }
 }

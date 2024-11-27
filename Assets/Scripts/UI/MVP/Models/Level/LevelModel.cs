@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using AFG;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -26,6 +27,8 @@ public class LevelModel : MonoBehaviour
     [SerializeField] private string _levelScene;
     public string LevelScene => _levelScene;
 
+    private string _end = "End";
+    private string _start = "Start";
 
     void Start()
     {
@@ -34,12 +37,12 @@ public class LevelModel : MonoBehaviour
 
     IEnumerator LoadScene(string sceneName)
     {
-        transition.SetBool("End", false);
-        transition.SetBool("Start", true);
+        transition.SetBool(_end, false);
+        transition.SetBool(_start, true);
         yield return new WaitForSeconds(_transitionTime);
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
-        transition.SetBool("End", true);
-        transition.SetBool("Start", false);
+        transition.SetBool(_end, true);
+        transition.SetBool(_start, false);
         yield return new WaitForSeconds(_transitionTime);
     }
 
