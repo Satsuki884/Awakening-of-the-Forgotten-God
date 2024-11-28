@@ -21,6 +21,8 @@ namespace AFG.MVP
         private Transform _characterHolder;// = new Transform[3];  // ������ �������� ��� ������ ������
         private GameObject[] _selectedCharacters = new GameObject[3];
 
+        public List<CharacterDataWrapper> SelectedCharacters{ get; set; } = new List<CharacterDataWrapper>();
+
         public virtual void Start()
         {
             var saveManager = GameController.Instance.SaveManager;
@@ -55,6 +57,7 @@ namespace AFG.MVP
             var character = Characters.Find(c => c.CharacterName.Equals(characterName));
 
             _selectedCharacters[_buttonIndex] = Instantiate(character.CharacterPrefab.gameObject, _characterHolder);
+            SelectedCharacters.Add(character);
 
             _selectedCharacters[_buttonIndex].transform.rotation = Quaternion.Euler(0, 180, 0);
 

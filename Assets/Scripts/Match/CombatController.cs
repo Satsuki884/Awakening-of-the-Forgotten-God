@@ -23,7 +23,7 @@ namespace AFG.Combat
 
         private void Start()
         {
-            var playerSquadData = GameController.Instance.SaveManager.PlayerCharacters;
+            var playerSquadData = GameController.Instance.SaveManager.PlayerSquad;
 
             var aiSquadData = GameController.
                 Instance.

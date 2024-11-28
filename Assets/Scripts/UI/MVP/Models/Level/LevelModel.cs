@@ -100,7 +100,7 @@ public class LevelModel : MonoBehaviour
     }
 
     public void StartCurrentLevel(){
-        OnLevelStarted?.Invoke(LevelNumber);
+        // OnLevelStarted?.Invoke(LevelNumber);
         UnLoadPrevScene(MenuSquadScene, LevelScene);
     }
 }

@@ -33,8 +33,8 @@ public class SettingController : MonoBehaviour
         _resolutionDropdown.value = currentResolutionIndex;
         _resolutionDropdown.RefreshShownValue();
 
-        SetBetweenSession();
         AddEventListeners();
+        SetBetweenSession();
         CloseSettings();
     }
 
@@ -60,8 +60,6 @@ public class SettingController : MonoBehaviour
     private string QualityLevel = "QualityLevel";
     private string FullScreen = "FullScreen";
     private string Resolution = "Resolution";
-    private string VolumeMusic = "VolumeMusic";
-    private string VolumeSFX = "VolumeSFX";
     private string Music = "Music";
     private string SFX = "SFX";
 
@@ -86,15 +84,17 @@ public class SettingController : MonoBehaviour
             Resolution savedResolution = resolutions[savedResolutionIndex];
             Screen.SetResolution(savedResolution.width, savedResolution.height, Screen.fullScreen);
         }
-        if (PlayerPrefs.HasKey(VolumeMusic))
+        if (PlayerPrefs.HasKey(Music))
         {
-            float savedVolume = PlayerPrefs.GetFloat(VolumeMusic);
+            Debug.Log(Music);
+            float savedVolume = PlayerPrefs.GetFloat(Music);
             _volumeSliderMusic.value = savedVolume;
             _audioMixer.SetFloat(Music, savedVolume);
         }
-        if (PlayerPrefs.HasKey(VolumeSFX))
+        if (PlayerPrefs.HasKey(SFX))
         {
-            float savedVolume = PlayerPrefs.GetFloat(VolumeSFX);
+            Debug.Log("VolumeSFX");
+            float savedVolume = PlayerPrefs.GetFloat(SFX);
             _volumeSliderSFX.value = savedVolume;
             _audioMixer.SetFloat(SFX, savedVolume);
         }
@@ -136,7 +136,7 @@ public class SettingController : MonoBehaviour
 
     public void SetQuality(int qualityLevel)
     {
-        Debug.Log(qualityLevel);
+        // Debug.Log(qualityLevel);
         QualitySettings.SetQualityLevel(qualityLevel);
         PlayerPrefs.SetInt(QualityLevel, qualityLevel);
         PlayerPrefs.Save();

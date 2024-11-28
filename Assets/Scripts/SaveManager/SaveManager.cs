@@ -47,6 +47,8 @@ namespace AFG
             }
         }
 
+        public List<CharacterDataWrapper> PlayerSquad{ get; set; }
+
         private PlayerDataWrapper _playerData;
         public PlayerDataWrapper PlayerData
         {

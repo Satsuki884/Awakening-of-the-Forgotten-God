@@ -3689,7 +3689,6 @@ GameObject:
   - component: {fileID: 1855775660}
   - component: {fileID: 1855775659}
   - component: {fileID: 1855775658}
-  - component: {fileID: 1855775662}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3783,26 +3782,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1855775662
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1855775657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a831d1d2b0f65b4f881f7c7536eeed8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _levelName: {fileID: 1123438724}
-  _pauseLevel: {fileID: 1342578059}
-  _endLevelPanel: {fileID: 1210885798}
-  _pausePanel: {fileID: 424220890}
-  _continue: {fileID: 219345523}
-  _restart: {fileID: 1540946483}
-  _leave: {fileID: 708619255}
-  _pauseLevelName: {fileID: 0}
 --- !u!1 &1875876782
 GameObject:
   m_ObjectHideFlags: 0
@@ -4242,6 +4221,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2089898624}
+  - component: {fileID: 2089898625}
   m_Layer: 5
   m_Name: Header
   m_TagString: Untagged
@@ -4270,6 +4250,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 75}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &2089898625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089898623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a831d1d2b0f65b4f881f7c7536eeed8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelName: {fileID: 1123438724}
+  _pauseLevel: {fileID: 1342578059}
+  _endLevelPanel: {fileID: 1210885798}
+  _pausePanel: {fileID: 424220890}
+  _continue: {fileID: 219345523}
+  _restart: {fileID: 1540946483}
+  _leave: {fileID: 708619255}
+  _pauseLevelName: {fileID: 1405357532}
 --- !u!1001 &827696239797612421
 PrefabInstance:
   m_ObjectHideFlags: 0

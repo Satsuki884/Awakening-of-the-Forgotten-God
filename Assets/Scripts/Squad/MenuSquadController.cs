@@ -22,8 +22,11 @@ namespace AFG
             _closeMenuSquad.onClick.RemoveAllListeners();
             _closeMenuSquad.onClick.AddListener(CloseMenuSquad);
 
-            _closeMenuSquad.onClick.RemoveAllListeners();
-            _closeMenuSquad.onClick.AddListener(StartLevel);
+            if(_startLevel != null)
+            {
+                _startLevel.onClick.RemoveAllListeners();
+                _startLevel.onClick.AddListener(StartLevel);
+            }
 
             if (_levelName != null)
             {
@@ -41,6 +44,7 @@ namespace AFG
 
         private void StartLevel()
         {
+            GameController.Instance.SaveManager.PlayerSquad = GameController.Instance.PlayerCharactersHolderModel.SelectedCharacters;
             LevelModel.StartCurrentLevel();
         }
     }
