@@ -24,7 +24,7 @@ namespace AFG.Combat
         private int _aiCharactersCount;
         private int _playerCharactersCount;
 
-        public CharacterDamageController characterDamageController;
+        // public CharacterDamageController characterDamageController;
 
         private void Start()
         {
@@ -57,13 +57,13 @@ namespace AFG.Combat
 
             SelectCharacter(sortedCharacters[_currentCharacterIndex]);
 
-            characterDamageController.OnQueueUpdated += UpdateQueue;
+            // characterDamageController.OnQueueUpdated += UpdateQueue;
         }
 
-        private void OnDestroy()
-        {
-            characterDamageController.OnQueueUpdated -= UpdateQueue;
-        }
+        // private void OnDestroy()
+        // {
+        //     characterDamageController.OnQueueUpdated -= UpdateQueue;
+        // }
 
         private void OnEnable()
         {
@@ -87,7 +87,13 @@ namespace AFG.Combat
 
         private void SelectCharacter(CharacterController character)
         {
-            Debug.Log("SelectCharacter: " + character.name);
+            if (character.Health <= 0)
+            {
+                UpdateQueue(character);
+                SelectNextCharacter();
+                return;
+            }
+            // Debug.Log("SelectCharacter: " + character.name);
             _selectedCharacter = character;
             _selectedCharacter.SelectCharacter();
 
@@ -111,24 +117,27 @@ namespace AFG.Combat
         public void UpdateQueue(CharacterController character)
         {
             Debug.Log("Update Queue. Will be deleted character with name: " + character.name);
-            for (int i = 0; i < _charactersQueue.Count; i++)
-            {
-                int j = i;
-                if (_charactersQueue[j] == character)
-                {
-                    _charactersQueue.RemoveAt(j);
-                }
-            }
+            // for (int i = 0; i < _charactersQueue.Count; i++)
+            // {
+            //     int j = i;
+            //     if (_charactersQueue[j] == character)
+            //     {
+            //         _charactersQueue.RemoveAt(j);
+            //     }
+            // }
 
             for (int i = 0; i < _charactersQueue.Count; i++)
             {
-                if (_charactersQueue[i].Brain.Type == CharacterBrainType.AI)
+                if (character.Health > 0)
                 {
-                    _aiCharactersCount++;
-                }
-                else if (_charactersQueue[i].Brain.Type == CharacterBrainType.Player)
-                {
-                    _playerCharactersCount++;
+                    if (_charactersQueue[i].Brain.Type == CharacterBrainType.AI)
+                    {
+                        _aiCharactersCount++;
+                    }
+                    else if (_charactersQueue[i].Brain.Type == CharacterBrainType.Player)
+                    {
+                        _playerCharactersCount++;
+                    }
                 }
             }
 
