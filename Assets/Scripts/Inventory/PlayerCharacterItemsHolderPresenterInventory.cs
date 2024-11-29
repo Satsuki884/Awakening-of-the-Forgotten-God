@@ -13,6 +13,11 @@ namespace AFG
 
         [SerializeField] private CharacterInfo _characterInfo;
 
+        [SerializeField] private Transform _inventoryItemsContainer;
+
+        private float _itemSpacing = .5f;
+        private float _itemHeight;
+
         private List<CharacterDataWrapper> PlayerCharacters { get; set; } =
             new List<CharacterDataWrapper>();
 
@@ -24,6 +29,7 @@ namespace AFG
 
         private void ShowAllPlayersCharacter()
         {
+            _itemHeight = _characterItem.GetComponent<RectTransform>().sizeDelta.y;
             
             foreach (var character in PlayerCharacters)
             {
@@ -33,6 +39,9 @@ namespace AFG
                     SelectCharacter(character);
                 });
             }
+
+            _inventoryItemsContainer.GetComponent<RectTransform>().sizeDelta =
+                    Vector3.up * (_itemSpacing + _itemHeight * ((PlayerCharacters.Count - 1)/2));
 
         }
 

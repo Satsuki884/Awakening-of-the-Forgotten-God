@@ -7611,7 +7611,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 62.7
+  m_fontSize: 66.6
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7707,6 +7707,7 @@ MonoBehaviour:
   _characterItem: {fileID: -3602562168007923876, guid: ea8a56d43f43ca24ba27ec46623874e1, type: 3}
   _holder: {fileID: 158214905}
   _characterInfo: {fileID: 192857521}
+  _inventoryItemsContainer: {fileID: 158214906}
 --- !u!224 &6657248523686760192
 RectTransform:
   m_ObjectHideFlags: 0
