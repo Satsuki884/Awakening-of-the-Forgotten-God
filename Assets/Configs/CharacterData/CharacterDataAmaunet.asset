@@ -17,7 +17,7 @@ MonoBehaviour:
     _icon: {fileID: 21300000, guid: 47190561dda636f48b357df009b27338, type: 3}
     _level: 0
     _characterStatsData:
-    - _health: 95
+    - _health: 5
       _def: 10
       _speed: 4
       _atk: 8

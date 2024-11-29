@@ -54,9 +54,10 @@ namespace AFG.Character
             _user.MoveController.MoveTo(_user, adjustedPosition, () =>
             {
                 //start hit enemy
-                _user.AnimationController.PlayMeleeAttackAnimation(_user ,() =>
-                {
+                // _user.AnimationController.PlayMeleeAttackAnimation(_user ,() =>
+                // {
                     //enemy hit
+                    Debug.Log("Enemy hit");
                     characterController.DamageController.TakeDamage(_user.Atk, characterController);
                     _user.AnimationController.PlayRunAnimation(_user);
 
@@ -67,7 +68,7 @@ namespace AFG.Character
                         _user.AnimationController.PlayIdleAnimation(_user);
                         onSkillUsed?.Invoke();
                     });
-                });
+                // });
             });
         }
     }

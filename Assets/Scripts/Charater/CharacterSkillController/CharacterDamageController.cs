@@ -11,8 +11,10 @@ namespace AFG.Character
     {
 
         [SerializeField] private HPDefBarsController hpDefBarsController;
+        public event Action<CharacterController> OnQueueUpdated;
         public void TakeDamage(float i, CharacterController target)
         {
+            Debug.Log("TakeDamage: " + i);
             if(target.Def > i)
             {
                 target.Def -= i;
@@ -28,10 +30,12 @@ namespace AFG.Character
             }else if (target.Health < i && target.Health > 0)
             {
                 target.Health = 0;
-                Destroy(target, 2f);
+                Destroy(target.gameObject);
+                OnQueueUpdated?.Invoke(target);
             }
             hpDefBarsController.UpdateDefBar(target.Def, target.MaxDef);
             hpDefBarsController.UpdateHealthBar(target.Health, target.MaxHealth);
+
         }
 
 

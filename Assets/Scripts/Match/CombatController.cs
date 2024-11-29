@@ -21,6 +21,11 @@ namespace AFG.Combat
         private CharacterController _selectedCharacter;
         private int _currentCharacterIndex = 0;
 
+        private int _aiCharactersCount;
+        private int _playerCharactersCount;
+
+        public CharacterDamageController characterDamageController;
+
         private void Start()
         {
             var playerSquadData = GameController.Instance.SaveManager.PlayerSquad;
@@ -51,6 +56,13 @@ namespace AFG.Combat
             }
 
             SelectCharacter(sortedCharacters[_currentCharacterIndex]);
+
+            characterDamageController.OnQueueUpdated += UpdateQueue;
+        }
+
+        private void OnDestroy()
+        {
+            characterDamageController.OnQueueUpdated -= UpdateQueue;
         }
 
         private void OnEnable()
@@ -75,12 +87,14 @@ namespace AFG.Combat
 
         private void SelectCharacter(CharacterController character)
         {
-            Debug.Log("SelectCharacter: " + character.name);    
+            Debug.Log("SelectCharacter: " + character.name);
             _selectedCharacter = character;
             _selectedCharacter.SelectCharacter();
 
             GameController.Instance.CombatModel.SelectedCharacter = _selectedCharacter;
         }
+
+
 
         private void SelectNextCharacter()
         {
@@ -90,6 +104,51 @@ namespace AFG.Combat
                 _currentCharacterIndex = 0;
             }
             SelectCharacter(_charactersQueue[_currentCharacterIndex]);
+        }
+
+        [SerializeField] private EndGameController _endgameController;
+
+        public void UpdateQueue(CharacterController character)
+        {
+            Debug.Log("Update Queue. Will be deleted character with name: " + character.name);
+            for (int i = 0; i < _charactersQueue.Count; i++)
+            {
+                int j = i;
+                if (_charactersQueue[j] == character)
+                {
+                    _charactersQueue.RemoveAt(j);
+                }
+            }
+
+            for (int i = 0; i < _charactersQueue.Count; i++)
+            {
+                if (_charactersQueue[i].Brain.Type == CharacterBrainType.AI)
+                {
+                    _aiCharactersCount++;
+                }
+                else if (_charactersQueue[i].Brain.Type == CharacterBrainType.Player)
+                {
+                    _playerCharactersCount++;
+                }
+            }
+
+            if (_aiCharactersCount == 0)
+            {
+                Debug.Log("Player wins");
+                _endgameController.EndLevel(true);
+            }
+            else if (_playerCharactersCount == 0)
+            {
+                Debug.Log("AI wins");
+                _endgameController.EndLevel(false);
+            }
+            else
+            {
+                _aiCharactersCount = 0;
+                _playerCharactersCount = 0;
+            }
+
+
         }
     }
 }

@@ -75,18 +75,18 @@ public class CharacterAnimationController : MonoBehaviour
     {
         //Debug.Log("Play mele animation");
 
-        childAnimator = character.GetComponentInChildren<Animator>();
-        if (childAnimator != null)
-        {
-            CheckSkill(character, childAnimator);
-            childAnimator.SetBool(_melee, true);
-            StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, _melee), () =>
-            {
-                childAnimator.SetBool(_melee, false);
-                OnHit?.Invoke();
-            }));
+        // childAnimator = character.GetComponentInChildren<Animator>();
+        // if (childAnimator != null)
+        // {
+        //     CheckSkill(character, childAnimator);
+        //     childAnimator.SetBool(_melee, true);
+        //     StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, _melee), () =>
+        //     {
+        //         childAnimator.SetBool(_melee, false);
+        //         OnHit?.Invoke();
+        //     }));
             
-        }
+        // }
 
         // OnHit?.Invoke();
     }
@@ -114,95 +114,95 @@ public class CharacterAnimationController : MonoBehaviour
     {
         //Debug.Log("Play range animation");
 
-        childAnimator = character.GetComponentInChildren<Animator>();
-        if (childAnimator != null)
-        {
-            CheckSkill(character, childAnimator);
-            childAnimator.SetBool(_range, true);
-            StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, _range), () =>
-            {
-                childAnimator.SetBool(_range, false);
-                OnRange?.Invoke();
-            }));
-        }
+        // childAnimator = character.GetComponentInChildren<Animator>();
+        // if (childAnimator != null)
+        // {
+        //     CheckSkill(character, childAnimator);
+        //     childAnimator.SetBool(_range, true);
+        //     StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, _range), () =>
+        //     {
+        //         childAnimator.SetBool(_range, false);
+        //         OnRange?.Invoke();
+        //     }));
+        // }
 
-        //OnRange?.Invoke();
+        OnRange?.Invoke();
     }
 
     public void PlayHealAnimation(CharacterController character, Action OnHeal)
     {
         //Debug.Log("Play heal animation");
 
-        childAnimator = character.GetComponentInChildren<Animator>();
-        if (childAnimator != null)
-        {
-            CheckSkill(character, childAnimator);
-            childAnimator.SetBool(_heal, true);
-            StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, _heal), () =>
-            {
-                childAnimator.SetBool(_heal, false);
-                OnHeal?.Invoke();
-            }));
-        }
+        // childAnimator = character.GetComponentInChildren<Animator>();
+        // if (childAnimator != null)
+        // {
+        //     CheckSkill(character, childAnimator);
+        //     childAnimator.SetBool(_heal, true);
+        //     StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, _heal), () =>
+        //     {
+        //         childAnimator.SetBool(_heal, false);
+        //         OnHeal?.Invoke();
+        //     }));
+        // }
 
-        // OnHeal?.Invoke();
+        OnHeal?.Invoke();
     }
 
     public void PlayBufAnimation(CharacterController character, Action OnBuf)
     {
         //Debug.Log("Play buf animation");
 
-        childAnimator = character.GetComponentInChildren<Animator>();
-        if (childAnimator != null)
-        {
-            CheckSkill(character, childAnimator);
-            childAnimator.SetBool(_buf, true);
-            StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, _buf), () =>
-            {
-                childAnimator.SetBool(_buf, false); 
-                OnBuf?.Invoke();
-            }));
-        }
+        // childAnimator = character.GetComponentInChildren<Animator>();
+        // if (childAnimator != null)
+        // {
+        //     CheckSkill(character, childAnimator);
+        //     childAnimator.SetBool(_buf, true);
+        //     StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, _buf), () =>
+        //     {
+        //         childAnimator.SetBool(_buf, false); 
+        //         OnBuf?.Invoke();
+        //     }));
+        // }
 
-        // OnBuf?.Invoke();
+        OnBuf?.Invoke();
     }
 
     public void PlayDebufAnimation(CharacterController character, Action OnDebuf)
     {
         //Debug.Log("Play debuf animation");
 
-        childAnimator = character.GetComponentInChildren<Animator>();
-        if (childAnimator != null)
-        {
-            CheckSkill(character, childAnimator);
-            childAnimator.SetBool(_debuf, true);
-            StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, _debuf), () =>
-            {
-                childAnimator.SetBool(_debuf, false);
-                OnDebuf?.Invoke();
-            }));
-        }
+        // childAnimator = character.GetComponentInChildren<Animator>();
+        // if (childAnimator != null)
+        // {
+        //     CheckSkill(character, childAnimator);
+        //     childAnimator.SetBool(_debuf, true);
+        //     StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, _debuf), () =>
+        //     {
+        //         childAnimator.SetBool(_debuf, false);
+        //         OnDebuf?.Invoke();
+        //     }));
+        // }
 
-        // OnDebuf?.Invoke();
+        OnDebuf?.Invoke();
     }
 
     public void PlayAreaAnimation(CharacterController character, Action OnArea)
     {
         //Debug.Log("Play area animation");
 
-        childAnimator = character.GetComponentInChildren<Animator>();
-        if (childAnimator != null)
-        {
-            CheckSkill(character, childAnimator);
-            childAnimator.SetBool(_area, true);
-            StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, _area), () =>
-            {
-                childAnimator.SetBool(_area, false);
-                OnArea?.Invoke();
-            }));
-        }
+        // childAnimator = character.GetComponentInChildren<Animator>();
+        // if (childAnimator != null)
+        // {
+        //     CheckSkill(character, childAnimator);
+        //     childAnimator.SetBool(_area, true);
+        //     StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, _area), () =>
+        //     {
+        //         childAnimator.SetBool(_area, false);
+        //         OnArea?.Invoke();
+        //     }));
+        // }
 
-        // OnArea?.Invoke();
+        OnArea?.Invoke();
     }
 
     public void PlayIdleAnimation(CharacterController character)

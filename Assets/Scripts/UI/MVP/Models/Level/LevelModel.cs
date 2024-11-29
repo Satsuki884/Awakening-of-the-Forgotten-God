@@ -82,8 +82,6 @@ public class LevelModel : MonoBehaviour
     public int LevelNumber{ get; set; }
 
     [SerializeField] private string _backgroundScene;
-    public event Action<int> OnLevelStarted;
-    public event Action<int> OnLevelFinish;
 
     [SerializeField] private LevelData[] _levels;
 

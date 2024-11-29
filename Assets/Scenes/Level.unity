@@ -288,6 +288,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerSquad: {fileID: 827696239797612422}
   _aiSquad: {fileID: 562713024}
+  characterDamageController: {fileID: 5667478600148470615, guid: 0b6f743e46a484787b04c762df2c2b51, type: 3}
+  _endgameController: {fileID: 1210885802}
 --- !u!4 &40741864
 Transform:
   m_ObjectHideFlags: 0
