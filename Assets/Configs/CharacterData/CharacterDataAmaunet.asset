@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterDataWrapper:
     _characterName: Amaunet
-    _icon: {fileID: 21300000, guid: 203280dedcaa20541802123de876c4b6, type: 3}
+    _icon: {fileID: 21300000, guid: 47190561dda636f48b357df009b27338, type: 3}
     _level: 0
     _characterStatsData:
     - _health: 95

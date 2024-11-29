@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterDataWrapper:
     _characterName: Teskatlipoka
-    _icon: {fileID: 21300000, guid: dbd171d1409a2be4f955fb0bca83be16, type: 3}
+    _icon: {fileID: 21300000, guid: be728cd7174f6b84894f4a2108123acc, type: 3}
     _level: 0
     _characterStatsData:
     - _health: 85

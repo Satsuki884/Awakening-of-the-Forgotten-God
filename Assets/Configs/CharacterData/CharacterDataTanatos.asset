@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characterDataWrapper:
     _characterName: Tanatos
-    _icon: {fileID: 21300000, guid: 99d220901e31024459951c144e991070, type: 3}
+    _icon: {fileID: 21300000, guid: 0248992f319487d409cc139197e4a94b, type: 3}
     _level: 0
     _characterStatsData:
     - _health: 108
