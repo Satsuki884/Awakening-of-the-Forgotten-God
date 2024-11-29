@@ -7817,8 +7817,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemSpacing: 10
-  _booksCoinController: {fileID: 0}
-  _booksCoinControllerInShop: {fileID: 0}
+  _booksCoinController: {fileID: 594393201}
+  _booksCoinControllerInShop: {fileID: 8773744307957539624}
   _shopMenu: {fileID: 8192853910153699519}
   _shopItemsContainer: {fileID: 3852285477019604835}
   _itemPrefab: {fileID: 8437011869845254526, guid: a68240b3b3a13d54db2ccbdf28e61018, type: 3}
