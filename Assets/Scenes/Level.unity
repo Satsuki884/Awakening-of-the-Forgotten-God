@@ -288,7 +288,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerSquad: {fileID: 827696239797612422}
   _aiSquad: {fileID: 562713024}
-  characterDamageController: {fileID: 5667478600148470615, guid: 0b6f743e46a484787b04c762df2c2b51, type: 3}
   _endgameController: {fileID: 1210885802}
 --- !u!4 &40741864
 Transform:
@@ -1070,7 +1069,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -0.20092773, y: -50.142883}
+  m_AnchoredPosition: {x: -0.20088196, y: -50.142876}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!1 &480154616

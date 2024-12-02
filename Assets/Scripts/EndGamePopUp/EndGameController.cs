@@ -79,6 +79,8 @@ namespace AFG
         {
             SavePlayerData();
             Debug.Log("NextLevel");
+            GameController.Instance.LevelModel.LevelNumber++;
+            GameController.Instance.LevelModel.UnLoadPrevScene(LevelModel.LevelScene, LevelModel.MenuSquadScene);
         }
 
         private void OnRestartButtonClicked()
@@ -88,7 +90,7 @@ namespace AFG
                 SavePlayerData();
             }
             Debug.Log("Restart");
-            GameController.Instance.LevelModel.UnLoadPrevScene(LevelModel.MenuSquadScene, LevelModel.MenuSquadScene);
+            GameController.Instance.LevelModel.UnLoadPrevScene(LevelModel.LevelScene, LevelModel.LevelScene);
 
         }
 
@@ -99,7 +101,7 @@ namespace AFG
             {
                 SavePlayerData();
             }
-            GameController.Instance.LevelModel.UnLoadPrevScene(LevelModel.MenuSquadScene, LevelModel.LevelMenuScene);
+            GameController.Instance.LevelModel.UnLoadPrevScene(LevelModel.LevelScene, LevelModel.LevelMenuScene);
         }
 
         private void SavePlayerData()
