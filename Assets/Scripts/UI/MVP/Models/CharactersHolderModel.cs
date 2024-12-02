@@ -57,7 +57,11 @@ namespace AFG.MVP
             var character = Characters.Find(c => c.CharacterName.Equals(characterName));
 
             _selectedCharacters[_buttonIndex] = Instantiate(character.CharacterPrefab.gameObject, _characterHolder);
-            SelectedCharacters.Add(character);
+            
+            if(!SelectedCharacters.Any(x=>x.CharacterName == characterName))
+            {
+                SelectedCharacters.Add(character);
+            }
 
             _selectedCharacters[_buttonIndex].transform.rotation = Quaternion.Euler(0, 270, 0);
 
