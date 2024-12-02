@@ -22,25 +22,11 @@ namespace AFG
         [SerializeField] private AudioClip _combatMusic;
         [SerializeField] private AudioClip _saleMusic;
 
-        private string _menuSquad;
-        private string _inventory;
-        private string _mainMenu;
-
-        private void Awake()
-        {
-            if (GameController.Instance != null && GameController.Instance.LevelModel != null)
-            {
-                _menuSquad = GameController.Instance.LevelModel.MenuSquadScene;
-                _inventory = GameController.Instance.LevelModel.InventoryScene;
-                _mainMenu = GameController.Instance.LevelModel.MainMenuScene;
-            }
-        }
-
         private void Start()
         {
-            if (SceneManager.GetActiveScene().name != _menuSquad &&
-                SceneManager.GetActiveScene().name != _inventory &&
-                SceneManager.GetActiveScene().name != _mainMenu)
+            if (SceneManager.GetActiveScene().name != GameController.Instance.LevelModel.MenuSquadScene &&
+                SceneManager.GetActiveScene().name != GameController.Instance.LevelModel.InventoryScene &&
+                SceneManager.GetActiveScene().name != GameController.Instance.LevelModel.MainMenuScene)
             {
                 _musicSource.clip = _combatMusic;
             }
