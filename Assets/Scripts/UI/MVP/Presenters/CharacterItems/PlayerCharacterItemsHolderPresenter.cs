@@ -45,7 +45,7 @@ namespace AFG.MVP
             {
                 var characterItem = Instantiate(_characterItem, _holder.transform);
                 //TODO refactoring move name to json
-                characterItem.Initialize(character.CharacterName, (characterName) =>
+                characterItem.Initialize(character.CharacterName, character.Icon, (characterName) =>
                 {
                     _model.StopCharacterSelection(characterName);
                 });
