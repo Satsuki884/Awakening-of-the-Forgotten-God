@@ -47,6 +47,7 @@ namespace AFG.MVP
             set
             {
                 _selectedTargets = value;
+                //execute skill
                 UseSelectedCharacterSkill(_player);
             }
         }
