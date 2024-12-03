@@ -59,7 +59,7 @@ namespace AFG.MVP
             _selectedCharacters[_buttonIndex] = Instantiate(character.CharacterPrefab.gameObject, _characterHolder);
             SelectedCharacters.Add(character);
 
-            _selectedCharacters[_buttonIndex].transform.rotation = Quaternion.Euler(0, 180, 0);
+            _selectedCharacters[_buttonIndex].transform.rotation = Quaternion.Euler(0, 90, 0);
 
             for (int i = 0; i < _selectedCharacters.Length; i++)
             {

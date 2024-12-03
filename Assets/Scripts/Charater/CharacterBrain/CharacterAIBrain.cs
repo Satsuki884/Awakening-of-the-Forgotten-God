@@ -44,10 +44,22 @@ namespace AFG.Character
                 _tempPlayerSquad = GameController.Instance.CombatModel.AiSquad;
             }
 
-            //AI select random skill
             int randSkillIndex = Random.Range(0, selectedCharacter.Skills.Length);
 
             var skill = selectedCharacter.Skills[randSkillIndex];
+
+            foreach (var character in _tempAISquad.Characters)
+            {
+                if (character.Health == character.MaxHealth)
+                {
+                    _tempAISquad.Characters.Remove(character);
+                }
+            }
+
+
+
+
+
 
             if (skill is CharacterMeleSkill)
             {
@@ -86,6 +98,7 @@ namespace AFG.Character
                     _tempAISquad.Characters);
             }
         }
+
 
         //principle DRY (Don't Repeat Yourself)
         private void UseSkill(

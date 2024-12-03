@@ -6,6 +6,7 @@ using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.UIElements.UxmlAttributeDescription;
 using AFG.Character;
 using AFG.Stats;
+using AFG;
 
 
 namespace AFG.Character
