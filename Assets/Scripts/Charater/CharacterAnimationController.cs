@@ -7,7 +7,6 @@ using CharacterController = AFG.Character.CharacterController;
 
 public class CharacterAnimationController : MonoBehaviour
 {
-
     private string _melee = "melee";
     private string _range = "range";
     private string _buf = "buf";
@@ -16,7 +15,12 @@ public class CharacterAnimationController : MonoBehaviour
     private string _area = "area";
     private string _run = "run";
 
-    private Animator childAnimator;
+    private Animator _animator;
+
+    private void Awake()
+    {
+        _animator = GetComponentInChildren<Animator>();
+    }
 
     public void CheckSkill(CharacterController character, Animator animator)
     {
@@ -63,32 +67,26 @@ public class CharacterAnimationController : MonoBehaviour
     {
         //Debug.Log("Play run animation");
 
-        childAnimator = character.GetComponentInChildren<Animator>();
-        if (childAnimator != null)
+        
+        if (_animator != null)
         {
-            CheckSkill(character, childAnimator);
-            childAnimator.SetBool(_run, true);
+            CheckSkill(character, _animator);
+            _animator.SetBool(_run, true);
         }
     }
 
     public void PlayMeleeAttackAnimation(CharacterController character, Action OnHit)
     {
-        //Debug.Log("Play mele animation");
-
-        // childAnimator = character.GetComponentInChildren<Animator>();
-        // if (childAnimator != null)
-        // {
-        //     CheckSkill(character, childAnimator);
-        //     childAnimator.SetBool(_melee, true);
-        //     StartCoroutine(WaitForAnimation(GetAnimLong(childAnimator, _melee), () =>
-        //     {
-        //         childAnimator.SetBool(_melee, false);
-        //         OnHit?.Invoke();
-        //     }));
-            
-        // }
-
-        // OnHit?.Invoke();
+        if (_animator != null)
+        {
+             CheckSkill(character, _animator);
+             _animator.SetBool(_melee, true);
+             StartCoroutine(WaitForAnimation(GetAnimLong(_animator, _melee), () =>
+             {
+                 _animator.SetBool(_melee, false);
+                 OnHit?.Invoke();
+             }));
+        }
     }
 
     private IEnumerator WaitForAnimation(float delay, Action onComplete)
@@ -208,10 +206,10 @@ public class CharacterAnimationController : MonoBehaviour
     public void PlayIdleAnimation(CharacterController character)
     {
 
-        childAnimator = character.GetComponentInChildren<Animator>();
-        if (childAnimator != null)
+        _animator = character.GetComponentInChildren<Animator>();
+        if (_animator != null)
         {
-            CheckSkill(character, childAnimator);
+            CheckSkill(character, _animator);
         }
         //Debug.Log("Play idle animation");
     }
