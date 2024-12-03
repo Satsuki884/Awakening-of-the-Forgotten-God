@@ -87,9 +87,13 @@ public class LevelModel : MonoBehaviour
 
     public CharacterDataWrapper[] PlayerSquad { get; set; }
 
+    public int CountLevels{
+        get { return _levels.Length; }
+    }
+
     public CharacterDataWrapper[] GetAiSquad()
     {
-        return _levels[LevelNumber].AISquad.CharacterData.Select(x => x.CharacterDataWrapper).ToArray();
+        return _levels[LevelNumber-1].AISquad.CharacterData.Select(x => x.CharacterDataWrapper).ToArray();
     }
 
     public void StartNextLevel(){

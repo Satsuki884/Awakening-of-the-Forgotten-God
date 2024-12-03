@@ -32,10 +32,11 @@ namespace AFG.Character
                 target.Health -= i;
             }else if (target.Health < i && target.Health > 0)
             {
-                // Debug.Log("target.Health < i && target.Health > 0");
                 target.Health = 0;
-                // OnQueueUpdated?.Invoke(target);
-                target.gameObject.SetActive(false);
+                target.AnimationController.PlayDeathAnimation(target, () =>
+                {
+                    target.gameObject.SetActive(false);
+                });
             }
             hpDefBarsController.UpdateDefBar(target.Def, target.MaxDef);
             hpDefBarsController.UpdateHealthBar(target.Health, target.MaxHealth);

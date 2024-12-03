@@ -89,8 +89,11 @@ namespace AFG.Combat
         {
             if (character.Health <= 0)
             {
-                UpdateQueue(character);
-                SelectNextCharacter();
+                Debug.Log("Character is dead. Selecting next character.");
+                if (UpdateQueue(character) == 0)
+                {
+                    SelectNextCharacter();
+                }
                 return;
             }
             // Debug.Log("SelectCharacter: " + character.name);
@@ -114,27 +117,21 @@ namespace AFG.Combat
 
         [SerializeField] private EndGameController _endgameController;
 
-        public void UpdateQueue(CharacterController character)
+        public int UpdateQueue(CharacterController character)
         {
             Debug.Log("Update Queue. Will be deleted character with name: " + character.name);
-            // for (int i = 0; i < _charactersQueue.Count; i++)
-            // {
-            //     int j = i;
-            //     if (_charactersQueue[j] == character)
-            //     {
-            //         _charactersQueue.RemoveAt(j);
-            //     }
-            // }
 
             for (int i = 0; i < _charactersQueue.Count; i++)
             {
-                if (character.Health > 0)
+                int j = i;
+                if (_charactersQueue[j].Health > 0)
                 {
-                    if (_charactersQueue[i].Brain.Type == CharacterBrainType.AI)
+                    Debug.Log("Character is alive. Adding to queue: " + character.name);
+                    if (_charactersQueue[j].Brain.Type == CharacterBrainType.AI)
                     {
                         _aiCharactersCount++;
                     }
-                    else if (_charactersQueue[i].Brain.Type == CharacterBrainType.Player)
+                    else if (_charactersQueue[j].Brain.Type == CharacterBrainType.Player)
                     {
                         _playerCharactersCount++;
                     }
@@ -145,16 +142,20 @@ namespace AFG.Combat
             {
                 Debug.Log("Player wins");
                 _endgameController.EndLevel(true);
+                return 1;
             }
             else if (_playerCharactersCount == 0)
             {
                 Debug.Log("AI wins");
                 _endgameController.EndLevel(false);
+                return -1;
             }
             else
             {
                 _aiCharactersCount = 0;
                 _playerCharactersCount = 0;
+                return 0;
+                SelectNextCharacter();
             }
 
 

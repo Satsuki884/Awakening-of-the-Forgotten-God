@@ -41,7 +41,7 @@ namespace AFG
             {
                 _endGamePopUpImage.color = _winColor;
                 _nextLevelButton.gameObject.SetActive(true);
-                _level.text = "Level 1" + " - " + "Victory";
+                _level.text = "Level " + GameController.Instance.LevelModel.LevelNumber + " - " + "Victory";
                 _resultCoin.text = Random.Range(20, 41).ToString();
                 var books = Random.Range(0, 51);
                 if (books != 0)
@@ -53,11 +53,15 @@ namespace AFG
                 {
                     _resultBooks.text = "1";
                 }
+                if (GameController.Instance.LevelModel.CountLevels == GameController.Instance.LevelModel.LevelNumber)
+                {
+                    _nextLevelButton.gameObject.SetActive(false);
+                }
             }
             else
             {
                 _rewards.SetActive(false);
-                _level.text = "Level 1" + " - " + "Defeat";
+                _level.text = "Level " + GameController.Instance.LevelModel.LevelNumber + " - " + "Defeat";
                 _endGamePopUpImage.color = _loseColor;
                 _nextLevelButton.gameObject.SetActive(false);
             }

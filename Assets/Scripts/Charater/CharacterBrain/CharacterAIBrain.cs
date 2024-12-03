@@ -48,15 +48,6 @@ namespace AFG.Character
 
             var skill = selectedCharacter.Skills[randSkillIndex];
 
-            foreach (var character in _tempAISquad.Characters)
-            {
-                if (character.Health == character.MaxHealth)
-                {
-                    _tempAISquad.Characters.Remove(character);
-                }
-            }
-
-
 
 
 
@@ -106,6 +97,8 @@ namespace AFG.Character
             CharacterSkill skill,
             List<CharacterController> characterTargets)
         {
+            characterTargets.RemoveAll(character => character.Health <= 0);
+            
             var randomIndex = UnityEngine.Random.Range(0, characterTargets.Count);
             var selectedTarget = characterTargets[randomIndex];
             selectedCharacter.SelectedCharacterSkill = skill;
