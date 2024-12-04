@@ -84,7 +84,7 @@ namespace AFG.MVP
                 }
                 else if (skill is CharacterRangeSkill)
                 {
-                    AddActionToButton(_attackMeleButton,
+                    AddActionToButton(_attackRangeButton,
                         selectedCharacter,
                         skill,
                         _tempAISquad.Characters);
