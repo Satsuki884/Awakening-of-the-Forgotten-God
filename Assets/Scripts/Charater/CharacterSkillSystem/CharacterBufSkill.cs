@@ -8,6 +8,11 @@ namespace AFG.Character
 {
     public class CharacterBufSkill : CharacterSkill
     {
+
+        [SerializeField] private GameObject _bufVfxPrefab;
+
+        private ParticleSystem _vfx;
+        
         public override void UseSkill(CharacterController user,
             List<CharacterController> targets, Action OnSkillUsed)
         {
@@ -57,11 +62,19 @@ namespace AFG.Character
                 {
                     //enemy hit
                     characterController.DeBufController.TakeBuf(characterController, 2, 5);
+
+                    if (_vfx == null)
+                    {
+                        _vfx = Instantiate(_bufVfxPrefab, targetPosition, Quaternion.identity).GetComponent<ParticleSystem>();
+                    }
+                    
+                    _vfx.Play();
                     _user.AnimationController.PlayRunAnimation(_user);
 
                     //return to start point
                     _user.MoveController.MoveBack(_user, startPoint, initialRotation, () =>
                     {
+                        _vfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
                         //play idle animation on start point
                         _user.AnimationController.PlayIdleAnimation(_user);
                         onSkillUsed?.Invoke();

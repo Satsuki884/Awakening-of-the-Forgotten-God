@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5f82007a2f044b5abbcfe481ca15132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debufVfxPrefab: {fileID: 160890, guid: 81a6215dbf618d84cae2c6907f947094, type: 3}
 --- !u!114 &7245177577283009198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68e779e6fa62c44b3be5b2dc92cd91e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _areaVfxPrefab: {fileID: 107252, guid: ce5715dcf97590b4cbec21f0ed7cf1ed, type: 3}
 --- !u!114 &3541680875661898641
 MonoBehaviour:
   m_ObjectHideFlags: 0

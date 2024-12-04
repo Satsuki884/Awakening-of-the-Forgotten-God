@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fabd2b58e92d3435b95f798c8dc27024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rangeVfxPrefab: {fileID: 115286, guid: ec1c5863f61e8ff4a84dbdb8a282a7ac, type: 3}
 --- !u!114 &434259912079046398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5f82007a2f044b5abbcfe481ca15132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debufVfxPrefab: {fileID: 160890, guid: 81a6215dbf618d84cae2c6907f947094, type: 3}
 --- !u!95 &4370454143291288323
 Animator:
   serializedVersion: 5

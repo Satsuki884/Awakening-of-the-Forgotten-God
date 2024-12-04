@@ -14,6 +14,11 @@ namespace AFG.Character
     public class CharacterAreaDamageSkill : CharacterSkill
     {
 
+        [SerializeField] private GameObject _areaVfxPrefab;
+
+        private ParticleSystem _vfx;
+
+
         public override void UseSkill(CharacterController user,
             List<CharacterController> targets, Action OnSkillUsed)
         {
@@ -63,6 +68,13 @@ namespace AFG.Character
                     for (int i = 0; i < _targets.Count; i++)
                     {
 
+                        // if (_vfx == null)
+                        // {
+                            _vfx = Instantiate(_areaVfxPrefab, targetPosition, Quaternion.identity).GetComponent<ParticleSystem>();
+                        // }
+
+                        _vfx.Play();
+
                         //enemy hit
                         _targets[i].DamageController.TakeDamage(_user.Atk, _targets[i]);
                         //return to start point
@@ -71,6 +83,7 @@ namespace AFG.Character
                     _user.AnimationController.PlayRunAnimation(_user);
                     _user.MoveController.MoveBack(_user, startPoint, initialRotation, () =>
                     {
+                        _vfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
                         //play idle animation on start point
                         _user.AnimationController.PlayIdleAnimation(_user);
                         onSkillUsed?.Invoke();

@@ -9,7 +9,7 @@ namespace AFG.Character
 {
     public class CharacterMeleSkill : CharacterSkill
     {
-        [SerializeField] private GameObject _vfxPrefab;
+        [SerializeField] private GameObject _meleeVfxPrefab;
 
         private ParticleSystem _vfx;
         
@@ -67,7 +67,7 @@ namespace AFG.Character
                     //TODO add pool system
                     if (_vfx == null)
                     {
-                        _vfx = Instantiate(_vfxPrefab, targetPosition, Quaternion.identity).GetComponent<ParticleSystem>();
+                        _vfx = Instantiate(_meleeVfxPrefab, targetPosition, Quaternion.identity).GetComponent<ParticleSystem>();
                     }
                     
                     _vfx.Play();

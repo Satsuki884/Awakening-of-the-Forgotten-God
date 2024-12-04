@@ -8,6 +8,11 @@ namespace AFG.Character
 {
     public class CharacterHealSkill : CharacterSkill
     {
+
+        [SerializeField] private GameObject _healVfxPrefab;
+
+        private ParticleSystem _vfx;
+        
         public override void UseSkill(CharacterController user,
             List<CharacterController> targets, Action OnSkillUsed)
         {
@@ -54,6 +59,13 @@ namespace AFG.Character
                 //start heal player character squad
                 _user.AnimationController.PlayHealAnimation(_user ,() =>
                 {
+
+                    if (_vfx == null)
+                    {
+                        _vfx = Instantiate(_healVfxPrefab, targetPosition, Quaternion.identity).GetComponent<ParticleSystem>();
+                    }
+                    
+                    _vfx.Play();
                     //heal
                     characterController.HealController.Healing(characterController, 10);
                     _user.AnimationController.PlayRunAnimation(_user);
@@ -61,6 +73,7 @@ namespace AFG.Character
                     //return to start point
                     _user.MoveController.MoveBack(_user, startPoint, initialRotation, () =>
                     {
+                        _vfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
                         //play idle animation on start point
                         _user.AnimationController.PlayIdleAnimation(_user);
                         onSkillUsed?.Invoke();
