@@ -67,7 +67,7 @@ namespace AFG.Character
                     //TODO add pool system
                     if (_vfx == null)
                     {
-                        _vfx = Instantiate(_vfxPrefab, characterController.transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
+                        _vfx = Instantiate(_vfxPrefab, targetPosition, Quaternion.identity).GetComponent<ParticleSystem>();
                     }
                     
                     _vfx.Play();
