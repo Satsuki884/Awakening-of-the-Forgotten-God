@@ -94,9 +94,9 @@ Material:
     - _Offset2: 0
     - _Outline: 1
     - _Parallax: 0.02
-    - _RampSmooth: 0.1
+    - _RampSmooth: 1
     - _RampSmoothOtherLights: 0.5
-    - _RampThreshold: 0.5
+    - _RampThreshold: 0
     - _RampThresholdOtherLights: 0.5
     - _RimMax: 1
     - _RimMin: 0.5
