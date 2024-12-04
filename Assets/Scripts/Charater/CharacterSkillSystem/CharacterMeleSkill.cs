@@ -3,11 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using AFG.Character;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace AFG.Character
 {
     public class CharacterMeleSkill : CharacterSkill
     {
+        [SerializeField] private GameObject _vfxPrefab;
+
+        private ParticleSystem _vfx;
+        
         public override void UseSkill(CharacterController user,
             List<CharacterController> targets, Action OnSkillUsed)
         {
@@ -58,12 +63,22 @@ namespace AFG.Character
                 {
                     //enemy hit
                     Debug.Log("Enemy hit");
+                    
+                    //TODO add pool system
+                    if (_vfx == null)
+                    {
+                        _vfx = Instantiate(_vfxPrefab, characterController.transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
+                    }
+                    
+                    _vfx.Play();
+                    
                     characterController.DamageController.TakeDamage(_user.Atk, characterController);
                     _user.AnimationController.PlayRunAnimation(_user);
 
                     //return to start point
                     _user.MoveController.MoveBack(_user, startPoint, initialRotation, () =>
                     {
+                        _vfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
                         //play idle animation on start point
                         _user.AnimationController.PlayIdleAnimation(_user);
                         onSkillUsed?.Invoke();

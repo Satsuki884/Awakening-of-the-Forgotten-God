@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13bf56803045b42ee955f2c029e2b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _vfxPrefab: {fileID: 8128187162247441353, guid: 4bd00ae5c981b40598d17ebce196815e, type: 3}
 --- !u!114 &2644674537550436380
 MonoBehaviour:
   m_ObjectHideFlags: 0
