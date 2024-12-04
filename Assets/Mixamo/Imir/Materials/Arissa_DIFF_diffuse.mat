@@ -146,11 +146,11 @@ Material:
     - _RampBandsSmoothing: 0.1
     - _RampOffset: 0
     - _RampScale: 1
-    - _RampSmooth: 0.2
+    - _RampSmooth: 1
     - _RampSmoothAdd: 0.75
     - _RampSmoothOtherLights: 0.5
     - _RampSmoothing: 0.1
-    - _RampThreshold: 0.75
+    - _RampThreshold: 0
     - _RampThresholdOtherLights: 0.5
     - _RampType: 0
     - _ReceiveShadowsOff: 1
@@ -201,7 +201,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BumpSpeed: {r: 0.2, g: 0.2, b: 0.3, a: 0.3}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _FoamColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
     - _FoamSpeed: {r: 2, g: 2, b: 2, a: 2}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
