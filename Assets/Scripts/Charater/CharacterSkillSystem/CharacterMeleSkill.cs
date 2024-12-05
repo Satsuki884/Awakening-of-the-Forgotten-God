@@ -78,7 +78,7 @@ namespace AFG.Character
                     //return to start point
                     _user.MoveController.MoveBack(_user, startPoint, initialRotation, () =>
                     {
-                        _vfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+                        // _vfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
                         //play idle animation on start point
                         _user.AnimationController.PlayIdleAnimation(_user);
                         onSkillUsed?.Invoke();

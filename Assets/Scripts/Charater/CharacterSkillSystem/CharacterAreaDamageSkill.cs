@@ -68,10 +68,10 @@ namespace AFG.Character
                     for (int i = 0; i < _targets.Count; i++)
                     {
 
-                        // if (_vfx == null)
-                        // {
+                        if (_vfx == null)
+                        {
                             _vfx = Instantiate(_areaVfxPrefab, targetPosition, Quaternion.identity).GetComponent<ParticleSystem>();
-                        // }
+                        }
 
                         _vfx.Play();
 
@@ -83,7 +83,7 @@ namespace AFG.Character
                     _user.AnimationController.PlayRunAnimation(_user);
                     _user.MoveController.MoveBack(_user, startPoint, initialRotation, () =>
                     {
-                        _vfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+                        // _vfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
                         //play idle animation on start point
                         _user.AnimationController.PlayIdleAnimation(_user);
                         onSkillUsed?.Invoke();

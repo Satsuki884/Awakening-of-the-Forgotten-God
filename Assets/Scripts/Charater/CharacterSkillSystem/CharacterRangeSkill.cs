@@ -59,7 +59,7 @@ namespace AFG.Character
                 _vfx.Play();
                 //enemy hit
                 characterController.DamageController.TakeDamage(_user.Atk, characterController);
-                _vfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+                // _vfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
                 //play idle animation on start point
                 _user.AnimationController.PlayIdleAnimation(_user);
                 onSkillUsed?.Invoke();
