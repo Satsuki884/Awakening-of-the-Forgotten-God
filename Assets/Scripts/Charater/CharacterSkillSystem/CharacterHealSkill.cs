@@ -12,7 +12,7 @@ namespace AFG.Character
         [SerializeField] private GameObject _healVfxPrefab;
 
         private ParticleSystem _vfx;
-        
+
         public override void UseSkill(CharacterController user,
             List<CharacterController> targets, Action OnSkillUsed)
         {
@@ -57,14 +57,14 @@ namespace AFG.Character
             _user.MoveController.MoveTo(_user, adjustedPosition, () =>
             {
                 //start heal player character squad
-                _user.AnimationController.PlayHealAnimation(_user ,() =>
+                _user.AnimationController.PlayHealAnimation(_user, () =>
                 {
-
+                    targetPosition.y += 1;
                     if (_vfx == null)
                     {
                         _vfx = Instantiate(_healVfxPrefab, targetPosition, Quaternion.identity).GetComponent<ParticleSystem>();
                     }
-                    
+
                     _vfx.Play();
                     //heal
                     characterController.HealController.Healing(characterController, 10);

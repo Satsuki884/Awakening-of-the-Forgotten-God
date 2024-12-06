@@ -63,7 +63,7 @@ namespace AFG.Character
                 {
                     //enemy hit
                     Debug.Log("Enemy hit");
-                    
+                    targetPosition.y += 1;
                     //TODO add pool system
                     if (_vfx == null)
                     {

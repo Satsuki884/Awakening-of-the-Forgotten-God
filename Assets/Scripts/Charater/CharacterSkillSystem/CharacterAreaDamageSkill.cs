@@ -67,7 +67,8 @@ namespace AFG.Character
                     //enemy hit
                     for (int i = 0; i < _targets.Count; i++)
                     {
-
+                        targetPosition = _targets[i].transform.position;
+                        targetPosition.y += 1;
                         if (_vfx == null)
                         {
                             _vfx = Instantiate(_areaVfxPrefab, targetPosition, Quaternion.identity).GetComponent<ParticleSystem>();

@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rangeVfxPrefab: {fileID: 127072, guid: 7f45705f5f30d8a45af0fc2eb8c8998a, type: 3}
+  _hitVfxPrefab: {fileID: 116678, guid: cbaf2c9f645e7d148aa4402a74bf6e9f, type: 3}
 --- !u!114 &4851309088933989751
 MonoBehaviour:
   m_ObjectHideFlags: 0

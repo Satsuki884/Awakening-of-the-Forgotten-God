@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07b82cc5ffb2b44f3a8bdd0252ce257a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bufVfxPrefab: {fileID: 163640, guid: be4058b04abc8fe4ca81c721c18ecb4f, type: 3}
+  _bufVfxPrefab: {fileID: 124416, guid: 9b95de169c5cf5b46b404f6f2bed4afb, type: 3}
 --- !u!114 &162313573228260008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13bf56803045b42ee955f2c029e2b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meleeVfxPrefab: {fileID: 135726, guid: fa0f45d143def4e4188900695d955614, type: 3}
+  _meleeVfxPrefab: {fileID: 171432, guid: 0ebcd60dd020022408e53f535d12f313, type: 3}
 --- !u!114 &104361686841162545
 MonoBehaviour:
   m_ObjectHideFlags: 0

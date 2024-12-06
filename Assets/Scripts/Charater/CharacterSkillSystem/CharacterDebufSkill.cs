@@ -11,7 +11,7 @@ namespace AFG.Character
         [SerializeField] private GameObject _debufVfxPrefab;
 
         private ParticleSystem _vfx;
-        
+
         public override void UseSkill(CharacterController user,
             List<CharacterController> targets, Action OnSkillUsed)
         {
@@ -56,28 +56,30 @@ namespace AFG.Character
             _user.MoveController.MoveTo(_user, adjustedPosition, () =>
             {
                 //start debuf enemy
-                _user.AnimationController.PlayDebufAnimation(_user ,() =>
+                _user.AnimationController.PlayDebufAnimation(_user, () =>
                 {
 
                     int randomBuf = UnityEngine.Random.Range(2, 4);
                     int randomBufValue = 1;
-                    if(randomBuf == 2)
+                    if (randomBuf == 2)
                     {
                         randomBufValue = UnityEngine.Random.Range(1, 5);
                     }
-                    else if(randomBuf == 3)
+                    else if (randomBuf == 3)
                     {
                         randomBufValue = UnityEngine.Random.Range(1, 5);
                     }
                     //enemy debuf
-                    characterController.DeBufController.TakeDeBuf(characterController, randomBuf, randomBufValue);
 
+
+                    targetPosition.y += 1;
                     if (_vfx == null)
                     {
                         _vfx = Instantiate(_debufVfxPrefab, targetPosition, Quaternion.identity).GetComponent<ParticleSystem>();
                     }
-                    
+
                     _vfx.Play();
+                    characterController.DeBufController.TakeDeBuf(characterController, randomBuf, randomBufValue);
                     _user.AnimationController.PlayRunAnimation(_user);
 
                     //return to start point
