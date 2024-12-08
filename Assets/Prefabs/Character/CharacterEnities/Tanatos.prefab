@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07b82cc5ffb2b44f3a8bdd0252ce257a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bufVfxPrefab: {fileID: 114476, guid: 225085907981d1a4f9901b6ced5b2657, type: 3}
+  _bufVfxPrefab: {fileID: 156674, guid: 31bea997407d42b4c815aff8926295bb, type: 3}
 --- !u!114 &6343347441535725958
 MonoBehaviour:
   m_ObjectHideFlags: 0
