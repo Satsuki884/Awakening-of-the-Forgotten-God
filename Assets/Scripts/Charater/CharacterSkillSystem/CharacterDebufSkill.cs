@@ -85,7 +85,7 @@ namespace AFG.Character
             });
         }
 
-        public void ParticlePlay()
+        public void ParticleDebufPlay()
         {
             targetPosition.y += 1;
 

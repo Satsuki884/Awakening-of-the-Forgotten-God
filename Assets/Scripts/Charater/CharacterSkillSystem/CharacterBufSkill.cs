@@ -39,7 +39,7 @@ namespace AFG.Character
             OnTargetSelected(AITarget);
         }
         Vector3 targetPosition;
-        
+
         protected override void OnTargetSelected(CharacterController characterController)
         {
             base.OnTargetSelected(characterController);
@@ -76,7 +76,7 @@ namespace AFG.Character
             });
         }
 
-        public void ParticlePlay()
+        public void ParticleBufPlay()
         {
             targetPosition.y += 1;
 
