@@ -14,7 +14,6 @@ public class CharacterAnimationController : MonoBehaviour
     private string _heal = "heal";
     private string _area = "area";
     private string _run = "run";
-    private string _idle = "idle";
     private string _death = "death";
 
     private Animator _animator;

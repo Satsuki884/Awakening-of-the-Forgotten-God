@@ -11,7 +11,6 @@ namespace AFG.Character
     {
 
         [SerializeField] private HPDefBarsController hpDefBarsController;
-        public event Action<CharacterController> OnQueueUpdated;
         public void TakeDamage(float i, CharacterController target)
         {
             // Debug.Log("TakeDamage: " + i);

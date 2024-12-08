@@ -39,6 +39,7 @@ namespace AFG.Character
             OnTargetSelected(AITarget);
         }
         Vector3 targetPosition;
+        
         protected override void OnTargetSelected(CharacterController characterController)
         {
             base.OnTargetSelected(characterController);

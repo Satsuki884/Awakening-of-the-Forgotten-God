@@ -155,7 +155,6 @@ namespace AFG.Combat
                 _aiCharactersCount = 0;
                 _playerCharactersCount = 0;
                 return 0;
-                SelectNextCharacter();
             }
 
 
