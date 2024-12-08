@@ -38,7 +38,7 @@ namespace AFG.Character
 
             OnTargetSelected(AITarget);
         }
-
+        Vector3 targetPosition;
         protected override void OnTargetSelected(CharacterController characterController)
         {
             base.OnTargetSelected(characterController);
@@ -50,7 +50,7 @@ namespace AFG.Character
             Quaternion initialRotation = _user.transform.rotation;
 
 
-            Vector3 targetPosition = characterController.transform.position;
+            targetPosition = characterController.transform.position;
             Vector3 direction = (targetPosition - _user.transform.position).normalized;
             Vector3 adjustedPosition = targetPosition - direction * 3f;
 
@@ -60,16 +60,6 @@ namespace AFG.Character
                 //start buf 
                 _user.AnimationController.PlayBufAnimation(_user, () =>
                 {
-                    //enemy hit
-
-                    targetPosition.y += 1;
-
-                    if (_vfx == null)
-                    {
-                        _vfx = Instantiate(_bufVfxPrefab, targetPosition, Quaternion.identity).GetComponent<ParticleSystem>();
-                    }
-
-                    _vfx.Play();
                     characterController.DeBufController.TakeBuf(characterController, 2, 5);
                     _user.AnimationController.PlayRunAnimation(_user);
 
@@ -83,6 +73,18 @@ namespace AFG.Character
                     });
                 });
             });
+        }
+
+        public void ParticlePlay()
+        {
+            targetPosition.y += 1;
+
+            if (_vfx == null)
+            {
+                _vfx = Instantiate(_bufVfxPrefab, targetPosition, Quaternion.identity).GetComponent<ParticleSystem>();
+            }
+
+            _vfx.Play();
         }
     }
 }
