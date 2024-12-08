@@ -53,19 +53,18 @@ namespace AFG.Character
             Vector3 direction = (targetPosition - _user.transform.position).normalized;
             Vector3 adjustedPosition = targetPosition - direction * 3f;
             adjustedPosition.y += 1;
-
+            targetPosition.y += 1;
             //start hit enemy
             _user.AnimationController.PlayRangeAttackAnimation(_user, () =>
             {
                 MoveTo(adjustedPosition, () =>
                     {
-                        _vfx.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-                        targetPosition.y += 1;
+                        _hitVfx.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
                         if (_vfx == null)
                         {
                             _vfx = Instantiate(_rangeVfxPrefab, targetPosition, Quaternion.identity).GetComponent<ParticleSystem>();
                         }
-
                         _vfx.Play();
                         //enemy hit
                         characterController.DamageController.TakeDamage(_user.Atk, characterController);
