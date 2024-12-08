@@ -87,7 +87,7 @@ namespace AFG.Character
 
         public void ParticleDebufPlay()
         {
-            targetPosition.y += 1;
+            targetPosition.y += 3;
 
             if (_vfx == null)
             {
