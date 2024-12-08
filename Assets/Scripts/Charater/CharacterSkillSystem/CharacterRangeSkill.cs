@@ -69,11 +69,13 @@ namespace AFG.Character
         {
             Vector3 direction = (targetPosition - _user.transform.position).normalized;
             Vector3 adjustedPosition = targetPosition - direction * 3f;
-            adjustedPosition.y += 1;
-            targetPosition.y += 1;
+            adjustedPosition.y += 3;
+            targetPosition.y += 3;
+            Vector3 fromPosition = _user.transform.position;
+            fromPosition.y += 3;
             // if (_hitVfx == null)
             // {
-                _hitVfx = Instantiate(_hitVfxPrefab, _user.transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
+                _hitVfx = Instantiate(_hitVfxPrefab, fromPosition, Quaternion.identity).GetComponent<ParticleSystem>();
             // }
             _hitVfx.Play();
 
