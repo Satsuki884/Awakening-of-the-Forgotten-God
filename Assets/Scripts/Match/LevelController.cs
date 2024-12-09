@@ -48,7 +48,7 @@ namespace AFG
 
         private void RestartLevel()
         {
-            LevelModel.StartCurrentLevel();
+            LevelModel.UnLoadPrevScene(LevelModel.LevelScene, LevelModel.LevelScene);
         }
 
         private void ContinueLevel()
